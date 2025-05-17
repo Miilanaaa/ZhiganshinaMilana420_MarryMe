@@ -1,0 +1,352 @@
+﻿<Page x:Class="ZhiganshinaMilana420_MarryMe.Pages.CollectionPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ZhiganshinaMilana420_MarryMe.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="750" d:DesignWidth="1445"
+      Title="CollectionPage">
+    
+    <Grid Background="#EEEFEA">
+        <StackPanel Orientation="Vertical"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="0 0 0 0">
+                <Border CornerRadius="20" 
+                        Padding="10" 
+                        Style="{StaticResource TrainerCardStyle}"
+                        Margin="5 10 10 10" 
+                        Height="200"
+                        Background="#909478"
+                        Width="200">
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="/Images/ForCollection/restaurant.png"
+                               Width="75"
+                               Margin="20"/>
+                        <Button Content="Рестораны"
+                                Name="RestaurantBt"
+                                FontSize="25"
+                                Style="{StaticResource MaterialDesignToolButton}" 
+                                Foreground="White"
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Top"
+                                Height="40" 
+                                Width="150" 
+                                Click="RestaurantBt_Click">
+                            <!--<Button.Effect>
+                                <DropShadowEffect ShadowDepth="4" BlurRadius="12" Color="#80000000" Opacity="0.9"/>
+                            </Button.Effect>-->
+                        </Button>
+                    </StackPanel>
+                </Border>
+                <Border CornerRadius="20" 
+                        Padding="10" 
+                        Style="{StaticResource TrainerCardStyle}"
+                        Margin="50 10 10 10" 
+                        Height="200"
+                        Background="#909478"
+                        Width="200">
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="/Images/ForCollection/RegistryОffice.png"
+                               Width="75"
+                               Margin="20"/>
+                        <Button Name="RegistryОfficeBtn"
+                                Content="Декорации" 
+                                FontSize="25"
+                                Style="{StaticResource MaterialDesignToolButton}" 
+                                Foreground="White"
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Top"
+                                Height="40" 
+                                Width="160" Click="RegistryОfficeBtn_Click">
+                            <!--<Button.Effect>
+                                <DropShadowEffect ShadowDepth="4" BlurRadius="12" Color="#80000000" Opacity="0.9"/>
+                            </Button.Effect>-->
+                        </Button>
+                    </StackPanel>
+                </Border>
+                <Border CornerRadius="20" 
+                        Padding="10" 
+                        Style="{StaticResource TrainerCardStyle}"
+                        Margin="50 10 10 10" 
+                        Height="200"
+                        Background="#909478"
+                        Width="200">
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="/Images/ForCollection/car.png"
+                               Width="75"
+                               Margin="20"/>
+                        <Button Content="Трансфер"
+                                Name="TransferBt"
+                                FontSize="25"
+                                Style="{StaticResource MaterialDesignToolButton}" 
+                                Foreground="White"
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Top"
+                                Height="40" 
+                                Width="150" 
+                                Click="TransferBt_Click">
+                            <!--<Button.Effect>
+                                <DropShadowEffect ShadowDepth="4" BlurRadius="12" Color="#80000000" Opacity="0.9"/>
+                            </Button.Effect>-->
+                        </Button>
+                    </StackPanel>
+                </Border>
+                <Border CornerRadius="20" 
+                        Padding="10" 
+                        Style="{StaticResource TrainerCardStyle}"
+                        Margin="50 10 10 10" 
+                        Height="200"
+                        Background="#909478"
+                        Width="200">
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="/Images/ForCollection/microphone.png"
+                               Width="75"
+                               Margin="20"/>
+                        <Button Content="Ведущий"
+                                Name="HostBt"
+                                FontSize="25"
+                                Style="{StaticResource MaterialDesignToolButton}" 
+                                Foreground="White"
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Top"
+                                Height="40" 
+                                Width="150" 
+                                Click="HostBt_Click">
+                            <!--<Button.Effect>
+                                <DropShadowEffect ShadowDepth="4" BlurRadius="12" Color="#80000000" Opacity="0.9"/>
+                            </Button.Effect>-->
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                        Margin="0 25 0 0">
+                <Border CornerRadius="20" 
+                        Padding="10" 
+                        Style="{StaticResource TrainerCardStyle}"
+                        Margin="5 10 10 10"
+                        Height="200"
+                        Background="#909478"
+                        Width="200">
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="/Images/ForCollection/wedding-dress.png"
+                               Width="85"
+                               Margin="10"/>
+                        <Button Content="Свадебное &#xD;&#xA;    платье"
+                                Name="DressBt"
+                                FontSize="25"
+                                Style="{StaticResource MaterialDesignToolButton}" 
+                                Foreground="White"
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Top"
+                                Height="70" 
+                                Width="150" 
+                                Click="DressBt_Click">
+                            <!--<Button.Effect>
+                                <DropShadowEffect ShadowDepth="4" BlurRadius="12" Color="#80000000" Opacity="0.9"/>
+                            </Button.Effect>-->
+                        </Button>
+                    </StackPanel>
+                </Border>
+                <Border CornerRadius="20" 
+                        Padding="10" 
+                        Style="{StaticResource TrainerCardStyle}"
+                        Margin="50 10 10 10" 
+                        Height="200"
+                        Background="#909478"
+                        Width="200">
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="/Images/ForCollection/tuxedo.png"
+                               Width="75"
+                               Margin="20"/>
+                        <Button Content="Смокинг"
+                                Name="TuxedoBt"
+                                FontSize="25"
+                                Style="{StaticResource MaterialDesignToolButton}" 
+                                Foreground="White"
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Top"
+                                Height="40" 
+                                Width="150" 
+                                Click="TuxedoBt_Click">
+                            <!--<Button.Effect>
+                                <DropShadowEffect ShadowDepth="4" BlurRadius="12" Color="#80000000" Opacity="0.9"/>
+                            </Button.Effect>-->
+                        </Button>
+                    </StackPanel>
+                </Border>
+                <Border CornerRadius="20" 
+                        Padding="10" 
+                        Style="{StaticResource TrainerCardStyle}"
+                        Margin="50 10 10 10" 
+                        Height="200"
+                        Background="#909478"
+                        Width="200">
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="/Images/ForCollection/fashionable-bag.png"
+                               Width="85"
+                               Margin="10"/>
+                        <Button Content=" Ювелирные &#xD;&#xA;  украшения"
+                                Name="DecorationBt"
+                                FontSize="25"
+                                Style="{StaticResource MaterialDesignToolButton}" 
+                                Foreground="White"
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Top"
+                                Height="75" 
+                                Width="170" 
+                                Click="DecorationBt_Click">
+                            <!--<Button.Effect>
+                                <DropShadowEffect ShadowDepth="4" BlurRadius="12" Color="#80000000" Opacity="0.9"/>
+                            </Button.Effect>-->
+                        </Button>
+                    </StackPanel>
+                </Border>
+                <Border CornerRadius="20" 
+                        Padding="10" 
+                        Style="{StaticResource TrainerCardStyle}"
+                        Margin="50 10 10 10" 
+                        Height="200"
+                        Background="#909478"
+                        Width="200">
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="/Images/ForCollection/makeup.png"
+                               Width="85"
+                               Margin="10"/>
+                        <Button Content=" Стилист &#xD;&#xA;визажист"
+                                Name="StylistBt"
+                                FontSize="25"
+                                Style="{StaticResource MaterialDesignToolButton}" 
+                                Foreground="White"
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Top"
+                                Height="69" 
+                                Width="150" 
+                                Click="StylistBt_Click">
+                            <!--<Button.Effect>
+                                <DropShadowEffect ShadowDepth="4" BlurRadius="12" Color="#80000000" Opacity="0.9"/>
+                            </Button.Effect>-->
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="0 25 0 0">
+                <Border CornerRadius="20" 
+                        Padding="10" 
+                        Style="{StaticResource TrainerCardStyle}"
+                        Margin="5 10 10 10" 
+                        Height="200"
+                        Background="#909478"
+                        Width="200">
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="/Images/ForCollection/wedding-cake.png"
+                               Width="85"
+                               Margin="20"/>
+                        <Button Content="Торт"
+                                Name="CakeBt" 
+                                FontSize="25"
+                                Style="{StaticResource MaterialDesignToolButton}" 
+                                Foreground="White"
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Top"
+                                Height="40" 
+                                Width="100" 
+                                Click="CakeBt_Click">
+                            <!--<Button.Effect>
+                                <DropShadowEffect ShadowDepth="4" BlurRadius="12" Color="#80000000" Opacity="0.9"/>
+                            </Button.Effect>-->
+                        </Button>
+                    </StackPanel>
+                </Border>
+                <Border CornerRadius="20" 
+                        Padding="10" 
+                        Style="{StaticResource TrainerCardStyle}"
+                        Margin="50 10 10 10" 
+                        Height="200"
+                        Background="#909478"
+                        Width="200">
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="/Images/ForCollection/nature.png"
+                               Width="85"
+                               Margin="10"/>
+                        <Button Content="  Букет &#xD;&#xA;невесты"
+                                Name="BouquetBt"
+                                FontSize="25"
+                                Style="{StaticResource MaterialDesignToolButton}" 
+                                Foreground="White"
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Top"
+                                Height="70" 
+                                Width="150" 
+                                Click="BouquetBt_Click">
+                            <!--<Button.Effect>
+                                <DropShadowEffect ShadowDepth="4" BlurRadius="12" Color="#80000000" Opacity="0.9"/>
+                            </Button.Effect>-->
+                        </Button>
+                    </StackPanel>
+                </Border>
+                <Border CornerRadius="20" 
+                        Padding="10" 
+                        Style="{StaticResource TrainerCardStyle}"
+                        Margin="50 10 10 10" 
+                        Height="200"
+                        Background="#909478"
+                        Width="200">
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="/Images/ForCollection/music-note.png"
+                               Width="75"
+                               Margin="20"/>
+                        <Button Content="Музыканты"
+                                Name="MusicBt"
+                                FontSize="25"
+                                Style="{StaticResource MaterialDesignToolButton}" 
+                                Foreground="White"
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Top"
+                                Height="40" 
+                                Width="150" 
+                                Click="MusicBt_Click">
+                            <!--<Button.Effect>
+                                <DropShadowEffect ShadowDepth="4" BlurRadius="12" Color="#80000000" Opacity="0.9"/>
+                            </Button.Effect>-->
+                        </Button>
+                    </StackPanel>
+                </Border>
+                <Border CornerRadius="20" 
+                        Padding="10" 
+                        Style="{StaticResource TrainerCardStyle}"
+                        Margin="50 10 10 10" 
+                        Height="200"
+                        Background="#909478"
+                        Width="200">
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="/Images/ForCollection/camera.png"
+                               Width="75"
+                               Margin="10"/>
+                        <Button Content=" Фотографы &#xD;&#xA;видеографы "
+                                Name="VideoBt"
+                                FontSize="25"
+                                Style="{StaticResource MaterialDesignToolButton}" 
+                                Foreground="White"
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Top"
+                                Height="80" 
+                                Width="160" 
+                                Click="VideoBt_Click">
+                            <!--<Button.Effect>
+                                <DropShadowEffect ShadowDepth="4" BlurRadius="12" Color="#80000000" Opacity="0.9"/>
+                            </Button.Effect>-->
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -1,0 +1,3431 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище ZhiganshinaMilana_MarryMeModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accessory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="AccessoryTypeId" Type="int" />
+        </EntityType>
+        <EntityType Name="AccessoryPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccessoryId" Type="int" Nullable="false" />
+          <Property Name="Photo" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AccessoryType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Bouquet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="BouquetTypeId" Type="int" />
+          <Property Name="Price" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="BouquetPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BouquetId" Type="int" />
+          <Property Name="Photo" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="BouquetType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Bride">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="100" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="PassportNumber" Type="nvarchar" MaxLength="4" />
+          <Property Name="PassportSeries" Type="nvarchar" MaxLength="6" />
+          <Property Name="PassportAddress" Type="nvarchar(max)" />
+          <Property Name="Addresss" Type="nvarchar(max)" />
+          <Property Name="Photo" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Cake">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CakeTypeId" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Photo" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="CakeType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clothing">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Price" Type="int" />
+          <Property Name="ClothingTypeId" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ClothingPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClothingId" Type="int" Nullable="false" />
+          <Property Name="Photo" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClothingType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Couple">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BrideId" Type="int" Nullable="false" />
+          <Property Name="GroomId" Type="int" Nullable="false" />
+          <Property Name="WeddingDate" Type="date" />
+          <Property Name="WeddingStatusId" Type="int" />
+          <Property Name="ContractDate" Type="date" />
+          <Property Name="ContractPath" Type="nvarchar(max)" />
+          <Property Name="MaterialsPath" Type="nvarchar(max)" />
+          <Property Name="NumberGuests" Type="int" />
+          <Property Name="WeddingBudget" Type="int" />
+        </EntityType>
+        <EntityType Name="CoupleFavorites">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CoupleId" Type="int" Nullable="false" />
+          <Property Name="RestaurantId" Type="int" />
+          <Property Name="DecorationId" Type="int" />
+          <Property Name="ClothingGrommId" Type="int" />
+          <Property Name="DressBriedId" Type="int" />
+          <Property Name="AccessoryId" Type="int" />
+          <Property Name="HostId" Type="int" />
+          <Property Name="PhotographerVideographerId" Type="int" />
+          <Property Name="BouquetId" Type="int" />
+          <Property Name="StylistId" Type="int" />
+          <Property Name="MusicianId" Type="int" />
+          <Property Name="TransferId" Type="int" />
+          <Property Name="CakeId" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Decoration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" />
+          <Property Name="Price" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="DecorationPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DecorationId" Type="int" />
+          <Property Name="Photo" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Dress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Price" Type="int" />
+          <Property Name="DressTypeId" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="DressTypy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Gromm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="100" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="PassportNumber" Type="nvarchar" MaxLength="4" />
+          <Property Name="PassportSeries" Type="nvarchar" MaxLength="6" />
+          <Property Name="PassportAddress" Type="nvarchar(max)" />
+          <Property Name="Addresss" Type="nvarchar(max)" />
+          <Property Name="Photo" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Host">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="100" />
+          <Property Name="Price" Type="int" />
+          <Property Name="Photo" Type="varbinary(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="HostBookingDates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HostId" Type="int" Nullable="false" />
+          <Property Name="BookingDate" Type="date" Nullable="false" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="CoupleId" Type="int" />
+        </EntityType>
+        <EntityType Name="HostPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HostId" Type="int" />
+          <Property Name="Photo" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Musician">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TeamName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MusicianTypeId" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="MusicianBookingDates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MusicianId" Type="int" Nullable="false" />
+          <Property Name="BookingDate" Type="date" Nullable="false" />
+          <Property Name="CoupleId" Type="int" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="MusicianPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MusicianId" Type="int" Nullable="false" />
+          <Property Name="Photo" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MusicianType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PhotoDress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DressId" Type="int" />
+          <Property Name="Photo" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="PhotographerType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="PhotographerVideographer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TeamName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Price" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="PhotographerTypeId" Type="int" />
+        </EntityType>
+        <EntityType Name="PhotographerVideographerBookingDates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PhotographerVideographerId" Type="int" Nullable="false" />
+          <Property Name="BookingDate" Type="date" Nullable="false" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="CoupleId" Type="int" />
+        </EntityType>
+        <EntityType Name="PhotographerVideographerPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PhotographerVideographerId" Type="int" Nullable="false" />
+          <Property Name="Photo" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Restaurant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="RestaurantTypeId" Type="int" />
+          <Property Name="Price" Type="int" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="DocumentMenu" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="RestaurantBookingDates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RestaurantId" Type="int" Nullable="false" />
+          <Property Name="BookingDate" Type="date" Nullable="false" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="CoupleId" Type="int" />
+          <Property Name="MenuPrice" Type="int" />
+        </EntityType>
+        <EntityType Name="RestaurantPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RestaurantId" Type="int" Nullable="false" />
+          <Property Name="Photo" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RestaurantType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Stylist">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TeamName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Price" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="StylistTypeId" Type="int" />
+        </EntityType>
+        <EntityType Name="StylistBookingDates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StylistId" Type="int" Nullable="false" />
+          <Property Name="BookingDate" Type="date" Nullable="false" />
+          <Property Name="CoupleId" Type="int" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="StylistPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StylistId" Type="int" Nullable="false" />
+          <Property Name="Photo" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StylistType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TaskUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="DateAppointment" Type="date" />
+          <Property Name="DateEnd" Type="date" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Done" Type="bit" />
+          <Property Name="AdminLastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="AdminFirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="AdminPhoto" Type="varbinary(max)" />
+          <Property Name="AdminId" Type="int" />
+        </EntityType>
+        <EntityType Name="Transfer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="TransferTypeId" Type="int" />
+        </EntityType>
+        <EntityType Name="TransferBookingDates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TransferId" Type="int" Nullable="false" />
+          <Property Name="BookingDate" Type="date" Nullable="false" />
+          <Property Name="CoupleId" Type="int" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="TransferPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TransferId" Type="int" Nullable="false" />
+          <Property Name="Photo" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TransferType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="100" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="Salary" Type="int" />
+          <Property Name="Photo" Type="varbinary(max)" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="BirthDate" Type="date" />
+          <Property Name="IdGender" Type="int" />
+          <Property Name="Dismissed" Type="bit" />
+        </EntityType>
+        <EntityType Name="WeddingStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__Accessory__Acces__08B54D69">
+          <End Role="Accessory" Type="Self.Accessory" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AccessoryPhoto" Type="Self.AccessoryPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accessory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccessoryPhoto">
+              <PropertyRef Name="AccessoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Accessory__Acces__5165187F">
+          <End Role="AccessoryType" Type="Self.AccessoryType" Multiplicity="0..1" />
+          <End Role="Accessory" Type="Self.Accessory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccessoryType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Accessory">
+              <PropertyRef Name="AccessoryTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Bouquet__Bouquet__59FA5E80">
+          <End Role="BouquetType" Type="Self.BouquetType" Multiplicity="0..1" />
+          <End Role="Bouquet" Type="Self.Bouquet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BouquetType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bouquet">
+              <PropertyRef Name="BouquetTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cake__CakeTypeId__6A30C649">
+          <End Role="CakeType" Type="Self.CakeType" Multiplicity="0..1" />
+          <End Role="Cake" Type="Self.Cake" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CakeType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cake">
+              <PropertyRef Name="CakeTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Clothing__Clothi__4CA06362">
+          <End Role="ClothingType" Type="Self.ClothingType" Multiplicity="0..1" />
+          <End Role="Clothing" Type="Self.Clothing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClothingType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clothing">
+              <PropertyRef Name="ClothingTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClothingP__Cloth__05D8E0BE">
+          <End Role="Clothing" Type="Self.Clothing" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ClothingPhoto" Type="Self.ClothingPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clothing">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClothingPhoto">
+              <PropertyRef Name="ClothingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Couple__BrideId__403A8C7D">
+          <End Role="Bride" Type="Self.Bride" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Couple" Type="Self.Couple" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bride">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Couple">
+              <PropertyRef Name="BrideId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Couple__GroomId__412EB0B6">
+          <End Role="Gromm" Type="Self.Gromm" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Couple" Type="Self.Couple" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gromm">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Couple">
+              <PropertyRef Name="GroomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CoupleFav__Acces__70DDC3D8">
+          <End Role="Accessory" Type="Self.Accessory" Multiplicity="0..1" />
+          <End Role="CoupleFavorites" Type="Self.CoupleFavorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accessory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CoupleFavorites">
+              <PropertyRef Name="AccessoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CoupleFav__Bouqu__73BA3083">
+          <End Role="Bouquet" Type="Self.Bouquet" Multiplicity="0..1" />
+          <End Role="CoupleFavorites" Type="Self.CoupleFavorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bouquet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CoupleFavorites">
+              <PropertyRef Name="BouquetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CoupleFav__CakeI__778AC167">
+          <End Role="Cake" Type="Self.Cake" Multiplicity="0..1" />
+          <End Role="CoupleFavorites" Type="Self.CoupleFavorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cake">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CoupleFavorites">
+              <PropertyRef Name="CakeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CoupleFav__Cloth__6FE99F9F">
+          <End Role="Clothing" Type="Self.Clothing" Multiplicity="0..1" />
+          <End Role="CoupleFavorites" Type="Self.CoupleFavorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clothing">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CoupleFavorites">
+              <PropertyRef Name="ClothingGrommId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CoupleFav__Coupl__6D0D32F4">
+          <End Role="Couple" Type="Self.Couple" Multiplicity="1" />
+          <End Role="CoupleFavorites" Type="Self.CoupleFavorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Couple">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CoupleFavorites">
+              <PropertyRef Name="CoupleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CoupleFav__HostI__71D1E811">
+          <End Role="Host" Type="Self.Host" Multiplicity="0..1" />
+          <End Role="CoupleFavorites" Type="Self.CoupleFavorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Host">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CoupleFavorites">
+              <PropertyRef Name="HostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CoupleFav__Music__75A278F5">
+          <End Role="Musician" Type="Self.Musician" Multiplicity="0..1" />
+          <End Role="CoupleFavorites" Type="Self.CoupleFavorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Musician">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CoupleFavorites">
+              <PropertyRef Name="MusicianId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CoupleFav__Photo__72C60C4A">
+          <End Role="PhotographerVideographer" Type="Self.PhotographerVideographer" Multiplicity="0..1" />
+          <End Role="CoupleFavorites" Type="Self.CoupleFavorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhotographerVideographer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CoupleFavorites">
+              <PropertyRef Name="PhotographerVideographerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CoupleFav__Resta__6E01572D">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="0..1" />
+          <End Role="CoupleFavorites" Type="Self.CoupleFavorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CoupleFavorites">
+              <PropertyRef Name="RestaurantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CoupleFav__Styli__74AE54BC">
+          <End Role="Stylist" Type="Self.Stylist" Multiplicity="0..1" />
+          <End Role="CoupleFavorites" Type="Self.CoupleFavorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stylist">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CoupleFavorites">
+              <PropertyRef Name="StylistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CoupleFav__Trans__76969D2E">
+          <End Role="Transfer" Type="Self.Transfer" Multiplicity="0..1" />
+          <End Role="CoupleFavorites" Type="Self.CoupleFavorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transfer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CoupleFavorites">
+              <PropertyRef Name="TransferId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HostBooki__HostI__0B91BA14">
+          <End Role="Host" Type="Self.Host" Multiplicity="1" />
+          <End Role="HostBookingDates" Type="Self.HostBookingDates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Host">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HostBookingDates">
+              <PropertyRef Name="HostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Musician__Musici__60A75C0F">
+          <End Role="MusicianType" Type="Self.MusicianType" Multiplicity="0..1" />
+          <End Role="Musician" Type="Self.Musician" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MusicianType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Musician">
+              <PropertyRef Name="MusicianTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MusicianB__Music__19DFD96B">
+          <End Role="Musician" Type="Self.Musician" Multiplicity="1" />
+          <End Role="MusicianBookingDates" Type="Self.MusicianBookingDates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Musician">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MusicianBookingDates">
+              <PropertyRef Name="MusicianId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MusicianP__Music__1CBC4616">
+          <End Role="Musician" Type="Self.Musician" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MusicianPhoto" Type="Self.MusicianPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Musician">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MusicianPhoto">
+              <PropertyRef Name="MusicianId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Photograp__Photo__0E6E26BF">
+          <End Role="PhotographerVideographer" Type="Self.PhotographerVideographer" Multiplicity="1" />
+          <End Role="PhotographerVideographerBookingDates" Type="Self.PhotographerVideographerBookingDates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhotographerVideographer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhotographerVideographerBookingDates">
+              <PropertyRef Name="PhotographerVideographerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Photograp__Photo__114A936A">
+          <End Role="PhotographerVideographer" Type="Self.PhotographerVideographer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PhotographerVideographerPhoto" Type="Self.PhotographerVideographerPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhotographerVideographer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhotographerVideographerPhoto">
+              <PropertyRef Name="PhotographerVideographerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Restauran__Resta__45F365D3">
+          <End Role="RestaurantType" Type="Self.RestaurantType" Multiplicity="0..1" />
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RestaurantType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Restaurant">
+              <PropertyRef Name="RestaurantTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Restauran__Resta__7A672E12">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RestaurantBookingDates" Type="Self.RestaurantBookingDates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RestaurantBookingDates">
+              <PropertyRef Name="RestaurantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Restauran__Resta__7D439ABD">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RestaurantPhoto" Type="Self.RestaurantPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RestaurantPhoto">
+              <PropertyRef Name="RestaurantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StylistBo__Styli__14270015">
+          <End Role="Stylist" Type="Self.Stylist" Multiplicity="1" />
+          <End Role="StylistBookingDates" Type="Self.StylistBookingDates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stylist">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StylistBookingDates">
+              <PropertyRef Name="StylistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StylistPh__Styli__17036CC0">
+          <End Role="Stylist" Type="Self.Stylist" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StylistPhoto" Type="Self.StylistPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stylist">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StylistPhoto">
+              <PropertyRef Name="StylistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transfer__Transf__656C112C">
+          <End Role="TransferType" Type="Self.TransferType" Multiplicity="0..1" />
+          <End Role="Transfer" Type="Self.Transfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransferType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transfer">
+              <PropertyRef Name="TransferTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TransferB__Trans__1F98B2C1">
+          <End Role="Transfer" Type="Self.Transfer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TransferBookingDates" Type="Self.TransferBookingDates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transfer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TransferBookingDates">
+              <PropertyRef Name="TransferId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TransferP__Trans__22751F6C">
+          <End Role="Transfer" Type="Self.Transfer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TransferPhoto" Type="Self.TransferPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transfer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TransferPhoto">
+              <PropertyRef Name="TransferId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__RoleId__398D8EEE">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BouquetPhoto_Bouquet">
+          <End Role="Bouquet" Type="Self.Bouquet" Multiplicity="0..1" />
+          <End Role="BouquetPhoto" Type="Self.BouquetPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bouquet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BouquetPhoto">
+              <PropertyRef Name="BouquetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Couple_WeddingStatus">
+          <End Role="WeddingStatus" Type="Self.WeddingStatus" Multiplicity="0..1" />
+          <End Role="Couple" Type="Self.Couple" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WeddingStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Couple">
+              <PropertyRef Name="WeddingStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoupleFavorites_Decoration">
+          <End Role="Decoration" Type="Self.Decoration" Multiplicity="0..1" />
+          <End Role="CoupleFavorites" Type="Self.CoupleFavorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Decoration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CoupleFavorites">
+              <PropertyRef Name="DecorationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoupleFavorites_Dress">
+          <End Role="Dress" Type="Self.Dress" Multiplicity="0..1" />
+          <End Role="CoupleFavorites" Type="Self.CoupleFavorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dress">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CoupleFavorites">
+              <PropertyRef Name="DressBriedId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DecorationPhoto_Decoration">
+          <End Role="Decoration" Type="Self.Decoration" Multiplicity="0..1" />
+          <End Role="DecorationPhoto" Type="Self.DecorationPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Decoration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DecorationPhoto">
+              <PropertyRef Name="DecorationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dress_DressTypy">
+          <End Role="DressTypy" Type="Self.DressTypy" Multiplicity="0..1" />
+          <End Role="Dress" Type="Self.Dress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DressTypy">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Dress">
+              <PropertyRef Name="DressTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HostBookingDates_Couple">
+          <End Role="Couple" Type="Self.Couple" Multiplicity="0..1" />
+          <End Role="HostBookingDates" Type="Self.HostBookingDates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Couple">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HostBookingDates">
+              <PropertyRef Name="CoupleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HostPhoto_Host">
+          <End Role="Host" Type="Self.Host" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HostPhoto" Type="Self.HostPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Host">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HostPhoto">
+              <PropertyRef Name="HostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MusicianBookingDates_Couple">
+          <End Role="Couple" Type="Self.Couple" Multiplicity="0..1" />
+          <End Role="MusicianBookingDates" Type="Self.MusicianBookingDates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Couple">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MusicianBookingDates">
+              <PropertyRef Name="CoupleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhotoDress_Dress">
+          <End Role="Dress" Type="Self.Dress" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PhotoDress" Type="Self.PhotoDress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dress">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhotoDress">
+              <PropertyRef Name="DressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhotographerVideographer_PhotographerType">
+          <End Role="PhotographerType" Type="Self.PhotographerType" Multiplicity="0..1" />
+          <End Role="PhotographerVideographer" Type="Self.PhotographerVideographer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhotographerType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhotographerVideographer">
+              <PropertyRef Name="PhotographerTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhotographerVideographerBookingDates_Couple">
+          <End Role="Couple" Type="Self.Couple" Multiplicity="0..1" />
+          <End Role="PhotographerVideographerBookingDates" Type="Self.PhotographerVideographerBookingDates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Couple">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhotographerVideographerBookingDates">
+              <PropertyRef Name="CoupleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RestaurantBookingDates_Couple">
+          <End Role="Couple" Type="Self.Couple" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RestaurantBookingDates" Type="Self.RestaurantBookingDates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Couple">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RestaurantBookingDates">
+              <PropertyRef Name="CoupleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stylist_StylistType">
+          <End Role="StylistType" Type="Self.StylistType" Multiplicity="0..1" />
+          <End Role="Stylist" Type="Self.Stylist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StylistType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stylist">
+              <PropertyRef Name="StylistTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StylistBookingDates_Couple">
+          <End Role="Couple" Type="Self.Couple" Multiplicity="0..1" />
+          <End Role="StylistBookingDates" Type="Self.StylistBookingDates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Couple">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StylistBookingDates">
+              <PropertyRef Name="CoupleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskUsers_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TaskUsers" Type="Self.TaskUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskUsers">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransferBookingDates_Couple">
+          <End Role="Couple" Type="Self.Couple" Multiplicity="0..1" />
+          <End Role="TransferBookingDates" Type="Self.TransferBookingDates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Couple">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TransferBookingDates">
+              <PropertyRef Name="CoupleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="IdGender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ZhiganshinaMilana_MarryMeModelContainer">
+          <EntitySet Name="Accessory" EntityType="Self.Accessory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccessoryPhoto" EntityType="Self.AccessoryPhoto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccessoryType" EntityType="Self.AccessoryType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bouquet" EntityType="Self.Bouquet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BouquetPhoto" EntityType="Self.BouquetPhoto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BouquetType" EntityType="Self.BouquetType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bride" EntityType="Self.Bride" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cake" EntityType="Self.Cake" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CakeType" EntityType="Self.CakeType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clothing" EntityType="Self.Clothing" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClothingPhoto" EntityType="Self.ClothingPhoto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClothingType" EntityType="Self.ClothingType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Couple" EntityType="Self.Couple" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CoupleFavorites" EntityType="Self.CoupleFavorites" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Decoration" EntityType="Self.Decoration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DecorationPhoto" EntityType="Self.DecorationPhoto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dress" EntityType="Self.Dress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DressTypy" EntityType="Self.DressTypy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gromm" EntityType="Self.Gromm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Host" EntityType="Self.Host" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HostBookingDates" EntityType="Self.HostBookingDates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HostPhoto" EntityType="Self.HostPhoto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Musician" EntityType="Self.Musician" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MusicianBookingDates" EntityType="Self.MusicianBookingDates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MusicianPhoto" EntityType="Self.MusicianPhoto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MusicianType" EntityType="Self.MusicianType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhotoDress" EntityType="Self.PhotoDress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhotographerType" EntityType="Self.PhotographerType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhotographerVideographer" EntityType="Self.PhotographerVideographer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhotographerVideographerBookingDates" EntityType="Self.PhotographerVideographerBookingDates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhotographerVideographerPhoto" EntityType="Self.PhotographerVideographerPhoto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Restaurant" EntityType="Self.Restaurant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RestaurantBookingDates" EntityType="Self.RestaurantBookingDates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RestaurantPhoto" EntityType="Self.RestaurantPhoto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RestaurantType" EntityType="Self.RestaurantType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stylist" EntityType="Self.Stylist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StylistBookingDates" EntityType="Self.StylistBookingDates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StylistPhoto" EntityType="Self.StylistPhoto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StylistType" EntityType="Self.StylistType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskUsers" EntityType="Self.TaskUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transfer" EntityType="Self.Transfer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransferBookingDates" EntityType="Self.TransferBookingDates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransferPhoto" EntityType="Self.TransferPhoto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransferType" EntityType="Self.TransferType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WeddingStatus" EntityType="Self.WeddingStatus" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Accessory__Acces__08B54D69" Association="Self.FK__Accessory__Acces__08B54D69">
+            <End Role="Accessory" EntitySet="Accessory" />
+            <End Role="AccessoryPhoto" EntitySet="AccessoryPhoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Accessory__Acces__5165187F" Association="Self.FK__Accessory__Acces__5165187F">
+            <End Role="AccessoryType" EntitySet="AccessoryType" />
+            <End Role="Accessory" EntitySet="Accessory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Bouquet__Bouquet__59FA5E80" Association="Self.FK__Bouquet__Bouquet__59FA5E80">
+            <End Role="BouquetType" EntitySet="BouquetType" />
+            <End Role="Bouquet" EntitySet="Bouquet" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cake__CakeTypeId__6A30C649" Association="Self.FK__Cake__CakeTypeId__6A30C649">
+            <End Role="CakeType" EntitySet="CakeType" />
+            <End Role="Cake" EntitySet="Cake" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Clothing__Clothi__4CA06362" Association="Self.FK__Clothing__Clothi__4CA06362">
+            <End Role="ClothingType" EntitySet="ClothingType" />
+            <End Role="Clothing" EntitySet="Clothing" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClothingP__Cloth__05D8E0BE" Association="Self.FK__ClothingP__Cloth__05D8E0BE">
+            <End Role="Clothing" EntitySet="Clothing" />
+            <End Role="ClothingPhoto" EntitySet="ClothingPhoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Couple__BrideId__403A8C7D" Association="Self.FK__Couple__BrideId__403A8C7D">
+            <End Role="Bride" EntitySet="Bride" />
+            <End Role="Couple" EntitySet="Couple" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Couple__GroomId__412EB0B6" Association="Self.FK__Couple__GroomId__412EB0B6">
+            <End Role="Gromm" EntitySet="Gromm" />
+            <End Role="Couple" EntitySet="Couple" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CoupleFav__Acces__70DDC3D8" Association="Self.FK__CoupleFav__Acces__70DDC3D8">
+            <End Role="Accessory" EntitySet="Accessory" />
+            <End Role="CoupleFavorites" EntitySet="CoupleFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CoupleFav__Bouqu__73BA3083" Association="Self.FK__CoupleFav__Bouqu__73BA3083">
+            <End Role="Bouquet" EntitySet="Bouquet" />
+            <End Role="CoupleFavorites" EntitySet="CoupleFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CoupleFav__CakeI__778AC167" Association="Self.FK__CoupleFav__CakeI__778AC167">
+            <End Role="Cake" EntitySet="Cake" />
+            <End Role="CoupleFavorites" EntitySet="CoupleFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CoupleFav__Cloth__6FE99F9F" Association="Self.FK__CoupleFav__Cloth__6FE99F9F">
+            <End Role="Clothing" EntitySet="Clothing" />
+            <End Role="CoupleFavorites" EntitySet="CoupleFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CoupleFav__Coupl__6D0D32F4" Association="Self.FK__CoupleFav__Coupl__6D0D32F4">
+            <End Role="Couple" EntitySet="Couple" />
+            <End Role="CoupleFavorites" EntitySet="CoupleFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CoupleFav__HostI__71D1E811" Association="Self.FK__CoupleFav__HostI__71D1E811">
+            <End Role="Host" EntitySet="Host" />
+            <End Role="CoupleFavorites" EntitySet="CoupleFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CoupleFav__Music__75A278F5" Association="Self.FK__CoupleFav__Music__75A278F5">
+            <End Role="Musician" EntitySet="Musician" />
+            <End Role="CoupleFavorites" EntitySet="CoupleFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CoupleFav__Photo__72C60C4A" Association="Self.FK__CoupleFav__Photo__72C60C4A">
+            <End Role="PhotographerVideographer" EntitySet="PhotographerVideographer" />
+            <End Role="CoupleFavorites" EntitySet="CoupleFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CoupleFav__Resta__6E01572D" Association="Self.FK__CoupleFav__Resta__6E01572D">
+            <End Role="Restaurant" EntitySet="Restaurant" />
+            <End Role="CoupleFavorites" EntitySet="CoupleFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CoupleFav__Styli__74AE54BC" Association="Self.FK__CoupleFav__Styli__74AE54BC">
+            <End Role="Stylist" EntitySet="Stylist" />
+            <End Role="CoupleFavorites" EntitySet="CoupleFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CoupleFav__Trans__76969D2E" Association="Self.FK__CoupleFav__Trans__76969D2E">
+            <End Role="Transfer" EntitySet="Transfer" />
+            <End Role="CoupleFavorites" EntitySet="CoupleFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HostBooki__HostI__0B91BA14" Association="Self.FK__HostBooki__HostI__0B91BA14">
+            <End Role="Host" EntitySet="Host" />
+            <End Role="HostBookingDates" EntitySet="HostBookingDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Musician__Musici__60A75C0F" Association="Self.FK__Musician__Musici__60A75C0F">
+            <End Role="MusicianType" EntitySet="MusicianType" />
+            <End Role="Musician" EntitySet="Musician" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MusicianB__Music__19DFD96B" Association="Self.FK__MusicianB__Music__19DFD96B">
+            <End Role="Musician" EntitySet="Musician" />
+            <End Role="MusicianBookingDates" EntitySet="MusicianBookingDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MusicianP__Music__1CBC4616" Association="Self.FK__MusicianP__Music__1CBC4616">
+            <End Role="Musician" EntitySet="Musician" />
+            <End Role="MusicianPhoto" EntitySet="MusicianPhoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Photograp__Photo__0E6E26BF" Association="Self.FK__Photograp__Photo__0E6E26BF">
+            <End Role="PhotographerVideographer" EntitySet="PhotographerVideographer" />
+            <End Role="PhotographerVideographerBookingDates" EntitySet="PhotographerVideographerBookingDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Photograp__Photo__114A936A" Association="Self.FK__Photograp__Photo__114A936A">
+            <End Role="PhotographerVideographer" EntitySet="PhotographerVideographer" />
+            <End Role="PhotographerVideographerPhoto" EntitySet="PhotographerVideographerPhoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Restauran__Resta__45F365D3" Association="Self.FK__Restauran__Resta__45F365D3">
+            <End Role="RestaurantType" EntitySet="RestaurantType" />
+            <End Role="Restaurant" EntitySet="Restaurant" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Restauran__Resta__7A672E12" Association="Self.FK__Restauran__Resta__7A672E12">
+            <End Role="Restaurant" EntitySet="Restaurant" />
+            <End Role="RestaurantBookingDates" EntitySet="RestaurantBookingDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Restauran__Resta__7D439ABD" Association="Self.FK__Restauran__Resta__7D439ABD">
+            <End Role="Restaurant" EntitySet="Restaurant" />
+            <End Role="RestaurantPhoto" EntitySet="RestaurantPhoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StylistBo__Styli__14270015" Association="Self.FK__StylistBo__Styli__14270015">
+            <End Role="Stylist" EntitySet="Stylist" />
+            <End Role="StylistBookingDates" EntitySet="StylistBookingDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StylistPh__Styli__17036CC0" Association="Self.FK__StylistPh__Styli__17036CC0">
+            <End Role="Stylist" EntitySet="Stylist" />
+            <End Role="StylistPhoto" EntitySet="StylistPhoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transfer__Transf__656C112C" Association="Self.FK__Transfer__Transf__656C112C">
+            <End Role="TransferType" EntitySet="TransferType" />
+            <End Role="Transfer" EntitySet="Transfer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TransferB__Trans__1F98B2C1" Association="Self.FK__TransferB__Trans__1F98B2C1">
+            <End Role="Transfer" EntitySet="Transfer" />
+            <End Role="TransferBookingDates" EntitySet="TransferBookingDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TransferP__Trans__22751F6C" Association="Self.FK__TransferP__Trans__22751F6C">
+            <End Role="Transfer" EntitySet="Transfer" />
+            <End Role="TransferPhoto" EntitySet="TransferPhoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__RoleId__398D8EEE" Association="Self.FK__Users__RoleId__398D8EEE">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BouquetPhoto_Bouquet" Association="Self.FK_BouquetPhoto_Bouquet">
+            <End Role="Bouquet" EntitySet="Bouquet" />
+            <End Role="BouquetPhoto" EntitySet="BouquetPhoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Couple_WeddingStatus" Association="Self.FK_Couple_WeddingStatus">
+            <End Role="WeddingStatus" EntitySet="WeddingStatus" />
+            <End Role="Couple" EntitySet="Couple" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoupleFavorites_Decoration" Association="Self.FK_CoupleFavorites_Decoration">
+            <End Role="Decoration" EntitySet="Decoration" />
+            <End Role="CoupleFavorites" EntitySet="CoupleFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoupleFavorites_Dress" Association="Self.FK_CoupleFavorites_Dress">
+            <End Role="Dress" EntitySet="Dress" />
+            <End Role="CoupleFavorites" EntitySet="CoupleFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DecorationPhoto_Decoration" Association="Self.FK_DecorationPhoto_Decoration">
+            <End Role="Decoration" EntitySet="Decoration" />
+            <End Role="DecorationPhoto" EntitySet="DecorationPhoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dress_DressTypy" Association="Self.FK_Dress_DressTypy">
+            <End Role="DressTypy" EntitySet="DressTypy" />
+            <End Role="Dress" EntitySet="Dress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HostBookingDates_Couple" Association="Self.FK_HostBookingDates_Couple">
+            <End Role="Couple" EntitySet="Couple" />
+            <End Role="HostBookingDates" EntitySet="HostBookingDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HostPhoto_Host" Association="Self.FK_HostPhoto_Host">
+            <End Role="Host" EntitySet="Host" />
+            <End Role="HostPhoto" EntitySet="HostPhoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MusicianBookingDates_Couple" Association="Self.FK_MusicianBookingDates_Couple">
+            <End Role="Couple" EntitySet="Couple" />
+            <End Role="MusicianBookingDates" EntitySet="MusicianBookingDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhotoDress_Dress" Association="Self.FK_PhotoDress_Dress">
+            <End Role="Dress" EntitySet="Dress" />
+            <End Role="PhotoDress" EntitySet="PhotoDress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhotographerVideographer_PhotographerType" Association="Self.FK_PhotographerVideographer_PhotographerType">
+            <End Role="PhotographerType" EntitySet="PhotographerType" />
+            <End Role="PhotographerVideographer" EntitySet="PhotographerVideographer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhotographerVideographerBookingDates_Couple" Association="Self.FK_PhotographerVideographerBookingDates_Couple">
+            <End Role="Couple" EntitySet="Couple" />
+            <End Role="PhotographerVideographerBookingDates" EntitySet="PhotographerVideographerBookingDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RestaurantBookingDates_Couple" Association="Self.FK_RestaurantBookingDates_Couple">
+            <End Role="Couple" EntitySet="Couple" />
+            <End Role="RestaurantBookingDates" EntitySet="RestaurantBookingDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stylist_StylistType" Association="Self.FK_Stylist_StylistType">
+            <End Role="StylistType" EntitySet="StylistType" />
+            <End Role="Stylist" EntitySet="Stylist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StylistBookingDates_Couple" Association="Self.FK_StylistBookingDates_Couple">
+            <End Role="Couple" EntitySet="Couple" />
+            <End Role="StylistBookingDates" EntitySet="StylistBookingDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskUsers_Users" Association="Self.FK_TaskUsers_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="TaskUsers" EntitySet="TaskUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransferBookingDates_Couple" Association="Self.FK_TransferBookingDates_Couple">
+            <End Role="Couple" EntitySet="Couple" />
+            <End Role="TransferBookingDates" EntitySet="TransferBookingDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Gender" Association="Self.FK_Users_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ZhiganshinaMilana_MarryMeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Accessory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="AccessoryTypeId" Type="Int32" />
+          <NavigationProperty Name="AccessoryPhoto" Relationship="Self.FK__Accessory__Acces__08B54D69" FromRole="Accessory" ToRole="AccessoryPhoto" />
+          <NavigationProperty Name="AccessoryType" Relationship="Self.FK__Accessory__Acces__5165187F" FromRole="Accessory" ToRole="AccessoryType" />
+          <NavigationProperty Name="CoupleFavorites" Relationship="Self.FK__CoupleFav__Acces__70DDC3D8" FromRole="Accessory" ToRole="CoupleFavorites" />
+        </EntityType>
+        <EntityType Name="AccessoryPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccessoryId" Type="Int32" Nullable="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="Accessory" Relationship="Self.FK__Accessory__Acces__08B54D69" FromRole="AccessoryPhoto" ToRole="Accessory" />
+        </EntityType>
+        <EntityType Name="AccessoryType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Accessory" Relationship="Self.FK__Accessory__Acces__5165187F" FromRole="AccessoryType" ToRole="Accessory" />
+        </EntityType>
+        <EntityType Name="Bouquet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BouquetTypeId" Type="Int32" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BouquetType" Relationship="Self.FK__Bouquet__Bouquet__59FA5E80" FromRole="Bouquet" ToRole="BouquetType" />
+          <NavigationProperty Name="CoupleFavorites" Relationship="Self.FK__CoupleFav__Bouqu__73BA3083" FromRole="Bouquet" ToRole="CoupleFavorites" />
+          <NavigationProperty Name="BouquetPhoto" Relationship="Self.FK_BouquetPhoto_Bouquet" FromRole="Bouquet" ToRole="BouquetPhoto" />
+        </EntityType>
+        <EntityType Name="BouquetPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BouquetId" Type="Int32" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Bouquet" Relationship="Self.FK_BouquetPhoto_Bouquet" FromRole="BouquetPhoto" ToRole="Bouquet" />
+        </EntityType>
+        <EntityType Name="BouquetType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Bouquet" Relationship="Self.FK__Bouquet__Bouquet__59FA5E80" FromRole="BouquetType" ToRole="Bouquet" />
+        </EntityType>
+        <EntityType Name="Bride">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PassportNumber" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="PassportSeries" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="PassportAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Addresss" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Couple" Relationship="Self.FK__Couple__BrideId__403A8C7D" FromRole="Bride" ToRole="Couple" />
+        </EntityType>
+        <EntityType Name="Cake">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CakeTypeId" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="CakeType" Relationship="Self.FK__Cake__CakeTypeId__6A30C649" FromRole="Cake" ToRole="CakeType" />
+          <NavigationProperty Name="CoupleFavorites" Relationship="Self.FK__CoupleFav__CakeI__778AC167" FromRole="Cake" ToRole="CoupleFavorites" />
+        </EntityType>
+        <EntityType Name="CakeType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Cake" Relationship="Self.FK__Cake__CakeTypeId__6A30C649" FromRole="CakeType" ToRole="Cake" />
+        </EntityType>
+        <EntityType Name="Clothing">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="ClothingTypeId" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ClothingType" Relationship="Self.FK__Clothing__Clothi__4CA06362" FromRole="Clothing" ToRole="ClothingType" />
+          <NavigationProperty Name="ClothingPhoto" Relationship="Self.FK__ClothingP__Cloth__05D8E0BE" FromRole="Clothing" ToRole="ClothingPhoto" />
+          <NavigationProperty Name="CoupleFavorites" Relationship="Self.FK__CoupleFav__Cloth__6FE99F9F" FromRole="Clothing" ToRole="CoupleFavorites" />
+        </EntityType>
+        <EntityType Name="ClothingPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClothingId" Type="Int32" Nullable="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="Clothing" Relationship="Self.FK__ClothingP__Cloth__05D8E0BE" FromRole="ClothingPhoto" ToRole="Clothing" />
+        </EntityType>
+        <EntityType Name="ClothingType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Clothing" Relationship="Self.FK__Clothing__Clothi__4CA06362" FromRole="ClothingType" ToRole="Clothing" />
+        </EntityType>
+        <EntityType Name="Couple">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BrideId" Type="Int32" Nullable="false" />
+          <Property Name="GroomId" Type="Int32" Nullable="false" />
+          <Property Name="WeddingDate" Type="DateTime" Precision="0" />
+          <Property Name="WeddingStatusId" Type="Int32" />
+          <Property Name="ContractDate" Type="DateTime" Precision="0" />
+          <Property Name="ContractPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MaterialsPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NumberGuests" Type="Int32" />
+          <Property Name="WeddingBudget" Type="Int32" />
+          <NavigationProperty Name="Bride" Relationship="Self.FK__Couple__BrideId__403A8C7D" FromRole="Couple" ToRole="Bride" />
+          <NavigationProperty Name="Gromm" Relationship="Self.FK__Couple__GroomId__412EB0B6" FromRole="Couple" ToRole="Gromm" />
+          <NavigationProperty Name="CoupleFavorites" Relationship="Self.FK__CoupleFav__Coupl__6D0D32F4" FromRole="Couple" ToRole="CoupleFavorites" />
+          <NavigationProperty Name="WeddingStatus" Relationship="Self.FK_Couple_WeddingStatus" FromRole="Couple" ToRole="WeddingStatus" />
+          <NavigationProperty Name="HostBookingDates" Relationship="Self.FK_HostBookingDates_Couple" FromRole="Couple" ToRole="HostBookingDates" />
+          <NavigationProperty Name="MusicianBookingDates" Relationship="Self.FK_MusicianBookingDates_Couple" FromRole="Couple" ToRole="MusicianBookingDates" />
+          <NavigationProperty Name="PhotographerVideographerBookingDates" Relationship="Self.FK_PhotographerVideographerBookingDates_Couple" FromRole="Couple" ToRole="PhotographerVideographerBookingDates" />
+          <NavigationProperty Name="RestaurantBookingDates" Relationship="Self.FK_RestaurantBookingDates_Couple" FromRole="Couple" ToRole="RestaurantBookingDates" />
+          <NavigationProperty Name="StylistBookingDates" Relationship="Self.FK_StylistBookingDates_Couple" FromRole="Couple" ToRole="StylistBookingDates" />
+          <NavigationProperty Name="TransferBookingDates" Relationship="Self.FK_TransferBookingDates_Couple" FromRole="Couple" ToRole="TransferBookingDates" />
+        </EntityType>
+        <EntityType Name="CoupleFavorites">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CoupleId" Type="Int32" Nullable="false" />
+          <Property Name="RestaurantId" Type="Int32" />
+          <Property Name="DecorationId" Type="Int32" />
+          <Property Name="ClothingGrommId" Type="Int32" />
+          <Property Name="DressBriedId" Type="Int32" />
+          <Property Name="AccessoryId" Type="Int32" />
+          <Property Name="HostId" Type="Int32" />
+          <Property Name="PhotographerVideographerId" Type="Int32" />
+          <Property Name="BouquetId" Type="Int32" />
+          <Property Name="StylistId" Type="Int32" />
+          <Property Name="MusicianId" Type="Int32" />
+          <Property Name="TransferId" Type="Int32" />
+          <Property Name="CakeId" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Accessory" Relationship="Self.FK__CoupleFav__Acces__70DDC3D8" FromRole="CoupleFavorites" ToRole="Accessory" />
+          <NavigationProperty Name="Bouquet" Relationship="Self.FK__CoupleFav__Bouqu__73BA3083" FromRole="CoupleFavorites" ToRole="Bouquet" />
+          <NavigationProperty Name="Cake" Relationship="Self.FK__CoupleFav__CakeI__778AC167" FromRole="CoupleFavorites" ToRole="Cake" />
+          <NavigationProperty Name="Clothing" Relationship="Self.FK__CoupleFav__Cloth__6FE99F9F" FromRole="CoupleFavorites" ToRole="Clothing" />
+          <NavigationProperty Name="Couple" Relationship="Self.FK__CoupleFav__Coupl__6D0D32F4" FromRole="CoupleFavorites" ToRole="Couple" />
+          <NavigationProperty Name="Host" Relationship="Self.FK__CoupleFav__HostI__71D1E811" FromRole="CoupleFavorites" ToRole="Host" />
+          <NavigationProperty Name="Musician" Relationship="Self.FK__CoupleFav__Music__75A278F5" FromRole="CoupleFavorites" ToRole="Musician" />
+          <NavigationProperty Name="PhotographerVideographer" Relationship="Self.FK__CoupleFav__Photo__72C60C4A" FromRole="CoupleFavorites" ToRole="PhotographerVideographer" />
+          <NavigationProperty Name="Restaurant" Relationship="Self.FK__CoupleFav__Resta__6E01572D" FromRole="CoupleFavorites" ToRole="Restaurant" />
+          <NavigationProperty Name="Stylist" Relationship="Self.FK__CoupleFav__Styli__74AE54BC" FromRole="CoupleFavorites" ToRole="Stylist" />
+          <NavigationProperty Name="Transfer" Relationship="Self.FK__CoupleFav__Trans__76969D2E" FromRole="CoupleFavorites" ToRole="Transfer" />
+          <NavigationProperty Name="Decoration" Relationship="Self.FK_CoupleFavorites_Decoration" FromRole="CoupleFavorites" ToRole="Decoration" />
+          <NavigationProperty Name="Dress" Relationship="Self.FK_CoupleFavorites_Dress" FromRole="CoupleFavorites" ToRole="Dress" />
+        </EntityType>
+        <EntityType Name="Decoration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CoupleFavorites" Relationship="Self.FK_CoupleFavorites_Decoration" FromRole="Decoration" ToRole="CoupleFavorites" />
+          <NavigationProperty Name="DecorationPhoto" Relationship="Self.FK_DecorationPhoto_Decoration" FromRole="Decoration" ToRole="DecorationPhoto" />
+        </EntityType>
+        <EntityType Name="DecorationPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DecorationId" Type="Int32" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Decoration" Relationship="Self.FK_DecorationPhoto_Decoration" FromRole="DecorationPhoto" ToRole="Decoration" />
+        </EntityType>
+        <EntityType Name="Dress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="DressTypeId" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CoupleFavorites" Relationship="Self.FK_CoupleFavorites_Dress" FromRole="Dress" ToRole="CoupleFavorites" />
+          <NavigationProperty Name="DressTypy" Relationship="Self.FK_Dress_DressTypy" FromRole="Dress" ToRole="DressTypy" />
+          <NavigationProperty Name="PhotoDress" Relationship="Self.FK_PhotoDress_Dress" FromRole="Dress" ToRole="PhotoDress" />
+        </EntityType>
+        <EntityType Name="DressTypy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Dress" Relationship="Self.FK_Dress_DressTypy" FromRole="DressTypy" ToRole="Dress" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_Gender" FromRole="Gender" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Gromm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PassportNumber" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="PassportSeries" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="PassportAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Addresss" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Couple" Relationship="Self.FK__Couple__GroomId__412EB0B6" FromRole="Gromm" ToRole="Couple" />
+        </EntityType>
+        <EntityType Name="Host">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CoupleFavorites" Relationship="Self.FK__CoupleFav__HostI__71D1E811" FromRole="Host" ToRole="CoupleFavorites" />
+          <NavigationProperty Name="HostBookingDates" Relationship="Self.FK__HostBooki__HostI__0B91BA14" FromRole="Host" ToRole="HostBookingDates" />
+          <NavigationProperty Name="HostPhoto" Relationship="Self.FK_HostPhoto_Host" FromRole="Host" ToRole="HostPhoto" />
+        </EntityType>
+        <EntityType Name="HostBookingDates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HostId" Type="Int32" Nullable="false" />
+          <Property Name="BookingDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="CoupleId" Type="Int32" />
+          <NavigationProperty Name="Couple" Relationship="Self.FK_HostBookingDates_Couple" FromRole="HostBookingDates" ToRole="Couple" />
+          <NavigationProperty Name="Host" Relationship="Self.FK__HostBooki__HostI__0B91BA14" FromRole="HostBookingDates" ToRole="Host" />
+        </EntityType>
+        <EntityType Name="HostPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HostId" Type="Int32" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Host" Relationship="Self.FK_HostPhoto_Host" FromRole="HostPhoto" ToRole="Host" />
+        </EntityType>
+        <EntityType Name="Musician">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeamName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MusicianTypeId" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="CoupleFavorites" Relationship="Self.FK__CoupleFav__Music__75A278F5" FromRole="Musician" ToRole="CoupleFavorites" />
+          <NavigationProperty Name="MusicianType" Relationship="Self.FK__Musician__Musici__60A75C0F" FromRole="Musician" ToRole="MusicianType" />
+          <NavigationProperty Name="MusicianBookingDates" Relationship="Self.FK__MusicianB__Music__19DFD96B" FromRole="Musician" ToRole="MusicianBookingDates" />
+          <NavigationProperty Name="MusicianPhoto" Relationship="Self.FK__MusicianP__Music__1CBC4616" FromRole="Musician" ToRole="MusicianPhoto" />
+        </EntityType>
+        <EntityType Name="MusicianBookingDates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MusicianId" Type="Int32" Nullable="false" />
+          <Property Name="BookingDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CoupleId" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="Couple" Relationship="Self.FK_MusicianBookingDates_Couple" FromRole="MusicianBookingDates" ToRole="Couple" />
+          <NavigationProperty Name="Musician" Relationship="Self.FK__MusicianB__Music__19DFD96B" FromRole="MusicianBookingDates" ToRole="Musician" />
+        </EntityType>
+        <EntityType Name="MusicianPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MusicianId" Type="Int32" Nullable="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="Musician" Relationship="Self.FK__MusicianP__Music__1CBC4616" FromRole="MusicianPhoto" ToRole="Musician" />
+        </EntityType>
+        <EntityType Name="MusicianType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Musician" Relationship="Self.FK__Musician__Musici__60A75C0F" FromRole="MusicianType" ToRole="Musician" />
+        </EntityType>
+        <EntityType Name="PhotoDress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DressId" Type="Int32" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Dress" Relationship="Self.FK_PhotoDress_Dress" FromRole="PhotoDress" ToRole="Dress" />
+        </EntityType>
+        <EntityType Name="PhotographerType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PhotographerVideographer" Relationship="Self.FK_PhotographerVideographer_PhotographerType" FromRole="PhotographerType" ToRole="PhotographerVideographer" />
+        </EntityType>
+        <EntityType Name="PhotographerVideographer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeamName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhotographerTypeId" Type="Int32" />
+          <NavigationProperty Name="CoupleFavorites" Relationship="Self.FK__CoupleFav__Photo__72C60C4A" FromRole="PhotographerVideographer" ToRole="CoupleFavorites" />
+          <NavigationProperty Name="PhotographerType" Relationship="Self.FK_PhotographerVideographer_PhotographerType" FromRole="PhotographerVideographer" ToRole="PhotographerType" />
+          <NavigationProperty Name="PhotographerVideographerBookingDates" Relationship="Self.FK__Photograp__Photo__0E6E26BF" FromRole="PhotographerVideographer" ToRole="PhotographerVideographerBookingDates" />
+          <NavigationProperty Name="PhotographerVideographerPhoto" Relationship="Self.FK__Photograp__Photo__114A936A" FromRole="PhotographerVideographer" ToRole="PhotographerVideographerPhoto" />
+        </EntityType>
+        <EntityType Name="PhotographerVideographerBookingDates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PhotographerVideographerId" Type="Int32" Nullable="false" />
+          <Property Name="BookingDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="CoupleId" Type="Int32" />
+          <NavigationProperty Name="Couple" Relationship="Self.FK_PhotographerVideographerBookingDates_Couple" FromRole="PhotographerVideographerBookingDates" ToRole="Couple" />
+          <NavigationProperty Name="PhotographerVideographer" Relationship="Self.FK__Photograp__Photo__0E6E26BF" FromRole="PhotographerVideographerBookingDates" ToRole="PhotographerVideographer" />
+        </EntityType>
+        <EntityType Name="PhotographerVideographerPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PhotographerVideographerId" Type="Int32" Nullable="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="PhotographerVideographer" Relationship="Self.FK__Photograp__Photo__114A936A" FromRole="PhotographerVideographerPhoto" ToRole="PhotographerVideographer" />
+        </EntityType>
+        <EntityType Name="Restaurant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RestaurantTypeId" Type="Int32" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DocumentMenu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CoupleFavorites" Relationship="Self.FK__CoupleFav__Resta__6E01572D" FromRole="Restaurant" ToRole="CoupleFavorites" />
+          <NavigationProperty Name="RestaurantType" Relationship="Self.FK__Restauran__Resta__45F365D3" FromRole="Restaurant" ToRole="RestaurantType" />
+          <NavigationProperty Name="RestaurantBookingDates" Relationship="Self.FK__Restauran__Resta__7A672E12" FromRole="Restaurant" ToRole="RestaurantBookingDates" />
+          <NavigationProperty Name="RestaurantPhoto" Relationship="Self.FK__Restauran__Resta__7D439ABD" FromRole="Restaurant" ToRole="RestaurantPhoto" />
+        </EntityType>
+        <EntityType Name="RestaurantBookingDates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RestaurantId" Type="Int32" Nullable="false" />
+          <Property Name="BookingDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="CoupleId" Type="Int32" />
+          <Property Name="MenuPrice" Type="Int32" />
+          <NavigationProperty Name="Couple" Relationship="Self.FK_RestaurantBookingDates_Couple" FromRole="RestaurantBookingDates" ToRole="Couple" />
+          <NavigationProperty Name="Restaurant" Relationship="Self.FK__Restauran__Resta__7A672E12" FromRole="RestaurantBookingDates" ToRole="Restaurant" />
+        </EntityType>
+        <EntityType Name="RestaurantPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RestaurantId" Type="Int32" Nullable="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="Restaurant" Relationship="Self.FK__Restauran__Resta__7D439ABD" FromRole="RestaurantPhoto" ToRole="Restaurant" />
+        </EntityType>
+        <EntityType Name="RestaurantType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Restaurant" Relationship="Self.FK__Restauran__Resta__45F365D3" FromRole="RestaurantType" ToRole="Restaurant" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Users__RoleId__398D8EEE" FromRole="Role" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Stylist">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeamName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StylistTypeId" Type="Int32" />
+          <NavigationProperty Name="CoupleFavorites" Relationship="Self.FK__CoupleFav__Styli__74AE54BC" FromRole="Stylist" ToRole="CoupleFavorites" />
+          <NavigationProperty Name="StylistBookingDates" Relationship="Self.FK__StylistBo__Styli__14270015" FromRole="Stylist" ToRole="StylistBookingDates" />
+          <NavigationProperty Name="StylistPhoto" Relationship="Self.FK__StylistPh__Styli__17036CC0" FromRole="Stylist" ToRole="StylistPhoto" />
+          <NavigationProperty Name="StylistType" Relationship="Self.FK_Stylist_StylistType" FromRole="Stylist" ToRole="StylistType" />
+        </EntityType>
+        <EntityType Name="StylistBookingDates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StylistId" Type="Int32" Nullable="false" />
+          <Property Name="BookingDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CoupleId" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="Couple" Relationship="Self.FK_StylistBookingDates_Couple" FromRole="StylistBookingDates" ToRole="Couple" />
+          <NavigationProperty Name="Stylist" Relationship="Self.FK__StylistBo__Styli__14270015" FromRole="StylistBookingDates" ToRole="Stylist" />
+        </EntityType>
+        <EntityType Name="StylistPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StylistId" Type="Int32" Nullable="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="Stylist" Relationship="Self.FK__StylistPh__Styli__17036CC0" FromRole="StylistPhoto" ToRole="Stylist" />
+        </EntityType>
+        <EntityType Name="StylistType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Stylist" Relationship="Self.FK_Stylist_StylistType" FromRole="StylistType" ToRole="Stylist" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TaskUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DateAppointment" Type="DateTime" Precision="0" />
+          <Property Name="DateEnd" Type="DateTime" Precision="0" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Done" Type="Boolean" />
+          <Property Name="AdminLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdminFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdminPhoto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="AdminId" Type="Int32" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_TaskUsers_Users" FromRole="TaskUsers" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Transfer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="TransferTypeId" Type="Int32" />
+          <NavigationProperty Name="CoupleFavorites" Relationship="Self.FK__CoupleFav__Trans__76969D2E" FromRole="Transfer" ToRole="CoupleFavorites" />
+          <NavigationProperty Name="TransferType" Relationship="Self.FK__Transfer__Transf__656C112C" FromRole="Transfer" ToRole="TransferType" />
+          <NavigationProperty Name="TransferBookingDates" Relationship="Self.FK__TransferB__Trans__1F98B2C1" FromRole="Transfer" ToRole="TransferBookingDates" />
+          <NavigationProperty Name="TransferPhoto" Relationship="Self.FK__TransferP__Trans__22751F6C" FromRole="Transfer" ToRole="TransferPhoto" />
+        </EntityType>
+        <EntityType Name="TransferBookingDates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransferId" Type="Int32" Nullable="false" />
+          <Property Name="BookingDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CoupleId" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="Couple" Relationship="Self.FK_TransferBookingDates_Couple" FromRole="TransferBookingDates" ToRole="Couple" />
+          <NavigationProperty Name="Transfer" Relationship="Self.FK__TransferB__Trans__1F98B2C1" FromRole="TransferBookingDates" ToRole="Transfer" />
+        </EntityType>
+        <EntityType Name="TransferPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransferId" Type="Int32" Nullable="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="Transfer" Relationship="Self.FK__TransferP__Trans__22751F6C" FromRole="TransferPhoto" ToRole="Transfer" />
+        </EntityType>
+        <EntityType Name="TransferType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Transfer" Relationship="Self.FK__Transfer__Transf__656C112C" FromRole="TransferType" ToRole="Transfer" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="Salary" Type="Int32" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDate" Type="DateTime" Precision="0" />
+          <Property Name="IdGender" Type="Int32" />
+          <Property Name="Dismissed" Type="Boolean" />
+          <NavigationProperty Name="Gender" Relationship="Self.FK_Users_Gender" FromRole="Users" ToRole="Gender" />
+          <NavigationProperty Name="Role" Relationship="Self.FK__Users__RoleId__398D8EEE" FromRole="Users" ToRole="Role" />
+          <NavigationProperty Name="TaskUsers" Relationship="Self.FK_TaskUsers_Users" FromRole="Users" ToRole="TaskUsers" />
+        </EntityType>
+        <EntityType Name="WeddingStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Couple" Relationship="Self.FK_Couple_WeddingStatus" FromRole="WeddingStatus" ToRole="Couple" />
+        </EntityType>
+        <Association Name="FK__Accessory__Acces__08B54D69">
+          <End Role="Accessory" Type="Self.Accessory" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AccessoryPhoto" Type="Self.AccessoryPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accessory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccessoryPhoto">
+              <PropertyRef Name="AccessoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Accessory__Acces__5165187F">
+          <End Role="AccessoryType" Type="Self.AccessoryType" Multiplicity="0..1" />
+          <End Role="Accessory" Type="Self.Accessory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccessoryType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Accessory">
+              <PropertyRef Name="AccessoryTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CoupleFav__Acces__70DDC3D8">
+          <End Role="Accessory" Type="Self.Accessory" Multiplicity="0..1" />
+          <End Role="CoupleFavorites" Type="Self.CoupleFavorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accessory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CoupleFavorites">
+              <PropertyRef Name="AccessoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Bouquet__Bouquet__59FA5E80">
+          <End Role="BouquetType" Type="Self.BouquetType" Multiplicity="0..1" />
+          <End Role="Bouquet" Type="Self.Bouquet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BouquetType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bouquet">
+              <PropertyRef Name="BouquetTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CoupleFav__Bouqu__73BA3083">
+          <End Role="Bouquet" Type="Self.Bouquet" Multiplicity="0..1" />
+          <End Role="CoupleFavorites" Type="Self.CoupleFavorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bouquet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CoupleFavorites">
+              <PropertyRef Name="BouquetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BouquetPhoto_Bouquet">
+          <End Role="Bouquet" Type="Self.Bouquet" Multiplicity="0..1" />
+          <End Role="BouquetPhoto" Type="Self.BouquetPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bouquet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BouquetPhoto">
+              <PropertyRef Name="BouquetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Couple__BrideId__403A8C7D">
+          <End Role="Bride" Type="Self.Bride" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Couple" Type="Self.Couple" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bride">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Couple">
+              <PropertyRef Name="BrideId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cake__CakeTypeId__6A30C649">
+          <End Role="CakeType" Type="Self.CakeType" Multiplicity="0..1" />
+          <End Role="Cake" Type="Self.Cake" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CakeType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cake">
+              <PropertyRef Name="CakeTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CoupleFav__CakeI__778AC167">
+          <End Role="Cake" Type="Self.Cake" Multiplicity="0..1" />
+          <End Role="CoupleFavorites" Type="Self.CoupleFavorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cake">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CoupleFavorites">
+              <PropertyRef Name="CakeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Clothing__Clothi__4CA06362">
+          <End Role="ClothingType" Type="Self.ClothingType" Multiplicity="0..1" />
+          <End Role="Clothing" Type="Self.Clothing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClothingType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clothing">
+              <PropertyRef Name="ClothingTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClothingP__Cloth__05D8E0BE">
+          <End Role="Clothing" Type="Self.Clothing" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ClothingPhoto" Type="Self.ClothingPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clothing">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClothingPhoto">
+              <PropertyRef Name="ClothingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CoupleFav__Cloth__6FE99F9F">
+          <End Role="Clothing" Type="Self.Clothing" Multiplicity="0..1" />
+          <End Role="CoupleFavorites" Type="Self.CoupleFavorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clothing">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CoupleFavorites">
+              <PropertyRef Name="ClothingGrommId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Couple__GroomId__412EB0B6">
+          <End Role="Gromm" Type="Self.Gromm" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Couple" Type="Self.Couple" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gromm">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Couple">
+              <PropertyRef Name="GroomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CoupleFav__Coupl__6D0D32F4">
+          <End Role="Couple" Type="Self.Couple" Multiplicity="1" />
+          <End Role="CoupleFavorites" Type="Self.CoupleFavorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Couple">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CoupleFavorites">
+              <PropertyRef Name="CoupleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Couple_WeddingStatus">
+          <End Role="WeddingStatus" Type="Self.WeddingStatus" Multiplicity="0..1" />
+          <End Role="Couple" Type="Self.Couple" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WeddingStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Couple">
+              <PropertyRef Name="WeddingStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HostBookingDates_Couple">
+          <End Role="Couple" Type="Self.Couple" Multiplicity="0..1" />
+          <End Role="HostBookingDates" Type="Self.HostBookingDates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Couple">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HostBookingDates">
+              <PropertyRef Name="CoupleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MusicianBookingDates_Couple">
+          <End Role="Couple" Type="Self.Couple" Multiplicity="0..1" />
+          <End Role="MusicianBookingDates" Type="Self.MusicianBookingDates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Couple">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MusicianBookingDates">
+              <PropertyRef Name="CoupleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhotographerVideographerBookingDates_Couple">
+          <End Role="Couple" Type="Self.Couple" Multiplicity="0..1" />
+          <End Role="PhotographerVideographerBookingDates" Type="Self.PhotographerVideographerBookingDates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Couple">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhotographerVideographerBookingDates">
+              <PropertyRef Name="CoupleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RestaurantBookingDates_Couple">
+          <End Role="Couple" Type="Self.Couple" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RestaurantBookingDates" Type="Self.RestaurantBookingDates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Couple">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RestaurantBookingDates">
+              <PropertyRef Name="CoupleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StylistBookingDates_Couple">
+          <End Role="Couple" Type="Self.Couple" Multiplicity="0..1" />
+          <End Role="StylistBookingDates" Type="Self.StylistBookingDates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Couple">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StylistBookingDates">
+              <PropertyRef Name="CoupleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransferBookingDates_Couple">
+          <End Role="Couple" Type="Self.Couple" Multiplicity="0..1" />
+          <End Role="TransferBookingDates" Type="Self.TransferBookingDates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Couple">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TransferBookingDates">
+              <PropertyRef Name="CoupleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CoupleFav__HostI__71D1E811">
+          <End Role="Host" Type="Self.Host" Multiplicity="0..1" />
+          <End Role="CoupleFavorites" Type="Self.CoupleFavorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Host">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CoupleFavorites">
+              <PropertyRef Name="HostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CoupleFav__Music__75A278F5">
+          <End Role="Musician" Type="Self.Musician" Multiplicity="0..1" />
+          <End Role="CoupleFavorites" Type="Self.CoupleFavorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Musician">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CoupleFavorites">
+              <PropertyRef Name="MusicianId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CoupleFav__Photo__72C60C4A">
+          <End Role="PhotographerVideographer" Type="Self.PhotographerVideographer" Multiplicity="0..1" />
+          <End Role="CoupleFavorites" Type="Self.CoupleFavorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhotographerVideographer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CoupleFavorites">
+              <PropertyRef Name="PhotographerVideographerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CoupleFav__Resta__6E01572D">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="0..1" />
+          <End Role="CoupleFavorites" Type="Self.CoupleFavorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CoupleFavorites">
+              <PropertyRef Name="RestaurantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CoupleFav__Styli__74AE54BC">
+          <End Role="Stylist" Type="Self.Stylist" Multiplicity="0..1" />
+          <End Role="CoupleFavorites" Type="Self.CoupleFavorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stylist">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CoupleFavorites">
+              <PropertyRef Name="StylistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CoupleFav__Trans__76969D2E">
+          <End Role="Transfer" Type="Self.Transfer" Multiplicity="0..1" />
+          <End Role="CoupleFavorites" Type="Self.CoupleFavorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transfer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CoupleFavorites">
+              <PropertyRef Name="TransferId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoupleFavorites_Decoration">
+          <End Role="Decoration" Type="Self.Decoration" Multiplicity="0..1" />
+          <End Role="CoupleFavorites" Type="Self.CoupleFavorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Decoration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CoupleFavorites">
+              <PropertyRef Name="DecorationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoupleFavorites_Dress">
+          <End Role="Dress" Type="Self.Dress" Multiplicity="0..1" />
+          <End Role="CoupleFavorites" Type="Self.CoupleFavorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dress">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CoupleFavorites">
+              <PropertyRef Name="DressBriedId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DecorationPhoto_Decoration">
+          <End Role="Decoration" Type="Self.Decoration" Multiplicity="0..1" />
+          <End Role="DecorationPhoto" Type="Self.DecorationPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Decoration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DecorationPhoto">
+              <PropertyRef Name="DecorationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dress_DressTypy">
+          <End Role="DressTypy" Type="Self.DressTypy" Multiplicity="0..1" />
+          <End Role="Dress" Type="Self.Dress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DressTypy">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Dress">
+              <PropertyRef Name="DressTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhotoDress_Dress">
+          <End Role="Dress" Type="Self.Dress" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PhotoDress" Type="Self.PhotoDress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dress">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhotoDress">
+              <PropertyRef Name="DressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="IdGender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HostBooki__HostI__0B91BA14">
+          <End Role="Host" Type="Self.Host" Multiplicity="1" />
+          <End Role="HostBookingDates" Type="Self.HostBookingDates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Host">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HostBookingDates">
+              <PropertyRef Name="HostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HostPhoto_Host">
+          <End Role="Host" Type="Self.Host" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HostPhoto" Type="Self.HostPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Host">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HostPhoto">
+              <PropertyRef Name="HostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Musician__Musici__60A75C0F">
+          <End Role="MusicianType" Type="Self.MusicianType" Multiplicity="0..1" />
+          <End Role="Musician" Type="Self.Musician" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MusicianType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Musician">
+              <PropertyRef Name="MusicianTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MusicianB__Music__19DFD96B">
+          <End Role="Musician" Type="Self.Musician" Multiplicity="1" />
+          <End Role="MusicianBookingDates" Type="Self.MusicianBookingDates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Musician">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MusicianBookingDates">
+              <PropertyRef Name="MusicianId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MusicianP__Music__1CBC4616">
+          <End Role="Musician" Type="Self.Musician" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MusicianPhoto" Type="Self.MusicianPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Musician">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MusicianPhoto">
+              <PropertyRef Name="MusicianId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhotographerVideographer_PhotographerType">
+          <End Role="PhotographerType" Type="Self.PhotographerType" Multiplicity="0..1" />
+          <End Role="PhotographerVideographer" Type="Self.PhotographerVideographer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhotographerType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhotographerVideographer">
+              <PropertyRef Name="PhotographerTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Photograp__Photo__0E6E26BF">
+          <End Role="PhotographerVideographer" Type="Self.PhotographerVideographer" Multiplicity="1" />
+          <End Role="PhotographerVideographerBookingDates" Type="Self.PhotographerVideographerBookingDates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhotographerVideographer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhotographerVideographerBookingDates">
+              <PropertyRef Name="PhotographerVideographerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Photograp__Photo__114A936A">
+          <End Role="PhotographerVideographer" Type="Self.PhotographerVideographer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PhotographerVideographerPhoto" Type="Self.PhotographerVideographerPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhotographerVideographer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhotographerVideographerPhoto">
+              <PropertyRef Name="PhotographerVideographerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Restauran__Resta__45F365D3">
+          <End Role="RestaurantType" Type="Self.RestaurantType" Multiplicity="0..1" />
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RestaurantType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Restaurant">
+              <PropertyRef Name="RestaurantTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Restauran__Resta__7A672E12">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RestaurantBookingDates" Type="Self.RestaurantBookingDates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RestaurantBookingDates">
+              <PropertyRef Name="RestaurantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Restauran__Resta__7D439ABD">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RestaurantPhoto" Type="Self.RestaurantPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RestaurantPhoto">
+              <PropertyRef Name="RestaurantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__RoleId__398D8EEE">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StylistBo__Styli__14270015">
+          <End Role="Stylist" Type="Self.Stylist" Multiplicity="1" />
+          <End Role="StylistBookingDates" Type="Self.StylistBookingDates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stylist">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StylistBookingDates">
+              <PropertyRef Name="StylistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StylistPh__Styli__17036CC0">
+          <End Role="Stylist" Type="Self.Stylist" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StylistPhoto" Type="Self.StylistPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stylist">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StylistPhoto">
+              <PropertyRef Name="StylistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stylist_StylistType">
+          <End Role="StylistType" Type="Self.StylistType" Multiplicity="0..1" />
+          <End Role="Stylist" Type="Self.Stylist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StylistType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stylist">
+              <PropertyRef Name="StylistTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskUsers_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TaskUsers" Type="Self.TaskUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskUsers">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transfer__Transf__656C112C">
+          <End Role="TransferType" Type="Self.TransferType" Multiplicity="0..1" />
+          <End Role="Transfer" Type="Self.Transfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransferType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transfer">
+              <PropertyRef Name="TransferTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TransferB__Trans__1F98B2C1">
+          <End Role="Transfer" Type="Self.Transfer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TransferBookingDates" Type="Self.TransferBookingDates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transfer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TransferBookingDates">
+              <PropertyRef Name="TransferId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TransferP__Trans__22751F6C">
+          <End Role="Transfer" Type="Self.Transfer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TransferPhoto" Type="Self.TransferPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transfer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TransferPhoto">
+              <PropertyRef Name="TransferId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MarryMeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accessory" EntityType="Self.Accessory" />
+          <EntitySet Name="AccessoryPhoto" EntityType="Self.AccessoryPhoto" />
+          <EntitySet Name="AccessoryType" EntityType="Self.AccessoryType" />
+          <EntitySet Name="Bouquet" EntityType="Self.Bouquet" />
+          <EntitySet Name="BouquetPhoto" EntityType="Self.BouquetPhoto" />
+          <EntitySet Name="BouquetType" EntityType="Self.BouquetType" />
+          <EntitySet Name="Bride" EntityType="Self.Bride" />
+          <EntitySet Name="Cake" EntityType="Self.Cake" />
+          <EntitySet Name="CakeType" EntityType="Self.CakeType" />
+          <EntitySet Name="Clothing" EntityType="Self.Clothing" />
+          <EntitySet Name="ClothingPhoto" EntityType="Self.ClothingPhoto" />
+          <EntitySet Name="ClothingType" EntityType="Self.ClothingType" />
+          <EntitySet Name="Couple" EntityType="Self.Couple" />
+          <EntitySet Name="CoupleFavorites" EntityType="Self.CoupleFavorites" />
+          <EntitySet Name="Decoration" EntityType="Self.Decoration" />
+          <EntitySet Name="DecorationPhoto" EntityType="Self.DecorationPhoto" />
+          <EntitySet Name="Dress" EntityType="Self.Dress" />
+          <EntitySet Name="DressTypy" EntityType="Self.DressTypy" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" />
+          <EntitySet Name="Gromm" EntityType="Self.Gromm" />
+          <EntitySet Name="Host" EntityType="Self.Host" />
+          <EntitySet Name="HostBookingDates" EntityType="Self.HostBookingDates" />
+          <EntitySet Name="HostPhoto" EntityType="Self.HostPhoto" />
+          <EntitySet Name="Musician" EntityType="Self.Musician" />
+          <EntitySet Name="MusicianBookingDates" EntityType="Self.MusicianBookingDates" />
+          <EntitySet Name="MusicianPhoto" EntityType="Self.MusicianPhoto" />
+          <EntitySet Name="MusicianType" EntityType="Self.MusicianType" />
+          <EntitySet Name="PhotoDress" EntityType="Self.PhotoDress" />
+          <EntitySet Name="PhotographerType" EntityType="Self.PhotographerType" />
+          <EntitySet Name="PhotographerVideographer" EntityType="Self.PhotographerVideographer" />
+          <EntitySet Name="PhotographerVideographerBookingDates" EntityType="Self.PhotographerVideographerBookingDates" />
+          <EntitySet Name="PhotographerVideographerPhoto" EntityType="Self.PhotographerVideographerPhoto" />
+          <EntitySet Name="Restaurant" EntityType="Self.Restaurant" />
+          <EntitySet Name="RestaurantBookingDates" EntityType="Self.RestaurantBookingDates" />
+          <EntitySet Name="RestaurantPhoto" EntityType="Self.RestaurantPhoto" />
+          <EntitySet Name="RestaurantType" EntityType="Self.RestaurantType" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="Stylist" EntityType="Self.Stylist" />
+          <EntitySet Name="StylistBookingDates" EntityType="Self.StylistBookingDates" />
+          <EntitySet Name="StylistPhoto" EntityType="Self.StylistPhoto" />
+          <EntitySet Name="StylistType" EntityType="Self.StylistType" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TaskUsers" EntityType="Self.TaskUsers" />
+          <EntitySet Name="Transfer" EntityType="Self.Transfer" />
+          <EntitySet Name="TransferBookingDates" EntityType="Self.TransferBookingDates" />
+          <EntitySet Name="TransferPhoto" EntityType="Self.TransferPhoto" />
+          <EntitySet Name="TransferType" EntityType="Self.TransferType" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="WeddingStatus" EntityType="Self.WeddingStatus" />
+          <AssociationSet Name="FK__Accessory__Acces__08B54D69" Association="Self.FK__Accessory__Acces__08B54D69">
+            <End Role="Accessory" EntitySet="Accessory" />
+            <End Role="AccessoryPhoto" EntitySet="AccessoryPhoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Accessory__Acces__5165187F" Association="Self.FK__Accessory__Acces__5165187F">
+            <End Role="AccessoryType" EntitySet="AccessoryType" />
+            <End Role="Accessory" EntitySet="Accessory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CoupleFav__Acces__70DDC3D8" Association="Self.FK__CoupleFav__Acces__70DDC3D8">
+            <End Role="Accessory" EntitySet="Accessory" />
+            <End Role="CoupleFavorites" EntitySet="CoupleFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Bouquet__Bouquet__59FA5E80" Association="Self.FK__Bouquet__Bouquet__59FA5E80">
+            <End Role="BouquetType" EntitySet="BouquetType" />
+            <End Role="Bouquet" EntitySet="Bouquet" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CoupleFav__Bouqu__73BA3083" Association="Self.FK__CoupleFav__Bouqu__73BA3083">
+            <End Role="Bouquet" EntitySet="Bouquet" />
+            <End Role="CoupleFavorites" EntitySet="CoupleFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BouquetPhoto_Bouquet" Association="Self.FK_BouquetPhoto_Bouquet">
+            <End Role="Bouquet" EntitySet="Bouquet" />
+            <End Role="BouquetPhoto" EntitySet="BouquetPhoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Couple__BrideId__403A8C7D" Association="Self.FK__Couple__BrideId__403A8C7D">
+            <End Role="Bride" EntitySet="Bride" />
+            <End Role="Couple" EntitySet="Couple" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cake__CakeTypeId__6A30C649" Association="Self.FK__Cake__CakeTypeId__6A30C649">
+            <End Role="CakeType" EntitySet="CakeType" />
+            <End Role="Cake" EntitySet="Cake" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CoupleFav__CakeI__778AC167" Association="Self.FK__CoupleFav__CakeI__778AC167">
+            <End Role="Cake" EntitySet="Cake" />
+            <End Role="CoupleFavorites" EntitySet="CoupleFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Clothing__Clothi__4CA06362" Association="Self.FK__Clothing__Clothi__4CA06362">
+            <End Role="ClothingType" EntitySet="ClothingType" />
+            <End Role="Clothing" EntitySet="Clothing" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClothingP__Cloth__05D8E0BE" Association="Self.FK__ClothingP__Cloth__05D8E0BE">
+            <End Role="Clothing" EntitySet="Clothing" />
+            <End Role="ClothingPhoto" EntitySet="ClothingPhoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CoupleFav__Cloth__6FE99F9F" Association="Self.FK__CoupleFav__Cloth__6FE99F9F">
+            <End Role="Clothing" EntitySet="Clothing" />
+            <End Role="CoupleFavorites" EntitySet="CoupleFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Couple__GroomId__412EB0B6" Association="Self.FK__Couple__GroomId__412EB0B6">
+            <End Role="Gromm" EntitySet="Gromm" />
+            <End Role="Couple" EntitySet="Couple" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CoupleFav__Coupl__6D0D32F4" Association="Self.FK__CoupleFav__Coupl__6D0D32F4">
+            <End Role="Couple" EntitySet="Couple" />
+            <End Role="CoupleFavorites" EntitySet="CoupleFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Couple_WeddingStatus" Association="Self.FK_Couple_WeddingStatus">
+            <End Role="WeddingStatus" EntitySet="WeddingStatus" />
+            <End Role="Couple" EntitySet="Couple" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HostBookingDates_Couple" Association="Self.FK_HostBookingDates_Couple">
+            <End Role="Couple" EntitySet="Couple" />
+            <End Role="HostBookingDates" EntitySet="HostBookingDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MusicianBookingDates_Couple" Association="Self.FK_MusicianBookingDates_Couple">
+            <End Role="Couple" EntitySet="Couple" />
+            <End Role="MusicianBookingDates" EntitySet="MusicianBookingDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhotographerVideographerBookingDates_Couple" Association="Self.FK_PhotographerVideographerBookingDates_Couple">
+            <End Role="Couple" EntitySet="Couple" />
+            <End Role="PhotographerVideographerBookingDates" EntitySet="PhotographerVideographerBookingDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RestaurantBookingDates_Couple" Association="Self.FK_RestaurantBookingDates_Couple">
+            <End Role="Couple" EntitySet="Couple" />
+            <End Role="RestaurantBookingDates" EntitySet="RestaurantBookingDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StylistBookingDates_Couple" Association="Self.FK_StylistBookingDates_Couple">
+            <End Role="Couple" EntitySet="Couple" />
+            <End Role="StylistBookingDates" EntitySet="StylistBookingDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransferBookingDates_Couple" Association="Self.FK_TransferBookingDates_Couple">
+            <End Role="Couple" EntitySet="Couple" />
+            <End Role="TransferBookingDates" EntitySet="TransferBookingDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CoupleFav__HostI__71D1E811" Association="Self.FK__CoupleFav__HostI__71D1E811">
+            <End Role="Host" EntitySet="Host" />
+            <End Role="CoupleFavorites" EntitySet="CoupleFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CoupleFav__Music__75A278F5" Association="Self.FK__CoupleFav__Music__75A278F5">
+            <End Role="Musician" EntitySet="Musician" />
+            <End Role="CoupleFavorites" EntitySet="CoupleFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CoupleFav__Photo__72C60C4A" Association="Self.FK__CoupleFav__Photo__72C60C4A">
+            <End Role="PhotographerVideographer" EntitySet="PhotographerVideographer" />
+            <End Role="CoupleFavorites" EntitySet="CoupleFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CoupleFav__Resta__6E01572D" Association="Self.FK__CoupleFav__Resta__6E01572D">
+            <End Role="Restaurant" EntitySet="Restaurant" />
+            <End Role="CoupleFavorites" EntitySet="CoupleFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CoupleFav__Styli__74AE54BC" Association="Self.FK__CoupleFav__Styli__74AE54BC">
+            <End Role="Stylist" EntitySet="Stylist" />
+            <End Role="CoupleFavorites" EntitySet="CoupleFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CoupleFav__Trans__76969D2E" Association="Self.FK__CoupleFav__Trans__76969D2E">
+            <End Role="Transfer" EntitySet="Transfer" />
+            <End Role="CoupleFavorites" EntitySet="CoupleFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoupleFavorites_Decoration" Association="Self.FK_CoupleFavorites_Decoration">
+            <End Role="Decoration" EntitySet="Decoration" />
+            <End Role="CoupleFavorites" EntitySet="CoupleFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoupleFavorites_Dress" Association="Self.FK_CoupleFavorites_Dress">
+            <End Role="Dress" EntitySet="Dress" />
+            <End Role="CoupleFavorites" EntitySet="CoupleFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DecorationPhoto_Decoration" Association="Self.FK_DecorationPhoto_Decoration">
+            <End Role="Decoration" EntitySet="Decoration" />
+            <End Role="DecorationPhoto" EntitySet="DecorationPhoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dress_DressTypy" Association="Self.FK_Dress_DressTypy">
+            <End Role="DressTypy" EntitySet="DressTypy" />
+            <End Role="Dress" EntitySet="Dress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhotoDress_Dress" Association="Self.FK_PhotoDress_Dress">
+            <End Role="Dress" EntitySet="Dress" />
+            <End Role="PhotoDress" EntitySet="PhotoDress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Gender" Association="Self.FK_Users_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HostBooki__HostI__0B91BA14" Association="Self.FK__HostBooki__HostI__0B91BA14">
+            <End Role="Host" EntitySet="Host" />
+            <End Role="HostBookingDates" EntitySet="HostBookingDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HostPhoto_Host" Association="Self.FK_HostPhoto_Host">
+            <End Role="Host" EntitySet="Host" />
+            <End Role="HostPhoto" EntitySet="HostPhoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Musician__Musici__60A75C0F" Association="Self.FK__Musician__Musici__60A75C0F">
+            <End Role="MusicianType" EntitySet="MusicianType" />
+            <End Role="Musician" EntitySet="Musician" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MusicianB__Music__19DFD96B" Association="Self.FK__MusicianB__Music__19DFD96B">
+            <End Role="Musician" EntitySet="Musician" />
+            <End Role="MusicianBookingDates" EntitySet="MusicianBookingDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MusicianP__Music__1CBC4616" Association="Self.FK__MusicianP__Music__1CBC4616">
+            <End Role="Musician" EntitySet="Musician" />
+            <End Role="MusicianPhoto" EntitySet="MusicianPhoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhotographerVideographer_PhotographerType" Association="Self.FK_PhotographerVideographer_PhotographerType">
+            <End Role="PhotographerType" EntitySet="PhotographerType" />
+            <End Role="PhotographerVideographer" EntitySet="PhotographerVideographer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Photograp__Photo__0E6E26BF" Association="Self.FK__Photograp__Photo__0E6E26BF">
+            <End Role="PhotographerVideographer" EntitySet="PhotographerVideographer" />
+            <End Role="PhotographerVideographerBookingDates" EntitySet="PhotographerVideographerBookingDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Photograp__Photo__114A936A" Association="Self.FK__Photograp__Photo__114A936A">
+            <End Role="PhotographerVideographer" EntitySet="PhotographerVideographer" />
+            <End Role="PhotographerVideographerPhoto" EntitySet="PhotographerVideographerPhoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Restauran__Resta__45F365D3" Association="Self.FK__Restauran__Resta__45F365D3">
+            <End Role="RestaurantType" EntitySet="RestaurantType" />
+            <End Role="Restaurant" EntitySet="Restaurant" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Restauran__Resta__7A672E12" Association="Self.FK__Restauran__Resta__7A672E12">
+            <End Role="Restaurant" EntitySet="Restaurant" />
+            <End Role="RestaurantBookingDates" EntitySet="RestaurantBookingDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Restauran__Resta__7D439ABD" Association="Self.FK__Restauran__Resta__7D439ABD">
+            <End Role="Restaurant" EntitySet="Restaurant" />
+            <End Role="RestaurantPhoto" EntitySet="RestaurantPhoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__RoleId__398D8EEE" Association="Self.FK__Users__RoleId__398D8EEE">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StylistBo__Styli__14270015" Association="Self.FK__StylistBo__Styli__14270015">
+            <End Role="Stylist" EntitySet="Stylist" />
+            <End Role="StylistBookingDates" EntitySet="StylistBookingDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StylistPh__Styli__17036CC0" Association="Self.FK__StylistPh__Styli__17036CC0">
+            <End Role="Stylist" EntitySet="Stylist" />
+            <End Role="StylistPhoto" EntitySet="StylistPhoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stylist_StylistType" Association="Self.FK_Stylist_StylistType">
+            <End Role="StylistType" EntitySet="StylistType" />
+            <End Role="Stylist" EntitySet="Stylist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskUsers_Users" Association="Self.FK_TaskUsers_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="TaskUsers" EntitySet="TaskUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transfer__Transf__656C112C" Association="Self.FK__Transfer__Transf__656C112C">
+            <End Role="TransferType" EntitySet="TransferType" />
+            <End Role="Transfer" EntitySet="Transfer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TransferB__Trans__1F98B2C1" Association="Self.FK__TransferB__Trans__1F98B2C1">
+            <End Role="Transfer" EntitySet="Transfer" />
+            <End Role="TransferBookingDates" EntitySet="TransferBookingDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TransferP__Trans__22751F6C" Association="Self.FK__TransferP__Trans__22751F6C">
+            <End Role="Transfer" EntitySet="Transfer" />
+            <End Role="TransferPhoto" EntitySet="TransferPhoto" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ZhiganshinaMilana_MarryMeModelContainer" CdmEntityContainer="MarryMeEntities">
+          <EntitySetMapping Name="Accessory">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.Accessory">
+              <MappingFragment StoreEntitySet="Accessory">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="AccessoryTypeId" ColumnName="AccessoryTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccessoryPhoto">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.AccessoryPhoto">
+              <MappingFragment StoreEntitySet="AccessoryPhoto">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AccessoryId" ColumnName="AccessoryId" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccessoryType">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.AccessoryType">
+              <MappingFragment StoreEntitySet="AccessoryType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bouquet">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.Bouquet">
+              <MappingFragment StoreEntitySet="Bouquet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BouquetTypeId" ColumnName="BouquetTypeId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BouquetPhoto">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.BouquetPhoto">
+              <MappingFragment StoreEntitySet="BouquetPhoto">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BouquetId" ColumnName="BouquetId" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BouquetType">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.BouquetType">
+              <MappingFragment StoreEntitySet="BouquetType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bride">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.Bride">
+              <MappingFragment StoreEntitySet="Bride">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PassportNumber" ColumnName="PassportNumber" />
+                <ScalarProperty Name="PassportSeries" ColumnName="PassportSeries" />
+                <ScalarProperty Name="PassportAddress" ColumnName="PassportAddress" />
+                <ScalarProperty Name="Addresss" ColumnName="Addresss" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cake">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.Cake">
+              <MappingFragment StoreEntitySet="Cake">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CakeTypeId" ColumnName="CakeTypeId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CakeType">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.CakeType">
+              <MappingFragment StoreEntitySet="CakeType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clothing">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.Clothing">
+              <MappingFragment StoreEntitySet="Clothing">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ClothingTypeId" ColumnName="ClothingTypeId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClothingPhoto">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.ClothingPhoto">
+              <MappingFragment StoreEntitySet="ClothingPhoto">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClothingId" ColumnName="ClothingId" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClothingType">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.ClothingType">
+              <MappingFragment StoreEntitySet="ClothingType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Couple">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.Couple">
+              <MappingFragment StoreEntitySet="Couple">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BrideId" ColumnName="BrideId" />
+                <ScalarProperty Name="GroomId" ColumnName="GroomId" />
+                <ScalarProperty Name="WeddingDate" ColumnName="WeddingDate" />
+                <ScalarProperty Name="WeddingStatusId" ColumnName="WeddingStatusId" />
+                <ScalarProperty Name="ContractDate" ColumnName="ContractDate" />
+                <ScalarProperty Name="ContractPath" ColumnName="ContractPath" />
+                <ScalarProperty Name="MaterialsPath" ColumnName="MaterialsPath" />
+                <ScalarProperty Name="NumberGuests" ColumnName="NumberGuests" />
+                <ScalarProperty Name="WeddingBudget" ColumnName="WeddingBudget" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CoupleFavorites">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.CoupleFavorites">
+              <MappingFragment StoreEntitySet="CoupleFavorites">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CoupleId" ColumnName="CoupleId" />
+                <ScalarProperty Name="RestaurantId" ColumnName="RestaurantId" />
+                <ScalarProperty Name="DecorationId" ColumnName="DecorationId" />
+                <ScalarProperty Name="ClothingGrommId" ColumnName="ClothingGrommId" />
+                <ScalarProperty Name="DressBriedId" ColumnName="DressBriedId" />
+                <ScalarProperty Name="AccessoryId" ColumnName="AccessoryId" />
+                <ScalarProperty Name="HostId" ColumnName="HostId" />
+                <ScalarProperty Name="PhotographerVideographerId" ColumnName="PhotographerVideographerId" />
+                <ScalarProperty Name="BouquetId" ColumnName="BouquetId" />
+                <ScalarProperty Name="StylistId" ColumnName="StylistId" />
+                <ScalarProperty Name="MusicianId" ColumnName="MusicianId" />
+                <ScalarProperty Name="TransferId" ColumnName="TransferId" />
+                <ScalarProperty Name="CakeId" ColumnName="CakeId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Decoration">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.Decoration">
+              <MappingFragment StoreEntitySet="Decoration">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DecorationPhoto">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.DecorationPhoto">
+              <MappingFragment StoreEntitySet="DecorationPhoto">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DecorationId" ColumnName="DecorationId" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dress">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.Dress">
+              <MappingFragment StoreEntitySet="Dress">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="DressTypeId" ColumnName="DressTypeId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DressTypy">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.DressTypy">
+              <MappingFragment StoreEntitySet="DressTypy">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gender">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gromm">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.Gromm">
+              <MappingFragment StoreEntitySet="Gromm">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PassportNumber" ColumnName="PassportNumber" />
+                <ScalarProperty Name="PassportSeries" ColumnName="PassportSeries" />
+                <ScalarProperty Name="PassportAddress" ColumnName="PassportAddress" />
+                <ScalarProperty Name="Addresss" ColumnName="Addresss" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Host">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.Host">
+              <MappingFragment StoreEntitySet="Host">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HostBookingDates">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.HostBookingDates">
+              <MappingFragment StoreEntitySet="HostBookingDates">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="HostId" ColumnName="HostId" />
+                <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CoupleId" ColumnName="CoupleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HostPhoto">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.HostPhoto">
+              <MappingFragment StoreEntitySet="HostPhoto">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="HostId" ColumnName="HostId" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Musician">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.Musician">
+              <MappingFragment StoreEntitySet="Musician">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+                <ScalarProperty Name="MusicianTypeId" ColumnName="MusicianTypeId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MusicianBookingDates">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.MusicianBookingDates">
+              <MappingFragment StoreEntitySet="MusicianBookingDates">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MusicianId" ColumnName="MusicianId" />
+                <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+                <ScalarProperty Name="CoupleId" ColumnName="CoupleId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MusicianPhoto">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.MusicianPhoto">
+              <MappingFragment StoreEntitySet="MusicianPhoto">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MusicianId" ColumnName="MusicianId" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MusicianType">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.MusicianType">
+              <MappingFragment StoreEntitySet="MusicianType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhotoDress">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.PhotoDress">
+              <MappingFragment StoreEntitySet="PhotoDress">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DressId" ColumnName="DressId" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhotographerType">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.PhotographerType">
+              <MappingFragment StoreEntitySet="PhotographerType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhotographerVideographer">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.PhotographerVideographer">
+              <MappingFragment StoreEntitySet="PhotographerVideographer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PhotographerTypeId" ColumnName="PhotographerTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhotographerVideographerBookingDates">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.PhotographerVideographerBookingDates">
+              <MappingFragment StoreEntitySet="PhotographerVideographerBookingDates">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PhotographerVideographerId" ColumnName="PhotographerVideographerId" />
+                <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CoupleId" ColumnName="CoupleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhotographerVideographerPhoto">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.PhotographerVideographerPhoto">
+              <MappingFragment StoreEntitySet="PhotographerVideographerPhoto">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PhotographerVideographerId" ColumnName="PhotographerVideographerId" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Restaurant">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.Restaurant">
+              <MappingFragment StoreEntitySet="Restaurant">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RestaurantTypeId" ColumnName="RestaurantTypeId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DocumentMenu" ColumnName="DocumentMenu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RestaurantBookingDates">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.RestaurantBookingDates">
+              <MappingFragment StoreEntitySet="RestaurantBookingDates">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RestaurantId" ColumnName="RestaurantId" />
+                <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CoupleId" ColumnName="CoupleId" />
+                <ScalarProperty Name="MenuPrice" ColumnName="MenuPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RestaurantPhoto">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.RestaurantPhoto">
+              <MappingFragment StoreEntitySet="RestaurantPhoto">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RestaurantId" ColumnName="RestaurantId" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RestaurantType">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.RestaurantType">
+              <MappingFragment StoreEntitySet="RestaurantType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stylist">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.Stylist">
+              <MappingFragment StoreEntitySet="Stylist">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StylistTypeId" ColumnName="StylistTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StylistBookingDates">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.StylistBookingDates">
+              <MappingFragment StoreEntitySet="StylistBookingDates">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StylistId" ColumnName="StylistId" />
+                <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+                <ScalarProperty Name="CoupleId" ColumnName="CoupleId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StylistPhoto">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.StylistPhoto">
+              <MappingFragment StoreEntitySet="StylistPhoto">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StylistId" ColumnName="StylistId" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StylistType">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.StylistType">
+              <MappingFragment StoreEntitySet="StylistType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskUsers">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.TaskUsers">
+              <MappingFragment StoreEntitySet="TaskUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DateAppointment" ColumnName="DateAppointment" />
+                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Done" ColumnName="Done" />
+                <ScalarProperty Name="AdminLastName" ColumnName="AdminLastName" />
+                <ScalarProperty Name="AdminFirstName" ColumnName="AdminFirstName" />
+                <ScalarProperty Name="AdminPhoto" ColumnName="AdminPhoto" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transfer">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.Transfer">
+              <MappingFragment StoreEntitySet="Transfer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="TransferTypeId" ColumnName="TransferTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransferBookingDates">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.TransferBookingDates">
+              <MappingFragment StoreEntitySet="TransferBookingDates">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TransferId" ColumnName="TransferId" />
+                <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+                <ScalarProperty Name="CoupleId" ColumnName="CoupleId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransferPhoto">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.TransferPhoto">
+              <MappingFragment StoreEntitySet="TransferPhoto">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TransferId" ColumnName="TransferId" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransferType">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.TransferType">
+              <MappingFragment StoreEntitySet="TransferType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="IdGender" ColumnName="IdGender" />
+                <ScalarProperty Name="Dismissed" ColumnName="Dismissed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WeddingStatus">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.WeddingStatus">
+              <MappingFragment StoreEntitySet="WeddingStatus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

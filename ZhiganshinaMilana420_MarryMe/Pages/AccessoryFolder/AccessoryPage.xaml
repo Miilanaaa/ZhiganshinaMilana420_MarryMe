@@ -1,0 +1,108 @@
+﻿<Page x:Class="ZhiganshinaMilana420_MarryMe.Pages.AccessoryFolder.AccessoryPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ZhiganshinaMilana420_MarryMe.Pages.AccessoryFolder"
+      mc:Ignorable="d" 
+      d:DesignHeight="815" d:DesignWidth="1570"
+      Title="AccessoryPage">
+
+    <Grid Margin="67 0 0 0" Background="#EEEFEA">
+        <TextBox x:Name="SearchTb"
+                 Width="350"
+                 Height="50"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 Margin="50 20 0 0" TextChanged="SearchTb_TextChanged"/>
+        <ComboBox x:Name="FilterCb"
+                  DisplayMemberPath="Name"
+                  FontSize="25"
+                  ItemsSource="{Binding typees}"
+                  Width="350"
+                  Height="50"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top"
+                  Margin="440 20 0 0" SelectionChanged="FilterCb_SelectionChanged"
+                  >
+            <ComboBox.ItemContainerStyle>
+                <Style TargetType="ComboBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+            </ComboBox.ItemContainerStyle>
+        </ComboBox>
+        <Button Content="Добавить украшение"
+                Width="350"
+                Height="50"
+                VerticalAlignment="Top"
+                Margin="500 20 0 0"
+                FontSize="25" 
+                Click="Button_Click"/>
+        <ListView x:Name="AccessoryLV"
+                  d:ItemsSource="{d:SampleData ItemCount=1}"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Bottom"
+                  Margin="40 0 0 40"
+                  Width="1410"
+                  Height="660">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="1"
+                                 HorizontalAlignment="Center"
+                                 VerticalAlignment="Top"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Border Background="#CDDCDF"
+                                Width="1360"
+                                Height="230"
+                                Margin="10 10 0 0"
+                                CornerRadius="20">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{Binding DisplayPhotoImage}"
+                                    Width="190"
+                                   HorizontalAlignment="Left"
+                                   Margin="50 5"/>
+                                <StackPanel Orientation="Vertical"
+                                            Width="700">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Id}"
+                                                   FontSize="35"
+                                                   Margin="0 10 0 0"/>
+                                        <Border Width="3"
+                                                Height="55"
+                                                Background="Black"
+                                                VerticalAlignment="Top"
+                                                Margin="10 10 0 0"/>
+                                        <TextBlock Text="{Binding Name}"
+                                                   Margin="10 10 0 0"
+                                                   FontSize="35"/>
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding Price}"
+                                               FontSize="35"
+                                               Margin="0 10 0 0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical">
+                                    <Button Content="Редактировать"
+                                            Width="200"
+                                            Height="50"
+                                            FontSize="25"
+                                            Margin="0 50 0 0"
+                                            Click="ExitBtn_Click"/>
+                                    <Button Content="Удалить"
+                                            Width="200"
+                                            Height="50"
+                                            FontSize="25"
+                                            Margin="0 40 0 0"
+                                            Click="DeleteBtn_Click"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>

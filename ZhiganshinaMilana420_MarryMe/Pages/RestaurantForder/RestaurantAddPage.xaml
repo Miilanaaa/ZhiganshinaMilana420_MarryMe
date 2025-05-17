@@ -1,0 +1,191 @@
+﻿<Page x:Class="ZhiganshinaMilana420_MarryMe.Pages.RestaurantForder.RestaurantAddPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ZhiganshinaMilana420_MarryMe.Pages.RestaurantForder"
+      mc:Ignorable="d" 
+      d:DesignHeight="750" d:DesignWidth="1445"
+      Title="RestaurantAddPage">
+
+    <Grid Background="#EEEFEA">
+        <Border Width="570"
+                BorderBrush="#909478"
+                BorderThickness="5"
+                CornerRadius="20"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Height="500"
+                Margin="30 30 0 0"/>
+        <StackPanel Orientation="Vertical"
+                    Margin="60 50 0 0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Название ресторана"
+                           FontSize="25"/>
+                <TextBox x:Name="NameTb"
+                         FontSize="20"
+                         Width="250"
+                         Margin="15 0 0 0"
+                         TextChanged="NameTb_TextChanged"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        Margin="0 15 0 0">
+                <TextBlock Text="Адрес"
+                           FontSize="25"/>
+                <TextBox x:Name="AddressTb"
+                         FontSize="20"
+                         Width="415"
+                         Margin="15 0 0 0"
+                         TextChanged="AddressTb_TextChanged"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        Margin="0 15 0 0">
+                <TextBlock Text="Цена аренды"
+                           FontSize="25"/>
+                <TextBox x:Name="PriceTb"
+                         FontSize="20"
+                         TextChanged="PriceTb_TextChanged"
+                         Width="330"
+                         Margin="15 0 0 0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        Margin="0 15 0 0">
+                <TextBlock Text="Тип ресторана"
+                           FontSize="25"/>
+                <ComboBox x:Name="TypeTb"
+                          FontSize="20"
+                          Width="315"
+                          SelectionChanged="TypeTb_SelectionChanged"
+                          Margin="15 0 0 0"
+                          ItemsSource="{Binding photographerTypes}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Описание"
+                           FontSize="25"
+                           Margin="0 10 0 0"/>
+                <TextBox x:Name="DescriptionTb"
+                         FontSize="20"
+                         Width="500"
+                         Height="160"
+                         TextChanged="DescriptionTb_TextChanged"
+                         HorizontalAlignment="Left"
+                         Margin="0 10 0 0"/>
+                <Button x:Name="AddBt"
+                        FontSize="20"
+                        Width="200"
+                        Height="40"
+                        Content="Добавить"
+                        HorizontalAlignment="Right"
+                        Margin="0 20 0 0"
+                        Click="AddBt_Click"/>
+            </StackPanel>
+        </StackPanel>
+        <Button Content="Выбрать фото" 
+                Click="SelectPhotos_Click" 
+                Width="220"
+                FontSize="20"
+                Height="50"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Margin="370 0 0 120"/>
+        <Button Content="Сохранить" 
+                Click="UploadPhotos_Click" 
+                Width="220"
+                FontSize="20"
+                Height="50"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Left"
+                Margin="370 130 0 50"/>
+        <ListView x:Name="PhotosLv" 
+                  Width="710"
+                  Height="550"
+                  HorizontalAlignment="Right"
+                  VerticalAlignment="Top"
+                  Margin="0 0 80 0"
+                  d:ItemsSource="{d:SampleData ItemCount=25}">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="3"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Image Source="{Binding Photo}" 
+                                           Width="200" 
+                                           Height="200" />
+                                    <Button Content="Удалить" 
+                                        Click="DeletePhoto_Click" 
+                                        Margin="0 5 0 0"
+                                        Padding="5"
+                                        Tag="{Binding Id}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <StackPanel Orientation="Horizontal" 
+                    Margin="400 0 0 45"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom">
+            <Button x:Name="AddMenuBt"
+                    FontSize="20"
+                    Width="200"
+                    Height="50"
+                    Content="+ Меню"
+                    Click="AddMenuBt_Click"/>
+            <Border BorderBrush="#909478" 
+                    BorderThickness="2"
+                    CornerRadius="10"
+                    Margin="20 0 0 0"
+                    Padding="10"
+                    Visibility="Collapsed"
+                    x:Name="MenuDocumentBorder" Cursor="">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Images/menu.png" 
+                           Width="30" 
+                           Height="30"
+                           Margin="0 0 10 0"/>
+                    <TextBlock x:Name="MenuDocumentTb" 
+                               Text="Меню ресторана"
+                               FontSize="18"
+                               VerticalAlignment="Center"/>
+                    <Button Content="Открыть"
+                            Margin="10 0 0 0"
+                            Padding="5"
+                            Click="OpenMenuDocument_Click"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+        <ProgressBar x:Name="UploadProgress" 
+                     Minimum="0" 
+                     Maximum="100" 
+                     Height="20"
+                     Width="700"
+                     HorizontalAlignment="Right"
+                     VerticalAlignment="Bottom"
+                     Margin="0 0 90 160"/>
+        <Button x:Name="ExitBt"
+                FontSize="20"
+                Width="200"
+                Height="50"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Margin="50"
+                Content="Отмена" 
+                Click="ExitBt_Click"/>
+    </Grid>
+</Page>

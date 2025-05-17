@@ -1,0 +1,83 @@
+﻿<Window x:Class="ZhiganshinaMilana420_MarryMe.Windows.AddTaskUserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ZhiganshinaMilana420_MarryMe.Windows"
+        mc:Ignorable="d"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        MouseDown="Window_MouseDown"
+        Title="AddTaskUserWindow" 
+        Height="450" 
+        Width="630">
+    <Grid Cursor="Hand">
+        <TextBlock x:Name="NameEmployeeTb"
+                   FontSize="18"
+                   Width="Auto"
+                   Height="50"
+                   Foreground="#909478"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Center"
+                   Margin="0 60 0 0"/>
+        <TextBlock Text="Срок реализации задачи"
+                   FontSize="20"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="20 140 0 0"/>
+        <DatePicker Name="DateEndDp"
+                    FontSize="20"
+                    Width="200"
+                    Height="35"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Margin="260 140 0 0"
+                    CalendarOpened="DateEndDp_CalendarOpened"
+                    DisplayDateStart="{x:Static sys:DateTime.Today}"/>
+        <TextBox x:Name="DescriptionTb"
+                 FontSize="20"
+                 Width="580"
+                 Height="200"
+                 Margin="0 130 0 0"
+                 TextWrapping="Wrap"
+                 AcceptsReturn="True"
+                 VerticalContentAlignment="Top"
+                 HorizontalContentAlignment="Left"
+                 VerticalScrollBarVisibility="Auto"
+                 SpellCheck.IsEnabled="True"
+                 Language="ru-RU"/>
+        <Button x:Name="AddTaksUserBt"
+            Width="150"
+            Height="35"
+            FontSize="17"
+            Content="Сохранить"
+            Margin="0 0 40 10"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom" 
+            Click="AddTaksUserBt_Click"/>
+        <Button x:Name="ClouseBtt"
+                Width="25" 
+                Height="25"
+                Content="✕"
+                FontSize="10"
+                Background="#909478"
+                Foreground="White"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="20"
+                Click="ClouseBtt_Click"
+                BorderBrush="Transparent">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Ellipse Fill="{TemplateBinding Background}" 
+                                     Stroke="{TemplateBinding BorderBrush}"
+                                     StrokeThickness="{TemplateBinding BorderThickness}"/>
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+    </Grid>
+</Window>

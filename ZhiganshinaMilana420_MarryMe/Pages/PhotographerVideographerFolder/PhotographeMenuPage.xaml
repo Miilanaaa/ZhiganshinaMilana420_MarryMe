@@ -1,0 +1,153 @@
+﻿<Page x:Class="ZhiganshinaMilana420_MarryMe.Pages.PhotographerVideographerFolder.PhotographeMenuPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ZhiganshinaMilana420_MarryMe.Pages.PhotographerVideographerFolder"
+      mc:Ignorable="d" 
+      d:DesignHeight="750" d:DesignWidth="1445"
+      Title="PhotographeMenuPage">
+
+    <Grid Background="#EEEFEA">
+        <TextBox x:Name="SearchTb"
+                 Width="170"
+                 Height="40"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 Margin="50 20 0 0"
+                 TextChanged="SearchTb_TextChanged"/>
+        <ComboBox x:Name="FilterCb"
+                  DisplayMemberPath="Name"
+                  FontSize="20"
+                  ItemsSource="{Binding typees}"
+                  Width="170"
+                  Height="40"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top"
+                  Margin="230 20 0 0" 
+                  SelectionChanged="FilterCb_SelectionChanged">
+            <ComboBox.ItemContainerStyle>
+                <Style TargetType="ComboBoxItem">
+                    <Setter Property="HorizontalContentAlignment" 
+                            Value="Center"/>
+                </Style>
+            </ComboBox.ItemContainerStyle>
+        </ComboBox>
+        <DatePicker x:Name="DateBookingDp"
+                    FontSize="20"
+                    Width="170"
+                    Height="40"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Margin="420 20 0 0"
+                    SelectedDateChanged="DateBookingDp_SelectedDateChanged"/>
+        <StackPanel Orientation="Horizontal" 
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Top"
+                    Margin="600 20 0 0">
+            <TextBlock Text="Цена от:" 
+                       VerticalAlignment="Center"
+                       Margin="0 0 10 0"/>
+            <TextBox x:Name="PriceFromTb" 
+                     Width="80" 
+                     Height="30"/>
+            <TextBlock Text="до:" 
+                   VerticalAlignment="Center"
+                   Margin="10 0 10 0"/>
+            <TextBox x:Name="PriceToTb" 
+                     Width="80" 
+                     Height="30"/>
+            <Button Content="Применить" 
+                    Width="100" 
+                    Height="30"
+                    Margin="10 0 0 0"
+                    Click="ApplyPriceFilter_Click"/>
+            <ComboBox x:Name="SortCb"
+                      Width="120"
+                      Height="30"
+                      Margin="10 0 0 0"
+                      SelectedIndex="0">
+                <ComboBoxItem Content="По умолчанию"/>
+                <ComboBoxItem Content="По возрастанию"/>
+                <ComboBoxItem Content="По убыванию"/>
+            </ComboBox>
+        </StackPanel>
+        <ListView x:Name="PhotographeLV"
+                  d:ItemsSource="{d:SampleData ItemCount=8}"
+                  VerticalAlignment="Bottom"
+                  Margin="0 0 0 70"
+                  Width="1370"
+                  Height="600" 
+                  SelectionChanged="PhotographeLV_SelectionChanged">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="4" 
+                                 VerticalAlignment="Top"
+                                 HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Border Width="320"
+                                Height="280"
+                                BorderThickness="5"
+                                BorderBrush="#909478"
+                                CornerRadius="20">
+                            <StackPanel Orientation="Vertical">
+                                <Image Width="190"
+                                       Height="190"
+                                       Margin="0 20 0 0"
+                                       Source="{Binding DisplayPhotoImage}"/>
+                                <TextBlock Text="{Binding TeamName}"
+                                           FontSize="20"
+                                           Margin="0 5 0 0"
+                                           HorizontalAlignment="Center"/>
+                                <StackPanel Orientation="Horizontal"
+                                            HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding Price}"
+                                               FontSize="20"/>
+                                    <TextBlock Text=" руб."
+                                               FontSize="20"
+                                               Margin="0 0 0 0"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackPanel x:Name="PaginationPanel"
+                Orientation="Horizontal" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Bottom"
+                Margin="0 0 0 10">
+            <Button x:Name="PrevPageBtn" 
+                    Content="◄" 
+                    Width="50" 
+                    Height="40" 
+                    FontSize="15"
+                    Margin="5 0"
+                    Click="PrevPageBtn_Click"/>
+
+            <!-- Кнопки страниц будут добавляться динамически -->
+
+            <Button x:Name="NextPageBtn" 
+                    Content="►" 
+                    Width="50" 
+                    Height="40" 
+                    FontSize="15"
+                    Margin="5 0"
+                    Click="NextPageBtn_Click"/>
+        </StackPanel>
+        <Button x:Name="ExitBt"
+                FontSize="20"
+                Width="150"
+                Height="40"
+                Content="Назад"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="20" 
+                Click="ExitBt_Click"/>
+    </Grid>
+</Page>

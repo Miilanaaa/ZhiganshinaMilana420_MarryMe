@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="85d45729639f4a7fa0d777fbaf748e15" Name="Diagram1">
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.Accessory" Width="1.5" PointX="0.75" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.AccessoryPhoto" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.AccessoryType" Width="1.5" PointX="1.5" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.Bouquet" Width="1.5" PointX="0.75" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.BouquetPhoto" Width="1.5" PointX="3" PointY="24.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.BouquetType" Width="1.5" PointX="1.5" PointY="21.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.Bride" Width="1.5" PointX="1.5" PointY="45.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.Cake" Width="1.5" PointX="0.75" PointY="24.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.CakeType" Width="1.5" PointX="1.5" PointY="27.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.Clothing" Width="1.5" PointX="0.75" PointY="30.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.ClothingPhoto" Width="1.5" PointX="3" PointY="31" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.ClothingType" Width="1.5" PointX="1.5" PointY="34" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.Couple" Width="1.5" PointX="0.75" PointY="39.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.CoupleFavorites" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.Decoration" Width="1.5" PointX="0.75" PointY="56.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.DecorationPhoto" Width="1.5" PointX="3" PointY="36.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.Dress" Width="1.5" PointX="0.75" PointY="59.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.DressTypy" Width="1.5" PointX="1.5" PointY="62.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.Gender" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.Gromm" Width="1.5" PointX="1.5" PointY="50" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.Host" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.HostBookingDates" Width="1.5" PointX="6" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.HostPhoto" Width="1.5" PointX="3" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.Musician" Width="1.5" PointX="0.75" PointY="65.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.MusicianBookingDates" Width="1.5" PointX="4" PointY="52.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.MusicianPhoto" Width="1.5" PointX="3" PointY="40" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.MusicianType" Width="1.5" PointX="1.5" PointY="69.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.PhotoDress" Width="1.5" PointX="3" PointY="42.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.PhotographerType" Width="1.5" PointX="1.5" PointY="75.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.PhotographerVideographer" Width="1.5" PointX="0.75" PointY="71.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.PhotographerVideographerBookingDates" Width="1.5" PointX="3" PointY="56.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.PhotographerVideographerPhoto" Width="1.5" PointX="3" PointY="72.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.Restaurant" Width="1.5" PointX="0.75" PointY="78.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.RestaurantBookingDates" Width="1.5" PointX="4" PointY="60.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.RestaurantPhoto" Width="1.5" PointX="3" PointY="79.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.RestaurantType" Width="1.5" PointX="1.5" PointY="83.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.Role" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.Stylist" Width="1.5" PointX="0.75" PointY="86.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.StylistBookingDates" Width="1.5" PointX="4" PointY="64" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.StylistPhoto" Width="1.5" PointX="3" PointY="86.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.StylistType" Width="1.5" PointX="1.5" PointY="89.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.sysdiagrams" Width="1.5" PointX="8.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.TaskUsers" Width="1.5" PointX="10.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.Transfer" Width="1.5" PointX="0.75" PointY="92.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.TransferBookingDates" Width="1.5" PointX="4" PointY="67.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.TransferPhoto" Width="1.5" PointX="3" PointY="93.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.TransferType" Width="1.5" PointX="1.5" PointY="96.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.Users" Width="1.5" PointX="8" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZhiganshinaMilana_MarryMeModel.WeddingStatus" Width="1.5" PointX="1.5" PointY="54" IsExpanded="true" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__Accessory__Acces__08B54D69" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__Accessory__Acces__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__CoupleFav__Acces__70DDC3D8" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__Bouquet__Bouquet__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__CoupleFav__Bouqu__73BA3083" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK_BouquetPhoto_Bouquet" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__Couple__BrideId__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__Cake__CakeTypeId__6A30C649" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__CoupleFav__CakeI__778AC167" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__Clothing__Clothi__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__ClothingP__Cloth__05D8E0BE" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__CoupleFav__Cloth__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__Couple__GroomId__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__CoupleFav__Coupl__6D0D32F4" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK_Couple_WeddingStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK_HostBookingDates_Couple" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK_MusicianBookingDates_Couple" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK_PhotographerVideographerBookingDates_Couple" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK_RestaurantBookingDates_Couple" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK_StylistBookingDates_Couple" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK_TransferBookingDates_Couple" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__CoupleFav__HostI__71D1E811" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__CoupleFav__Music__75A278F5" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__CoupleFav__Photo__72C60C4A" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__CoupleFav__Resta__6E01572D" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__CoupleFav__Styli__74AE54BC" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__CoupleFav__Trans__76969D2E" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK_CoupleFavorites_Decoration" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK_CoupleFavorites_Dress" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK_DecorationPhoto_Decoration" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK_Dress_DressTypy" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK_PhotoDress_Dress" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK_Users_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__HostBooki__HostI__0B91BA14" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK_HostPhoto_Host" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__Musician__Musici__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__MusicianB__Music__19DFD96B" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__MusicianP__Music__1CBC4616" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK_PhotographerVideographer_PhotographerType" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__Photograp__Photo__0E6E26BF" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__Photograp__Photo__114A936A" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__Restauran__Resta__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__Restauran__Resta__7A672E12" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__Restauran__Resta__7D439ABD" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__Users__RoleId__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__StylistBo__Styli__14270015" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__StylistPh__Styli__17036CC0" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK_Stylist_StylistType" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK_TaskUsers_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__Transfer__Transf__656C112C" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__TransferB__Trans__1F98B2C1" ManuallyRouted="false" />
+        <AssociationConnector Association="ZhiganshinaMilana_MarryMeModel.FK__TransferP__Trans__22751F6C" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

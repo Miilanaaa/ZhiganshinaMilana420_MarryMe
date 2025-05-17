@@ -1,0 +1,55 @@
+﻿<Window x:Class="ZhiganshinaMilana420_MarryMe.Windows.DismissalWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ZhiganshinaMilana420_MarryMe.Windows"
+        mc:Ignorable="d"
+        Title="DismissalWindow" Height="350" 
+        Width="500"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+    <Grid Margin="10">
+        <StackPanel>
+            <TextBlock Text="Вы точно хотите уволить сотрудника?" 
+                       FontSize="16" 
+                       FontWeight="Bold"
+                       Margin="0 0 0 10"/>
+
+            <TextBlock Text="{Binding EmployeeFullName}" 
+                       FontSize="16"
+                       Margin="0 0 0 20"/>
+
+            <TextBlock Text="Статья ТК РФ:" FontSize="16"/>
+            <ComboBox x:Name="ArticleCb" 
+                      FontSize="16" 
+                      Margin="0 5 0 10"
+                      SelectedIndex="0">
+                <ComboBoxItem>п. 3 ч. 1 ст. 77 ТК РФ - по собственному желанию</ComboBoxItem>
+                <ComboBoxItem>п. 5 ч. 1 ст. 81 ТК РФ - неоднократное неисполнение трудовых обязанностей</ComboBoxItem>
+                <ComboBoxItem>п. 6 ч. 1 ст. 81 ТК РФ - прогул</ComboBoxItem>
+                <ComboBoxItem>п. 10 ч. 1 ст. 81 ТК РФ - разглашение охраняемой законом тайны</ComboBoxItem>
+            </ComboBox>
+
+            <TextBlock Text="Причина увольнения:" FontSize="16"/>
+            <TextBox x:Name="ReasonTb" 
+                     FontSize="16" 
+                     Margin="0 5 0 20" 
+                     Height="60" 
+                     TextWrapping="Wrap"/>
+
+            <StackPanel Orientation="Horizontal" 
+                        HorizontalAlignment="Right">
+                <Button Content="Отмена" 
+                        Width="100" 
+                        Height="30" 
+                        Margin="0 0 10 0"
+                        Click="CancelButton_Click"/>
+                <Button Content="Уволить" 
+                        Width="100" 
+                        Height="30"
+                        Click="DismissButton_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

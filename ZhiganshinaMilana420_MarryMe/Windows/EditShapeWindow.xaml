@@ -1,0 +1,32 @@
+﻿<Window x:Class="ZhiganshinaMilana420_MarryMe.Windows.EditShapeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ZhiganshinaMilana420_MarryMe.Windows"
+        mc:Ignorable="d"
+        Title="EditShapeWindow" Height="450" Width="800">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Название:" Grid.Row="0"/>
+        <TextBox x:Name="NameTextBox" Grid.Row="1" Margin="0,5"/>
+
+        <TextBlock Text="Ширина:" Grid.Row="2" Margin="0,10,0,0"/>
+        <TextBox x:Name="WidthTextBox" Grid.Row="2" Margin="0,28,0,24"/>
+
+        <TextBlock Text="Длина:" Grid.Row="2" Margin="0,57,0,283" Grid.RowSpan="3"/>
+        <TextBox x:Name="HeightTextBox" Grid.Row="4" Margin="0,4,0,264"/>
+
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <Button Content="Сохранить" Width="80" Margin="0,0,10,0" Click="SaveButton_Click"/>
+            <Button Content="Отмена" Width="80" Click="CancelButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

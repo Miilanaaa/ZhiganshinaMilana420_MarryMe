@@ -1,0 +1,51 @@
+﻿<Page x:Class="ZhiganshinaMilana420_MarryMe.Pages.SeatingPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ZhiganshinaMilana420_MarryMe.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="815" d:DesignWidth="1570"
+      Title="SeatingPage">
+
+    <Grid Background="Wheat">
+        <!-- Определение строк Grid -->
+        <Grid.RowDefinitions>
+            <!-- Первая строка для панели инструментов (автоматическая высота) -->
+            <RowDefinition Height="Auto"/>
+            <!-- Вторая строка для холста (занимает все оставшееся пространство) -->
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Панель инструментов с кнопками (расположена в первой строке) -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5">
+            <!-- Кнопка добавления прямоугольника -->
+            <Button Content="Добавить прямоугольник" Margin="5" Padding="10,5" Click="AddRectangle_Click"/>
+            <!-- Кнопка добавления эллипса -->
+            <!--<Button Content="Добавить эллипс" Margin="5" Padding="10,5" />-->
+            <Button Content="Добавить гостя" Margin="5" Padding="10,5" Click="AddEllipse_Click"/>
+            <Button Content="Добавить стол" Margin="5" Padding="10,5" Click="AddTable_Click"/>
+            <!-- Кнопка очистки холста -->
+            <Button Content="Очистить" Margin="5" Padding="10,5" Click="ClearCanvas_Click"/>
+            <Button Content="Отмена" Margin="900 0 0 0" Padding="10,5" Click="ExitNavigate_Click"/>
+        </StackPanel>
+
+        <!-- Область для рисования (расположена во второй строке) -->
+        <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="1" Margin="5">
+            <!-- Холст для размещения фигур -->
+            <Canvas x:Name="DrawingCanvas" Background="White" 
+                    MouseMove="DrawingCanvas_MouseMove"
+                    MouseLeftButtonUp="DrawingCanvas_MouseLeftButtonUp"
+                    MouseLeave="DrawingCanvas_MouseLeave">
+                <!-- 
+                Свойства Canvas:
+                x:Name - имя для обращения в коде
+                Background - цвет фона
+                MouseMove - обработчик движения мыши
+                MouseLeftButtonUp - обработчик отпускания кнопки мыши
+                MouseLeave - обработчик выхода мыши за пределы холста
+                -->
+            </Canvas>
+        </Border>
+    </Grid>
+</Page>

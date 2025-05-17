@@ -1,0 +1,113 @@
+﻿<Page x:Class="ZhiganshinaMilana420_MarryMe.Pages.PhotographerVideographerFolder.CardPhotographePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ZhiganshinaMilana420_MarryMe.Pages.PhotographerVideographerFolder"
+      mc:Ignorable="d" 
+      d:DesignHeight="750" d:DesignWidth="1445"
+      Title="CardPhotographePage">
+
+    <Grid Background="#EEEFEA">
+        <Grid Width="750" 
+              Height="750" 
+              HorizontalAlignment="Left" 
+              VerticalAlignment="Top">
+            <Image x:Name="CurrentImage"
+                   Stretch="UniformToFill"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+        </Grid>
+        <TextBlock x:Name="PhotoCounter"
+                    HorizontalAlignment="Left"
+                    Margin="400 0 0 0"
+                    VerticalAlignment="Bottom"
+                    FontSize="30" Cursor=""/>
+        <Button Content="❮" 
+                FontSize="20" 
+                Width="50" 
+                Height="40" 
+                BorderBrush="Transparent"
+                Background="#60000000"
+                Opacity="0.7"
+                HorizontalAlignment="Left"
+                Click="PrevPhoto_Click">
+            <Button.Effect>
+                <DropShadowEffect ShadowDepth="4" 
+                                  BlurRadius="12" 
+                                  Color="#80000000" 
+                                  Opacity="0.9"/>
+            </Button.Effect>
+        </Button>
+        <Button Content="❯" 
+                FontSize="20" 
+                Width="50" 
+                Height="40"
+                BorderBrush="Transparent"
+                Background="#60000000"
+                Opacity="0.7"
+                HorizontalAlignment="Left"
+                Margin="700 0 0 0"
+                Click="NextPhoto_Click">
+            <Button.Effect>
+                <DropShadowEffect ShadowDepth="4" 
+                                  BlurRadius="12" 
+                                  Color="#80000000" 
+                                  Opacity="0.9"/>
+            </Button.Effect>
+        </Button>
+        <StackPanel Orientation="Vertical"
+                    Margin="0 60 0 0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Width="660" Cursor="">
+            <TextBlock x:Name="NameTb"
+                       HorizontalAlignment="Left"
+                       Margin="50 0 0 0"
+                       Width="300"
+                       Height="auto"
+                       TextWrapping="Wrap"
+                       FontSize="25"
+                       FontWeight="Bold"
+                       Foreground="#909478"/>
+            <TextBox Name="DescriptionTb"
+                     HorizontalAlignment="Left"
+                     Margin="50 20 0 0"
+                     Width="430"
+                     Height="300"
+                     TextWrapping="Wrap"
+                     FontSize="20"
+                     IsReadOnly="True"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock HorizontalAlignment="Left"
+                           Margin="50 70 0 0"
+                           Text="Стоимость брони команды"
+                           FontSize="20"/>
+                <TextBox x:Name="PriceTb"
+                         HorizontalAlignment="Left"
+                         Margin="10 70 0 0"
+                         Width="155"
+                         Height="30"
+                         FontSize="20"
+                         IsReadOnly="True"/>
+            </StackPanel>
+        </StackPanel>
+        <Button Content="Выбрать"
+                Name="ToBookBtt"
+                Width="150"
+                Height="40"
+                FontSize="20"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Margin="30" Click="ToBookBtt_Click"/>
+        <Button x:Name="ExitBt"
+                FontSize="20"
+                Width="150"
+                Height="40"
+                Content="Назад"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="20" 
+                Click="ExitBt_Click"/>
+    </Grid>
+</Page>

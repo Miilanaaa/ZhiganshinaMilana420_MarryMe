@@ -1,0 +1,118 @@
+﻿<Page x:Class="ZhiganshinaMilana420_MarryMe.Pages.TransferFolder.AddTransferPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ZhiganshinaMilana420_MarryMe.Pages.TransferFolder"
+      mc:Ignorable="d" 
+      d:DesignHeight="815" d:DesignWidth="1570"
+      Title="AddTransferPage">
+    
+    <Grid Background="#EEEFEA">
+        <StackPanel Orientation="Vertical"
+                    Width="700"
+                    Height="142"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Margin="50 40 0 0">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Название транспорта"
+                           FontSize="25"/>
+                <TextBox x:Name="NameTb"
+                         FontSize="30"
+                         Width="400"
+                         Margin="10 0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        Margin="0 20 0 0">
+                <TextBlock Text="Цена"
+                           FontSize="25"/>
+                <TextBox x:Name="PriceTb"
+                         FontSize="30"
+                         Width="400"
+                         Margin="10 0"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" 
+                    Margin="0 0 5 50"
+                    Width="600"
+                    Height="100"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom">
+            <Button Content="Выбрать фото" 
+                    Click="SelectPhotos_Click" 
+                    Padding="10 5" 
+                    Width="220"
+                    FontSize="25"
+                    Height="50"
+                    Margin="0 0 10 0"/>
+            <Button Content="Загрузить выбранные" 
+                    Click="UploadPhotos_Click" 
+                    Width="350"
+                    FontSize="25"
+                    
+                    Height="50"
+                    Padding="10 5"/>
+        </StackPanel>
+        <!-- Список выбранных фото -->
+        <ListView x:Name="PhotosLv" 
+                  Width="900"
+                  Height="593"
+                  d:ItemsSource="{d:SampleData ItemCount=25}"
+                  Margin="50 0 0 35"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Bottom">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="3"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="250">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Image Source="{Binding Photo}" 
+                                       Width="200" 
+                                       Height="200" />
+                                    <Button Content="Удалить" 
+                                        Click="DeletePhoto_Click" 
+                                        Margin="0 5 0 0"
+                                        Padding="5"
+                                        Tag="{Binding Id}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <ProgressBar x:Name="UploadProgress" 
+                     Minimum="0" 
+                     Maximum="100" 
+                     Height="20"
+                     Width="800"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Bottom"
+                     Margin="50 0 0 10"/>
+
+        <Button x:Name="ExitBt"
+                FontSize="25"
+                Width="200"
+                Height="50"
+                Content="Отмена"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="20" Click="ExitBt_Click"/>
+        <Button x:Name="AddBt"
+                FontSize="25"
+                Width="200"
+                Height="50"
+                Content="Добавить"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="0 20 250 0" Click="AddBt_Click"/>
+    </Grid>
+</Page>

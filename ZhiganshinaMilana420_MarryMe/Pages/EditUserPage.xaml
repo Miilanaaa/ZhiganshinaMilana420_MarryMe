@@ -1,0 +1,168 @@
+﻿<Page x:Class="ZhiganshinaMilana420_MarryMe.Pages.EditUserPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ZhiganshinaMilana420_MarryMe.Pages"
+      mc:Ignorable="d" 
+       d:DesignHeight="750" d:DesignWidth="1445"
+      Title="EditUserPage">
+
+    <Grid Background="#EEEFEA">
+        <Border HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Width="1200"
+                Height="600"
+                BorderBrush="#E4C8BF"
+                BorderThickness="5"
+                CornerRadius="20"/>
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <StackPanel Orientation="Vertical">
+                <Image x:Name="TestImg"
+                       Width="280" 
+                       Height="280"/>
+                <Button x:Name="changeBtn"
+                        Content="Изменить"
+                        Margin="0 20 0 0"
+                        HorizontalAlignment="Center"
+                        FontSize="17"
+                        Height="35"
+                        Width="150" 
+                        Click="changeBtn_Click"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                        Margin="50 0 0 0">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Фамилия"
+                               FontSize="20"/>
+                        <TextBox x:Name="SurnameTb"
+                             Width="200"
+                             Height="35"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             Margin="0 5 0 0"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical"
+                            Margin="10 0 0 0">
+                        <TextBlock Text="Имя"
+                               FontSize="20"/>
+                        <TextBox x:Name="NameTb"
+                             Width="200"
+                             Height="35"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             Margin="0 5 0 0"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical"
+                            Margin="10 0 0 0">
+                        <TextBlock Text="Отчество"
+                               FontSize="20"/>
+                        <TextBox x:Name="PatronymicTb"
+                             Width="200"
+                             Height="35"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             Margin="0 5 0 0"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                        Margin="0 15 0 0">
+                    <TextBlock Text="Email"
+                           FontSize="20"
+                           Margin="0 5 0 0"/>
+                    <TextBox x:Name="EmailTb"
+                         Width="145"
+                         Height="35"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top"
+                         Margin="10 5 0 0"/>
+                    <TextBlock Text="Пол"
+                           FontSize="20"
+                           Margin="10 5 0 0"/>
+
+                    <TextBlock Text="м"
+                               FontSize="20"
+                               Margin="18 5 0 0"/>
+                    <CheckBox x:Name="GenderMen"
+                              Style="{StaticResource MaterialDesignActionToggleButton}"
+                              Margin="10 0 0 0"/>
+                    <TextBlock Text="ж"
+                               FontSize="20"
+                               Margin="19 5 0 0"/>
+                    <CheckBox x:Name="GenderGirl"
+                              Style="{StaticResource MaterialDesignActionToggleButton}"
+                              Margin="10 0 0 0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                        Margin="0 15 0 0">
+                    <TextBlock Text="День рождения"
+                           FontSize="20"
+                           Margin="0 5 0 0"/>
+                    <DatePicker x:Name="BirthDateDp"
+                            Margin="10 5 0 0"
+                            Width="200"
+                            Height="35"/>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal"
+                        Margin="0 15 0 0">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Логин"
+                               FontSize="20"/>
+                        <TextBox x:Name="LoginTb"
+                             Width="200"
+                             Height="35"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             Margin="0 5 0 0"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical"
+                            Margin="10 0 0 0">
+                        <TextBlock Text="Пароль"
+                               FontSize="20"/>
+                        <StackPanel Orientation="Horizontal">
+                            <PasswordBox x:Name="PasswordTb"
+                                 Width="200"
+                                 Height="35"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Top"
+                                 Margin="0 5 0 0"/>
+                            <Button x:Name="TogglePasswordButton" 
+                                Width="52" 
+                                Margin="0 5 0 0"
+                                Content="👁"
+                                Foreground="Black"
+                                FontSize="16"
+                                Background="Transparent" 
+                                BorderThickness="0"
+                                Click="TogglePasswordButton_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right">
+                    <Button x:Name="GoBackBtt"
+                            Width="150"
+                            Height="40"
+                            FontSize="17"
+                            HorizontalAlignment="Right"
+                            Margin="0 25 50 0"
+                            Content="Назад" 
+                            Click="GoBackBtt_Click"/>
+                    <Button x:Name="AddEmployyeBt"
+                            Width="150"
+                            Height="40"
+                            FontSize="17"
+                            Margin="0 25 0 0"
+                            Content="Сохранить" 
+                            Click="AddEmployyeBt_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

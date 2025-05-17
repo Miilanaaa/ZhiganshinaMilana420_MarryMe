@@ -1,0 +1,136 @@
+﻿<Page x:Class="ZhiganshinaMilana420_MarryMe.Pages.TaskPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ZhiganshinaMilana420_MarryMe.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="750" d:DesignWidth="1445"
+      Title="TaskPage">
+
+    <Grid Background="#EEEFEA">
+        <TextBox x:Name="SearchTb"
+                 Width="250"
+                 Height="40"
+                 FontSize="25"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 Margin="40 20 0 0" 
+                 TextChanged="SearchTb_TextChanged"/>
+        <Button x:Name="AddEmployyeBt"
+                Width="200"
+                Content="+ Задача"
+                Height="50"
+                FontSize="20"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="0 20 250 0" 
+                Click="AddTaskUserBt_Click"/>
+        <Button x:Name="ExitBt"
+                Width="200"
+                Content="Назад"
+                Height="50"
+                FontSize="20"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="20" 
+                Click="ExitBt_Click"/>
+        <DatePicker x:Name="DateTaskDp"
+                    Width="250"
+                    Height="40"
+                    HorizontalAlignment="Left"
+                    Margin="300 20 0 0"
+                    VerticalAlignment="Top"
+                    FontSize="20"
+                    SelectedDateChanged="DateTaskDp_SelectedDateChanged"/>
+        <ListView x:Name="TaskUserLV"
+                  d:ItemsSource="{d:SampleData ItemCount=1}"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Bottom"
+                  Margin="0 0 0 100"
+                  AlternationCount="10000"
+                  Width="1350"
+                  Height="560" 
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical"
+                                HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0 5 0 0">
+                        <Border Width="1300"
+                                Height="Auto" 
+                                MinHeight="60"
+                                BorderBrush="#EDB69E"
+                                BorderThickness="5"
+                                CornerRadius="20">
+                            <StackPanel Orientation="Horizontal">
+                                <Ellipse Height="40" 
+                                         Width="40"
+                                         Margin="20 0 10 30">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="{Binding AdminPhoto}"
+                                                    Stretch="UniformToFill" 
+                                                    AlignmentX="Center" 
+                                                    AlignmentY="Center"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                <StackPanel Orientation="Vertical"
+                                            VerticalAlignment="Center"
+                                            Margin="0 0 0 30"
+                                            Width="100">
+                                    <TextBlock Text="{Binding AdminLastName}"
+                                               TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding AdminFirstName}"
+                                               TextWrapping="Wrap"/>
+                                </StackPanel>
+                                <TextBlock Text="{Binding Description}"
+                                           FontSize="20"
+                                           Width="550"
+                                           Height="Auto"
+                                           TextWrapping="Wrap"
+                                           Margin="20 30 0 0"
+                                           VerticalAlignment="Top"/>
+                                <StackPanel Orientation="Horizontal" 
+                                            VerticalAlignment="Top">
+                                    <CheckBox IsChecked="{Binding Done, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  
+                                              Style="{StaticResource MaterialDesignActionToggleButton}"
+                                              VerticalAlignment="Center"
+                                              Margin="5 30 10 0"
+                                              IsEnabled="False"/>
+                                    <TextBlock x:Name="DateTaskUserTb"
+                                               Width="200"
+                                               Text="{Binding DateEnd, StringFormat='{}{0:dd.MM.yyyy}'}"
+                                               Height="Auto" 
+                                               Margin="20 30 0 0"
+                                               FontSize="20"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical"
+                                            Margin="50 30 0 0"
+                                            VerticalAlignment="Top">
+                                    <Button x:Name="EditBt"
+                                            Width="180"
+                                            Height="40"
+                                            Content="редактировать"
+                                            Margin="5"
+                                            FontSize="20"
+                                            Click="EditBt_Click"/>
+                                    <Button x:Name="DelateBt"
+                                            Width="180"
+                                            Height="40"
+                                            Margin="5"
+                                            Content="удалить"
+                                            FontSize="20"
+                                            Click="DelateBt_Click"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>

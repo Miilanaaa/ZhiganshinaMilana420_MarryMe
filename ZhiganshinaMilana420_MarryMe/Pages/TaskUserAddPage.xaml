@@ -1,0 +1,146 @@
+﻿<Page x:Class="ZhiganshinaMilana420_MarryMe.Pages.TaskUserAddPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ZhiganshinaMilana420_MarryMe.Pages"
+      mc:Ignorable="d"
+      d:DesignHeight="750" d:DesignWidth="1445"
+      Title="TaskUserAddPage">
+
+    <Grid Background="#EEEFEA">
+        <TextBox x:Name="SearchTb"
+                 Width="350"
+                 Height="40"
+                 FontSize="15"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 Margin="20 20 0 0" 
+                 TextChanged="SearchTb_TextChanged"/>
+        <TextBlock Text="Работающие"
+                   FontSize="25"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="430 20 0 0"/>
+        <CheckBox x:Name="ShowFreeCheckBox"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top"
+                  Style="{StaticResource MaterialDesignActionToggleButton}"
+                  Margin="810 25 0 0"
+                  Checked="ShowFreeCheckBox_Checked"
+                  Unchecked="ShowFreeCheckBox_Unchecked" Cursor=""/>
+        <TextBlock Text="Уволенные"
+                   FontSize="25"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="670 20 0 0"/>
+        <CheckBox x:Name="ShowTakenCheckBox"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top"
+                  Style="{StaticResource MaterialDesignActionToggleButton}"
+                  Margin="600 25 0 0" 
+                  Checked="ShowTakenCheckBox_Checked"
+                  Unchecked="ShowTakenCheckBox_Unchecked"/>
+        <Button x:Name="AddEmployyeBt"
+                Width="250"
+                Content="Добить сотрудника"
+                Height="35"
+                FontSize="17"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="0 20 70 0" 
+                Click="AddEmployyeBt_Click"/>
+        <ListView x:Name="UsersLV"
+                  d:ItemsSource="{d:SampleData ItemCount=25}"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Bottom"
+                  Margin="20 0 0 0"
+                  Width="1355"
+                  Height="660">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="1" 
+                                 VerticalAlignment="Top"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Border BorderBrush="#909478"
+                                BorderThickness="5"
+                                Width="1310"
+                                Height="150"
+                                CornerRadius="20">
+                            <StackPanel Orientation="Horizontal" Cursor="">
+                                <Ellipse Width="100"
+                                         Height="100"
+                                         HorizontalAlignment="Left"
+                                         Margin="50 5">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="{Binding Photo}"
+                                                    Stretch="UniformToFill" 
+                                                    AlignmentX="Center" 
+                                                    AlignmentY="Center"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                <StackPanel Orientation="Vertical"
+                                            Width="500">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="№0"
+                                                   FontSize="20"
+                                                   Margin="20 20 0 0"/>
+                                        <TextBlock Text="{Binding Id}"
+                                                   FontSize="20"
+                                                   Margin="0 20 0 0"/>
+                                        <TextBlock Text="{Binding Role.Name}"
+                                               FontSize="20"
+                                               Margin="40 20 0 0"/>
+                                        
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Surname}"
+                                                Margin="20 10 0 0"
+                                                FontSize="20"/>
+                                        <TextBlock Text="{Binding Name}"
+                                                Margin="5 10 0 0"
+                                                FontSize="20"/>
+                                        <TextBlock Text="{Binding Patronymic}"
+                                                Margin="5 10 0 0"
+                                                FontSize="20"/>
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding BirthDate, StringFormat='{}{0:dd.MM.yyyy}'}"
+                                               FontSize="20"
+                                               Margin="20 20 0 0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical"
+                                            Width="400">
+                                    <TextBlock Text="Email"
+                                               FontSize="20"
+                                               Margin="0 5 0 0"/>
+                                    <TextBlock Text="{Binding Email}"
+                                               FontSize="20"
+                                               Margin="0 5 0 0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical"
+                                            VerticalAlignment="Center">
+                                    <Button Content="+ задачи"
+                                            Width="130"
+                                            Height="40"
+                                            FontSize="17"
+                                            Margin="0 0 0 0"
+                                            Click="TaskUserBt_Click"/>
+                                    <Button Content="уволить"
+                                            Width="130"
+                                            Height="40"
+                                            FontSize="17"
+                                            Margin="0 30 0 0"
+                                            Click="Delate_Click"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>
