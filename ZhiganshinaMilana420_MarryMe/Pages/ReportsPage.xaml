@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="750" d:DesignWidth="1445"
       Title="ReportsPage">
-
+    
     <Grid Background="#EEEFEA">
         <TabControl>
             <TabItem Header="Бронирования" 
@@ -104,15 +104,15 @@
                     </ListView>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Активность" 
+            <TabItem Header="Активность колекций" 
                      Style="{StaticResource MaterialDesignTabItem}">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal"
-                    Margin="100 20 0 0">
+                                Margin="100 20 0 0">
                         <ComboBox x:Name="AktivCb"
-                      Width="250"
-                      Height="30"
-                      SelectionChanged="AktivCb_SelectionChanged">
+                                  Width="250"
+                                  Height="30"
+                                  SelectionChanged="AktivCb_SelectionChanged">
                             <ComboBoxItem Content="Рестораны"/>
                             <ComboBoxItem Content="Декорации"/>
                             <ComboBoxItem Content="Трансфер"/>
