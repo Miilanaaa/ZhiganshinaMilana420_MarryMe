@@ -22,6 +22,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.CakeFolder
     /// </summary>
     public partial class CakePage : Page
     {
+        public static List<CakeType> typees { get; set; }
         public static List<Cake> cakes {  get; set; }
         public CakePage()
         {
@@ -29,17 +30,37 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.CakeFolder
             cakes = new List<Cake>(DbConnection.MarryMe.Cake.ToList());
             CakeLV.ItemsSource = cakes;
 
+            typees = new List<CakeType>(DbConnection.MarryMe.CakeType.ToList());
+            typees.Insert(0, new CakeType() { Name = "Все" });
+            FilterCb.SelectedIndex = 0;
             this.DataContext = this;
+        }
+
+        public void Refresh()
+        {
+            var filterDres = DbConnection.MarryMe.Cake.ToList();
+            var category = FilterCb.SelectedItem as CakeType;
+
+            if (category != null && category.Id != 0)
+            {
+                filterDres = filterDres.Where(c => c.CakeTypeId == category.Id).ToList();
+            }
+
+            if (SearchTb.Text.Length > 0)
+            {
+                filterDres = filterDres.Where(r => r.Name.ToLower().Contains(SearchTb.Text.Trim().ToLower())).ToList();
+            }
+            CakeLV.ItemsSource = filterDres;
         }
 
         private void SearchTb_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            Refresh();
         }
 
         private void FilterCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            Refresh();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

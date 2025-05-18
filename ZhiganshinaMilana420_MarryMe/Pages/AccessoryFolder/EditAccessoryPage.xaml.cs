@@ -31,11 +31,16 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.AccessoryFolder
         Accessory contextAccessory;
         public static Accessory accessory1 = new Accessory();
         public static Accessory acc { get; set; }
+        public static List<AccessoryType> accessoryTypes { get; set; }
         public EditAccessoryPage(Accessory accessory)
         {
             InitializeComponent();
             UploadProgress.Visibility = Visibility.Collapsed;
 
+            accessoryTypes = new List<AccessoryType>(DbConnection.MarryMe.AccessoryType.ToList());
+            contextAccessory = accessory;
+            acc = accessory;
+            accessory1 = accessory;
             // Загружаем фото только для текущего ресторана
             photos = new ObservableCollection<AccessoryPhoto>(
                 DbConnection.MarryMe.AccessoryPhoto
@@ -44,17 +49,52 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.AccessoryFolder
             );
 
             PhotosLv.ItemsSource = photos;
-
-            contextAccessory = accessory;
-            acc = accessory;
-            accessory1 = accessory;
             this.DataContext = this;
 
-            if (accessory1 != null)
+            NameTb.Text = accessory.Name;
+            PriceTb.Text = accessory.Price.ToString();
+            DescriptionTb.Text = accessory.Description;
+            if (accessory.AccessoryTypeId != null)
             {
-                NameTb.Text = contextAccessory.Name;
-                PriceTb.Text = contextAccessory.Price.ToString();
+                TypeTb.SelectedItem = accessoryTypes.FirstOrDefault(t => t.Id == accessory.AccessoryTypeId);
             }
+        }
+        private void ApplyErrorStyle(Control control)
+        {
+            control.BorderBrush = Brushes.Red;
+            control.BorderThickness = new Thickness(2);
+            control.ToolTip = "Это поле обязательно для заполнения";
+        }
+
+        private void ClearErrorStyle(Control control)
+        {
+            control.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFABADB3"));
+            control.BorderThickness = new Thickness(1);
+            control.ToolTip = null;
+        }
+
+        private void ResetAllErrorStyles()
+        {
+            ClearErrorStyle(NameTb);
+            ClearErrorStyle(PriceTb);
+            ClearErrorStyle(DescriptionTb);
+        }
+
+        private void NameTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ClearErrorStyle(NameTb);
+        }
+        private void PriceTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ClearErrorStyle(PriceTb);
+        }
+        private void TypeTb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ClearErrorStyle(TypeTb);
+        }
+        private void DescriptionTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ClearErrorStyle(DescriptionTb);
         }
         private void SelectPhotos_Click(object sender, RoutedEventArgs e)
         {
@@ -198,19 +238,56 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.AccessoryFolder
 
         private void EditBt_Click(object sender, RoutedEventArgs e)
         {
-            Accessory accessory = accessory1;
-            if (string.IsNullOrWhiteSpace(NameTb.Text) ||
-               string.IsNullOrWhiteSpace(PriceTb.Text))
+            ResetAllErrorStyles();
+            bool hasErrors = false;
+
+            if (string.IsNullOrWhiteSpace(NameTb.Text))
             {
-                MessageBox.Show("Заполните все данные!!!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                ApplyErrorStyle(NameTb);
+                hasErrors = true;
             }
-            else
+
+            if (string.IsNullOrWhiteSpace(PriceTb.Text) || !int.TryParse(PriceTb.Text, out _))
             {
-                accessory.Name = NameTb.Text;
-                accessory.Price = Convert.ToDecimal(PriceTb.Text);
+                ApplyErrorStyle(PriceTb);
+                hasErrors = true;
+            }
+            if (TypeTb.SelectedItem == null)
+            {
+                ApplyErrorStyle(TypeTb);
+                hasErrors = true;
+            }
+            if (string.IsNullOrWhiteSpace(DescriptionTb.Text))
+            {
+                ApplyErrorStyle(DescriptionTb);
+                hasErrors = true;
+            }
+
+            if (hasErrors)
+            {
+                MessageBox.Show("Заполните все обязательные поля корректно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            try
+            {
+                accessory1.Name = NameTb.Text;
+                accessory1.Price = Convert.ToInt32(PriceTb.Text);
+                accessory1.AccessoryTypeId = (TypeTb.SelectedItem as AccessoryType)?.Id ?? 0;
+                accessory1.Description = DescriptionTb.Text;
+
                 DbConnection.MarryMe.SaveChanges();
-                MessageBox.Show("Данные изменены!", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
-                NavigationService.Navigate(new AccessoryPage());
+
+                MessageBox.Show("Изменения сохранены!",
+                               "Успех",
+                               MessageBoxButton.OK,
+                               MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при сохранении: {ex.Message}",
+                               "Ошибка",
+                               MessageBoxButton.OK,
+                               MessageBoxImage.Error);
             }
         }
     }

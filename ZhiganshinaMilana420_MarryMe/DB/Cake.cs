@@ -18,16 +18,19 @@ namespace ZhiganshinaMilana420_MarryMe.DB
         public Cake()
         {
             this.CoupleFavorites = new HashSet<CoupleFavorites>();
+            this.CakePhoto = new HashSet<CakePhoto>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
         public Nullable<int> CakeTypeId { get; set; }
-        public Nullable<decimal> Price { get; set; }
-        public byte[] Photo { get; set; }
+        public Nullable<int> Price { get; set; }
+        public string Description { get; set; }
     
         public virtual CakeType CakeType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CoupleFavorites> CoupleFavorites { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CakePhoto> CakePhoto { get; set; }
     }
 }

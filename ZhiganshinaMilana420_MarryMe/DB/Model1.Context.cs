@@ -33,6 +33,7 @@ namespace ZhiganshinaMilana420_MarryMe.DB
         public virtual DbSet<BouquetType> BouquetType { get; set; }
         public virtual DbSet<Bride> Bride { get; set; }
         public virtual DbSet<Cake> Cake { get; set; }
+        public virtual DbSet<CakePhoto> CakePhoto { get; set; }
         public virtual DbSet<CakeType> CakeType { get; set; }
         public virtual DbSet<Clothing> Clothing { get; set; }
         public virtual DbSet<ClothingPhoto> ClothingPhoto { get; set; }

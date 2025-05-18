@@ -23,22 +23,43 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.AccessoryFolder
     public partial class AccessoryPage : Page
     {
         public static List<Accessory> accessories { get; set; }
+        public static List<AccessoryType> typees { get; set; }
         public AccessoryPage()
         {
             InitializeComponent();
             accessories = new List<Accessory>(DbConnection.MarryMe.Accessory.ToList());
             AccessoryLV.ItemsSource = accessories;
+
+            typees = new List<AccessoryType>(DbConnection.MarryMe.AccessoryType.ToList());
+            typees.Insert(0, new AccessoryType() { Name = "Все" });
+            FilterCb.SelectedIndex = 0;
             this.DataContext = this;
         }
 
+        public void Refresh()
+        {
+            var filterDres = DbConnection.MarryMe.Accessory.ToList();
+            var category = FilterCb.SelectedItem as AccessoryType;
+
+            if (category != null && category.Id != 0)
+            {
+                filterDres = filterDres.Where(c => c.AccessoryTypeId == category.Id).ToList();
+            }
+
+            if (SearchTb.Text.Length > 0)
+            {
+                filterDres = filterDres.Where(r => r.Name.ToLower().Contains(SearchTb.Text.Trim().ToLower())).ToList();
+            }
+            AccessoryLV.ItemsSource = filterDres;
+        }
         private void SearchTb_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            Refresh();
         }
 
         private void FilterCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            Refresh();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

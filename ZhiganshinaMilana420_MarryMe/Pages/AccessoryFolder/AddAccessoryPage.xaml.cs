@@ -31,13 +31,51 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.AccessoryFolder
 
         public static Accessory accessory1 = new Accessory();
         public static Accessory acc { get; set; }
+        public static List<AccessoryType> accessoryTypes { get; set; }
         public AddAccessoryPage()
         {
             InitializeComponent();
             UploadProgress.Visibility = Visibility.Collapsed;
 
+            accessoryTypes = new List<AccessoryType>(DbConnection.MarryMe.AccessoryType.ToList());
             PhotosLv.ItemsSource = photos;
             this.DataContext = this;
+        }
+        private void ApplyErrorStyle(Control control)
+        {
+            control.BorderBrush = Brushes.Red;
+            control.BorderThickness = new Thickness(2);
+            control.ToolTip = "Это поле обязательно для заполнения";
+        }
+
+        private void ResetAllErrorStyles()
+        {
+            ClearErrorStyle(NameTb);
+            ClearErrorStyle(PriceTb);
+            ClearErrorStyle(TypeTb);
+            ClearErrorStyle(DescriptionTb);
+        }
+        private void NameTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ClearErrorStyle(NameTb);
+        }
+        private void PriceTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ClearErrorStyle(PriceTb);
+        }
+        private void TypeTb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ClearErrorStyle(TypeTb);
+        }
+        private void DescriptionTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ClearErrorStyle(DescriptionTb);
+        }
+        private void ClearErrorStyle(Control control)
+        {
+            control.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFABADB3"));
+            control.BorderThickness = new Thickness(1);
+            control.ToolTip = null;
         }
         private void SelectPhotos_Click(object sender, RoutedEventArgs e)
         {
@@ -188,19 +226,49 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.AccessoryFolder
 
         private void AddBt_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(NameTb.Text) ||
-               string.IsNullOrWhiteSpace(PriceTb.Text))
+            ResetAllErrorStyles();
+            bool hasErrors = false;
+
+            // Проверка названия 
+            if (string.IsNullOrWhiteSpace(NameTb.Text))
             {
-                MessageBox.Show("Заполните все данные!!!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                ApplyErrorStyle(NameTb);
+                hasErrors = true;
             }
 
+            // Проверка цены
+            if (string.IsNullOrWhiteSpace(PriceTb.Text) || !int.TryParse(PriceTb.Text, out _))
+            {
+                ApplyErrorStyle(PriceTb);
+                hasErrors = true;
+            }
+            // Проверка типа ресторана
+            if (TypeTb.SelectedItem == null)
+            {
+                ApplyErrorStyle(TypeTb);
+                hasErrors = true;
+            }
+
+            // Проверка описания (если оно обязательно)
+            if (string.IsNullOrWhiteSpace(DescriptionTb.Text))
+            {
+                ApplyErrorStyle(DescriptionTb);
+                hasErrors = true;
+            }
+
+            if (hasErrors)
+            {
+                MessageBox.Show("Заполните все обязательные поля корректно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             try
             {
                 Accessory accessory = new Accessory()
                 {
                     Name = NameTb.Text,
-                    Price = Convert.ToInt32(PriceTb.Text)
+                    Price = Convert.ToInt32(PriceTb.Text),
+                    AccessoryTypeId = (TypeTb.SelectedItem as AccessoryType)?.Id ?? 0,
+                    Description = DescriptionTb.Text
                 };
 
                 DbConnection.MarryMe.Accessory.Add(accessory);

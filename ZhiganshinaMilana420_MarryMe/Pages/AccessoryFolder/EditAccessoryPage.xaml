@@ -5,64 +5,102 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ZhiganshinaMilana420_MarryMe.Pages.AccessoryFolder"
       mc:Ignorable="d" 
-      d:DesignHeight="815" d:DesignWidth="1570"
+      d:DesignHeight="750" d:DesignWidth="1445"
       Title="EditAccessoryPage">
 
     <Grid Background="#EEEFEA">
+        <Border Width="570"
+                BorderBrush="#909478"
+                BorderThickness="5"
+                CornerRadius="20"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Height="450"
+                Margin="30 30 0 0"/>
         <StackPanel Orientation="Vertical"
-                    Width="700"
-                    Height="121"
+                    Margin="60 50 0 0"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Margin="50 40 0 0">
+                    VerticalAlignment="Top">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Название"
+                <TextBlock Text="Название украшения"
                            FontSize="25"/>
                 <TextBox x:Name="NameTb"
-                         FontSize="30"
-                         Width="400"
-                         Margin="10 0"/>
+                         FontSize="20"
+                         Width="240"
+                         Margin="15 0 0 0"
+                         TextChanged="NameTb_TextChanged"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal"
-                        Margin="0 20 0 0">
-                <TextBlock Text="Цена"
+                        Margin="0 15 0 0">
+                <TextBlock Text="Цена украшения"
                            FontSize="25"/>
                 <TextBox x:Name="PriceTb"
-                         FontSize="30"
-                         Width="400"
-                         Margin="10 0"/>
+                         FontSize="20"
+                         TextChanged="PriceTb_TextChanged"
+                         Width="290"
+                         Margin="15 0 0 0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        Margin="0 15 0 0">
+                <TextBlock Text="Тип украшения"
+                           FontSize="25"/>
+                <ComboBox x:Name="TypeTb"
+                          FontSize="20"
+                          Width="310"
+                          SelectionChanged="TypeTb_SelectionChanged"
+                          Margin="15 0 0 0"
+                          ItemsSource="{Binding accessoryTypes}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Описание"
+                           FontSize="25"
+                           Margin="0 10 0 0"/>
+                <TextBox x:Name="DescriptionTb"
+                         FontSize="20"
+                         Width="500"
+                         Height="160"
+                         TextChanged="DescriptionTb_TextChanged"
+                         HorizontalAlignment="Left"
+                         Margin="0 10 0 0"/>
+                <Button x:Name="AddBt"
+                        FontSize="20"
+                        Width="200"
+                        Height="40"
+                        Content="Сохранить"
+                        HorizontalAlignment="Right"
+                        Margin="0 20 0 0"
+                        Click="EditBt_Click"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" 
-                    Margin="0 0 5 50"
-                    Width="600"
-                    Height="100"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Bottom"
-                    >
-            <Button Content="Выбрать фото" 
-                    Click="SelectPhotos_Click" 
-                    Padding="10 5" 
-                    Width="220"
-                    FontSize="25"
-                    Height="50"
-                    Margin="0 0 10 0"/>
-            <Button Content="Загрузить выбранные" 
-                    Click="UploadPhotos_Click" 
-                    Width="350"
-                    FontSize="25"
-                    
-                    Height="50"
-                    Padding="10 5"/>
-        </StackPanel>
-        <!-- Список выбранных фото -->
+        <Button Content="Выбрать фото" 
+                Click="SelectPhotos_Click" 
+                Width="220"
+                FontSize="20"
+                Height="50"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Margin="370 0 0 120"/>
+        <Button Content="Сохранить" 
+                Click="UploadPhotos_Click" 
+                Width="220"
+                FontSize="20"
+                Height="50"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Left"
+                Margin="370 130 0 50"/>
         <ListView x:Name="PhotosLv" 
-                  Width="841"
-                  Height="614"
-                  d:ItemsSource="{d:SampleData ItemCount=25}"
-                  Margin="50 0 0 35"
-                  HorizontalAlignment="Left"
-                  VerticalAlignment="Bottom">
+                  Width="710"
+                  Height="700"
+                  HorizontalAlignment="Right"
+                  VerticalAlignment="Top"
+                  Margin="0 0 80 0"
+                  d:ItemsSource="{d:SampleData ItemCount=25}">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="3"/>
@@ -70,13 +108,13 @@
             </ListView.ItemsPanel>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Width="220">
+                    <GridViewColumn>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel>
                                     <Image Source="{Binding Photo}" 
-                                       Width="200" 
-                                       Height="200" />
+                                           Width="200" 
+                                           Height="200" />
                                     <Button Content="Удалить" 
                                         Click="DeletePhoto_Click" 
                                         Margin="0 5 0 0"
@@ -89,32 +127,22 @@
                 </GridView>
             </ListView.View>
         </ListView>
-
         <ProgressBar x:Name="UploadProgress" 
                      Minimum="0" 
                      Maximum="100" 
                      Height="20"
-                     Width="800"
-                     HorizontalAlignment="Left"
+                     Width="710"
+                     HorizontalAlignment="Right"
                      VerticalAlignment="Bottom"
-                     Margin="50 0 0 10"/>
-
+                     Margin="0 0 80 30"/>
         <Button x:Name="ExitBt"
-                FontSize="25"
+                FontSize="20"
                 Width="200"
                 Height="50"
-                Content="Отмена"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Top"
-                Margin="20" Click="ExitBt_Click"/>
-        <Button x:Name="AddBt"
-                FontSize="25"
-                Width="200"
-                Height="50"
-                Content="Добавить"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Top"
-                Margin="0 20 250 0" 
-                Click="EditBt_Click"/>
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Margin="50"
+                Content="Назад" 
+                Click="ExitBt_Click"/>
     </Grid>
 </Page>

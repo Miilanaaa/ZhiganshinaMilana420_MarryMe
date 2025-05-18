@@ -12,15 +12,12 @@ namespace ZhiganshinaMilana420_MarryMe.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class MusicianBookingDates
+    public partial class CakePhoto
     {
         public int Id { get; set; }
-        public int MusicianId { get; set; }
-        public System.DateTime BookingDate { get; set; }
-        public Nullable<bool> Status { get; set; }
-        public Nullable<int> CoupleId { get; set; }
+        public Nullable<int> CakeId { get; set; }
+        public byte[] Photo { get; set; }
     
-        public virtual Couple Couple { get; set; }
-        public virtual Musician Musician { get; set; }
+        public virtual Cake Cake { get; set; }
     }
 }

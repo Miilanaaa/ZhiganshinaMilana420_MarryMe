@@ -22,23 +22,43 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.MusicianFolder
     /// </summary>
     public partial class MusicianPage : Page
     {
+        public static List<MusicianType> typees { get; set; }
         public static List<Musician> musicians { get; set; }
         public MusicianPage()
         {
             InitializeComponent();
             musicians = new List<Musician>(DbConnection.MarryMe.Musician.ToList());
             MusicianLV.ItemsSource = musicians;
+
+            typees = new List<MusicianType>(DbConnection.MarryMe.MusicianType.ToList());
+            typees.Insert(0, new MusicianType() { Name = "Все" });
+            FilterCb.SelectedIndex = 0;
             this.DataContext = this;
         }
+        public void Refresh()
+        {
+            var filterRestaurant = DbConnection.MarryMe.Musician.ToList();
+            var category = FilterCb.SelectedItem as MusicianType;
 
+            if (category != null && category.Id != 0)
+            {
+                filterRestaurant = filterRestaurant.Where(c => c.MusicianTypeId == category.Id).ToList();
+            }
+
+            if (SearchTb.Text.Length > 0)
+            {
+                filterRestaurant = filterRestaurant.Where(r => r.TeamName.ToLower().Contains(SearchTb.Text.Trim().ToLower())).ToList();
+            }
+            MusicianLV.ItemsSource = filterRestaurant;
+        }
         private void SearchTb_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            Refresh();
         }
 
         private void FilterCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            Refresh();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -59,7 +79,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.MusicianFolder
             {
                 try
                 {
-                    MessageBoxResult result = MessageBox.Show("Вы точно хотите удалить эту услугу?", "Подтверждение удаления", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    MessageBoxResult result = MessageBox.Show("Вы точно хотите удалить эту группу?", "Подтверждение удаления", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (result == MessageBoxResult.Yes)
                     {
                         DbConnection.MarryMe.Musician.Remove(musician);

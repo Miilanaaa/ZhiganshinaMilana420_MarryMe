@@ -236,6 +236,9 @@
     <Compile Include="DB\Cake.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB\CakePhoto.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB\CakeType.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -310,6 +313,7 @@
     </Compile>
     <Compile Include="DB\Partikal\Accessory.cs" />
     <Compile Include="DB\Partikal\Bouquet.cs" />
+    <Compile Include="DB\Partikal\Cake.cs" />
     <Compile Include="DB\Partikal\Clothing.cs" />
     <Compile Include="DB\Partikal\Decoration.cs" />
     <Compile Include="DB\Partikal\Dress.cs" />
@@ -387,11 +391,17 @@
     <Compile Include="DB\WeddingStatus.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AccessoryFolder\AccessoryMenuPage.xaml.cs">
+      <DependentUpon>AccessoryMenuPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AccessoryFolder\AccessoryPage.xaml.cs">
       <DependentUpon>AccessoryPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\AccessoryFolder\AddAccessoryPage.xaml.cs">
       <DependentUpon>AddAccessoryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AccessoryFolder\CardAccessoryPage.xaml.cs">
+      <DependentUpon>CardAccessoryPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\AccessoryFolder\EditAccessoryPage.xaml.cs">
       <DependentUpon>EditAccessoryPage.xaml</DependentUpon>
@@ -417,8 +427,14 @@
     <Compile Include="Pages\CakeFolder\AddCakePage.xaml.cs">
       <DependentUpon>AddCakePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\CakeFolder\CakeMenuPage.xaml.cs">
+      <DependentUpon>CakeMenuPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\CakeFolder\CakePage.xaml.cs">
       <DependentUpon>CakePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\CakeFolder\CardCakePage.xaml.cs">
+      <DependentUpon>CardCakePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\CakeFolder\EditCakePage.xaml.cs">
       <DependentUpon>EditCakePage.xaml</DependentUpon>
@@ -495,8 +511,14 @@
     <Compile Include="Pages\MusicianFolder\AddMusicianPage.xaml.cs">
       <DependentUpon>AddMusicianPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\MusicianFolder\CardMusicianPage.xaml.cs">
+      <DependentUpon>CardMusicianPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MusicianFolder\EditMusicianPage.xaml.cs">
       <DependentUpon>EditMusicianPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MusicianFolder\MusicianMenuPage.xaml.cs">
+      <DependentUpon>MusicianMenuPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MusicianFolder\MusicianPage.xaml.cs">
       <DependentUpon>MusicianPage.xaml</DependentUpon>
@@ -555,8 +577,14 @@
     <Compile Include="Pages\TransferFolder\AddTransferPage.xaml.cs">
       <DependentUpon>AddTransferPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\TransferFolder\CardTransferPage.xaml.cs">
+      <DependentUpon>CardTransferPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\TransferFolder\EditTransferPage.xaml.cs">
       <DependentUpon>EditTransferPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\TransferFolder\TransferMenuPage.xaml.cs">
+      <DependentUpon>TransferMenuPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\TransferFolder\TransferPage.xaml.cs">
       <DependentUpon>TransferPage.xaml</DependentUpon>
@@ -595,11 +623,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\AccessoryFolder\AccessoryMenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\AccessoryFolder\AccessoryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\AccessoryFolder\AddAccessoryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AccessoryFolder\CardAccessoryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -639,7 +675,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\CakeFolder\CakeMenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\CakeFolder\CakePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\CakeFolder\CardCakePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -755,7 +799,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\MusicianFolder\CardMusicianPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\MusicianFolder\EditMusicianPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MusicianFolder\MusicianMenuPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -847,7 +899,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\TransferFolder\CardTransferPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\TransferFolder\EditTransferPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\TransferFolder\TransferMenuPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

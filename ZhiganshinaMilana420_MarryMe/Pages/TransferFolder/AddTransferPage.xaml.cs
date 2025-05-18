@@ -30,13 +30,52 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.TransferFolder
         public static List<Transfer> transfers {  get; set; }
         public static Transfer transfer1 = new Transfer();
         public static Transfer tra { get; set; }
+        public static List<TransferType> transferTypes { get; set; }
         public AddTransferPage()
         {
             InitializeComponent();
             UploadProgress.Visibility = Visibility.Collapsed;
 
+            transferTypes = new List<TransferType>(DbConnection.MarryMe.TransferType.ToList());
             PhotosLv.ItemsSource = photos;
             this.DataContext = this;
+        }
+        private void ApplyErrorStyle(Control control)
+        {
+            control.BorderBrush = Brushes.Red;
+            control.BorderThickness = new Thickness(2);
+            control.ToolTip = "Это поле обязательно для заполнения";
+        }
+
+        private void ResetAllErrorStyles()
+        {
+            ClearErrorStyle(NameTb);
+            ClearErrorStyle(PriceTb);
+            ClearErrorStyle(TypeTb);
+            ClearErrorStyle(DescriptionTb);
+        }
+        private void NameTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ClearErrorStyle(NameTb);
+        }
+
+        private void PriceTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ClearErrorStyle(PriceTb);
+        }
+        private void TypeTb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ClearErrorStyle(TypeTb);
+        }
+        private void DescriptionTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ClearErrorStyle(DescriptionTb);
+        }
+        private void ClearErrorStyle(Control control)
+        {
+            control.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFABADB3"));
+            control.BorderThickness = new Thickness(1);
+            control.ToolTip = null;
         }
         private void SelectPhotos_Click(object sender, RoutedEventArgs e)
         {
@@ -188,20 +227,50 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.TransferFolder
 
         private void AddBt_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(NameTb.Text) ||
-               string.IsNullOrWhiteSpace(PriceTb.Text))
+            // Сбрасываем все подсветки ошибок
+            ResetAllErrorStyles();
+
+            bool hasErrors = false;
+
+            // Проверка названия ресторана
+            if (string.IsNullOrWhiteSpace(NameTb.Text))
             {
-                MessageBox.Show("Заполните все данные!!!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                ApplyErrorStyle(NameTb);
+                hasErrors = true;
             }
 
+            // Проверка цены
+            if (string.IsNullOrWhiteSpace(PriceTb.Text) || !int.TryParse(PriceTb.Text, out _))
+            {
+                ApplyErrorStyle(PriceTb);
+                hasErrors = true;
+            }
+            // Проверка типа ресторана
+            if (TypeTb.SelectedItem == null)
+            {
+                ApplyErrorStyle(TypeTb);
+                hasErrors = true;
+            }
+            // Проверка описания (если оно обязательно)
+            if (string.IsNullOrWhiteSpace(DescriptionTb.Text))
+            {
+                ApplyErrorStyle(DescriptionTb);
+                hasErrors = true;
+            }
+
+            if (hasErrors)
+            {
+                MessageBox.Show("Заполните все обязательные поля корректно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             try
             {
                 Transfer transfer = new Transfer()
                 {
                     Name = NameTb.Text,
-                    //TransferTypeId = 1,
+                    TransferTypeId = (TypeTb.SelectedItem as TransferType)?.Id ?? 0,
                     Price = Convert.ToInt32(PriceTb.Text),
+                    Description = DescriptionTb.Text
                 };
 
                 DbConnection.MarryMe.Transfer.Add(transfer);
@@ -210,7 +279,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.TransferFolder
                 // КРИТИЧЕСКОЕ ИЗМЕНЕНИЕ: Обновляем ID ресторана
                 transfer1 = transfer; // Или restaurant1.Id = restaurant.Id;
 
-                MessageBox.Show("Транспорт добавлен! Теперь вы можете добавить фото",
+                MessageBox.Show("Трфнсфер добавлен! Теперь вы можете добавить фото",
                                "Успех",
                                MessageBoxButton.OK,
                                MessageBoxImage.Information);

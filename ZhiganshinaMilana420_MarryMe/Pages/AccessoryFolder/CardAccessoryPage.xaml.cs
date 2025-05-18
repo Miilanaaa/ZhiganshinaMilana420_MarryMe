@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,47 +14,46 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ZhiganshinaMilana420_MarryMe.DB;
 
-namespace ZhiganshinaMilana420_MarryMe.Pages.BouquetFolder
+namespace ZhiganshinaMilana420_MarryMe.Pages.AccessoryFolder
 {
     /// <summary>
-    /// Логика взаимодействия для CardBouquetPage.xaml
+    /// Логика взаимодействия для CardAccessoryPage.xaml
     /// </summary>
-    public partial class CardBouquetPage : Page
+    public partial class CardAccessoryPage : Page
     {
         private int _currentPhotoIndex = 0;
-        private List<BouquetPhoto> _bouquetPhotos;
+        private List<AccessoryPhoto> _accessoryPhotos;
         public static CoupleFavorites coupleFavorites { get; set; }
-        Bouquet contextBouquet;
+        Accessory contextAccessory;
         Couple contextCouple;
 
-        public static Bouquet bouquet1 = new Bouquet();
+        public static Accessory accessory1 = new Accessory();
         public static Couple couple1 = new Couple();
         public static CoupleFavorites coupleFavorites1 = new CoupleFavorites();
-        public static List<Bouquet> bouquets { get; set; }
-        public CardBouquetPage(Bouquet bouquet, Couple couple, CoupleFavorites coupleFavorites)
+        public static List<Accessory> accessories { get; set; }
+        public CardAccessoryPage(Accessory accessory, Couple couple, CoupleFavorites coupleFavorites)
         {
             InitializeComponent();
             contextCouple = couple;
-            bouquet1 = bouquet;
+            accessory1 = accessory;
             couple1 = couple;
             coupleFavorites1 = coupleFavorites;
-            contextBouquet = bouquet ?? throw new ArgumentNullException(nameof(bouquet));
+            contextAccessory = accessory ?? throw new ArgumentNullException(nameof(accessory));
             LoadData();
         }
         private void LoadData()
         {
             try
             {
-                _bouquetPhotos = DbConnection.MarryMe.BouquetPhoto
-                    .Where(p => p.BouquetId == contextBouquet.Id).ToList();
+                _accessoryPhotos = DbConnection.MarryMe.AccessoryPhoto
+                    .Where(p => p.AccessoryId == contextAccessory.Id).ToList();
 
                 UpdatePhotoDisplay();
 
                 // Вывод данных ресторана
-                NameTb.Text = contextBouquet.Name;
-                DescriptionTb.Text = contextBouquet.Description;
-                PriceTb.Text = contextBouquet.Price.ToString();
-
+                NameTb.Text = contextAccessory.Name;
+                DescriptionTb.Text = contextAccessory.Description;
+                PriceTb.Text = contextAccessory.Price.ToString();
             }
             catch (Exception ex)
             {
@@ -64,7 +62,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.BouquetFolder
         }
         private void UpdatePhotoDisplay()
         {
-            if (_bouquetPhotos == null || _bouquetPhotos.Count == 0)
+            if (_accessoryPhotos == null || _accessoryPhotos.Count == 0)
             {
                 CurrentImage.Source = null;
                 PhotoCounter.Text = "Нет фотографий";
@@ -72,17 +70,17 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.BouquetFolder
             }
 
             // Обеспечиваем цикличность перелистывания
-            if (_currentPhotoIndex >= _bouquetPhotos.Count)
+            if (_currentPhotoIndex >= _accessoryPhotos.Count)
                 _currentPhotoIndex = 0;
             else if (_currentPhotoIndex < 0)
-                _currentPhotoIndex = _bouquetPhotos.Count - 1;
+                _currentPhotoIndex = _accessoryPhotos.Count - 1;
 
             // Обновляем отображаемое изображение
-            var currentPhoto = _bouquetPhotos[_currentPhotoIndex];
+            var currentPhoto = _accessoryPhotos[_currentPhotoIndex];
             try
             {
                 CurrentImage.Source = ConvertByteArrayToBitmapImage(currentPhoto.Photo);
-                PhotoCounter.Text = $"{_currentPhotoIndex + 1} / {_bouquetPhotos.Count}";
+                PhotoCounter.Text = $"{_currentPhotoIndex + 1} / {_accessoryPhotos.Count}";
             }
             catch
             {
@@ -132,19 +130,19 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.BouquetFolder
                     favorite = new CoupleFavorites
                     {
                         CoupleId = contextCouple.Id,
-                        BouquetId = contextBouquet.Id
+                        AccessoryId = contextAccessory.Id
                     };
                     DbConnection.MarryMe.CoupleFavorites.Add(favorite);
                 }
                 else
                 {
-                    favorite.BouquetId = contextBouquet.Id;
+                    favorite.AccessoryId = contextAccessory.Id;
                 }
 
                 // Сохраняем все изменения
                 DbConnection.MarryMe.SaveChanges();
 
-                MessageBox.Show("Букет успешно забронировано!",
+                MessageBox.Show("Украшения успешно забронировано!",
                                   "Бронирование подтверждено",
                                   MessageBoxButton.OK,
                                   MessageBoxImage.Information);

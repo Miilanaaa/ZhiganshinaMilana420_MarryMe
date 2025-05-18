@@ -28,6 +28,10 @@ using ZhiganshinaMilana420_MarryMe.Pages.HostFolder;
 using ZhiganshinaMilana420_MarryMe.Pages.PhotographerVideographerFolder;
 using ZhiganshinaMilana420_MarryMe.Pages.BouquetFolder;
 using ZhiganshinaMilana420_MarryMe.Pages.StylistFolder;
+using ZhiganshinaMilana420_MarryMe.Pages.MusicianFolder;
+using ZhiganshinaMilana420_MarryMe.Pages.TransferFolder;
+using ZhiganshinaMilana420_MarryMe.Pages.CakeFolder;
+using ZhiganshinaMilana420_MarryMe.Pages.AccessoryFolder;
 
 namespace ZhiganshinaMilana420_MarryMe.Pages
 {
@@ -111,16 +115,16 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
                             NavigationService.Navigate(new StylistMenuPage(contextCouple, CoupleFavorites));
                             break;
                         case 9:
-                            NavigationService.Navigate(new TestPage());
+                            NavigationService.Navigate(new MusicianMenuPage(contextCouple, CoupleFavorites));
                             break;
                         case 10:
-                            NavigationService.Navigate(new TestPage());
+                            NavigationService.Navigate(new TransferMenuPage(contextCouple, CoupleFavorites));
                             break;
                         case 11:
-                            NavigationService.Navigate(new TestPage());
+                            NavigationService.Navigate(new CakeMenuPage(contextCouple, CoupleFavorites));
                             break;
                         case 12:
-                            NavigationService.Navigate(new TestPage());
+                            NavigationService.Navigate(new AccessoryMenuPage(contextCouple, CoupleFavorites));
                             break;
                     }
                 }

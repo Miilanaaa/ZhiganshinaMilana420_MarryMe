@@ -31,21 +31,37 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.TransferFolder
             transfers = new List<Transfer>(DbConnection.MarryMe.Transfer.ToList());
             TransferLV.ItemsSource = transfers;
             transferPhotos = new List<TransferPhoto>(DbConnection.MarryMe.TransferPhoto.ToList());
+            
             typees = new List<TransferType>(DbConnection.MarryMe.TransferType.ToList());
             typees.Insert(0, new TransferType() { Name = "Все" });
             FilterCb.SelectedIndex = 0;
-
             this.DataContext = this;
         }
 
+        public void Refresh()
+        {
+            var filterRestaurant = DbConnection.MarryMe.Transfer.ToList();
+            var category = FilterCb.SelectedItem as TransferType;
+
+            if (category != null && category.Id != 0)
+            {
+                filterRestaurant = filterRestaurant.Where(c => c.TransferTypeId == category.Id).ToList();
+            }
+
+            if (SearchTb.Text.Length > 0)
+            {
+                filterRestaurant = filterRestaurant.Where(r => r.Name.ToLower().Contains(SearchTb.Text.Trim().ToLower())).ToList();
+            }
+            TransferLV.ItemsSource = filterRestaurant;
+        }
         private void SearchTb_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            Refresh();
         }
 
         private void FilterCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            Refresh();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -53,7 +69,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.TransferFolder
             NavigationService.Navigate(new AddTransferPage());
         }
 
-        private void EditBtn_Click(object sender, RoutedEventArgs e)
+        private void ExitBtn_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button button && button.DataContext is Transfer transfer)
             {
@@ -67,18 +83,18 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.TransferFolder
             {
                 try
                 {
-                    MessageBoxResult result = MessageBox.Show("Вы точно хотите удалить эту услугу?", "Подтверждение удаления", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    MessageBoxResult result = MessageBox.Show("Вы точно хотите удалить этот трансфер?", "Подтверждение удаления", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (result == MessageBoxResult.Yes)
                     {
                         DbConnection.MarryMe.Transfer.Remove(transfer);
                         DbConnection.MarryMe.SaveChanges();
                         NavigationService.Navigate(new TransferPage());
-                        MessageBox.Show("Товар успешно удалён!", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show("Трансфер успешно удалён!", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
                 catch
                 {
-                    MessageBox.Show("Информацию о транспорте невозможно удалить, он забронирован гостями", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Информацию о трансфере невозможно удалить, он забронирован гостями", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
             }

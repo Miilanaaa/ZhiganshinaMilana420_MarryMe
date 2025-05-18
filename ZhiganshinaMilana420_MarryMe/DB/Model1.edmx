@@ -11,8 +11,9 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Price" Type="int" />
           <Property Name="AccessoryTypeId" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="AccessoryPhoto">
           <Key>
@@ -77,7 +78,15 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="CakeTypeId" Type="int" />
-          <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Price" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="CakePhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CakeId" Type="int" />
           <Property Name="Photo" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="CakeType">
@@ -241,7 +250,8 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TeamName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="MusicianTypeId" Type="int" />
-          <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Price" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="MusicianBookingDates">
           <Key>
@@ -250,8 +260,8 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MusicianId" Type="int" Nullable="false" />
           <Property Name="BookingDate" Type="date" Nullable="false" />
-          <Property Name="CoupleId" Type="int" />
           <Property Name="Status" Type="bit" />
+          <Property Name="CoupleId" Type="int" />
         </EntityType>
         <EntityType Name="MusicianPhoto">
           <Key>
@@ -422,8 +432,9 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Price" Type="int" />
           <Property Name="TransferTypeId" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="TransferBookingDates">
           <Key>
@@ -917,6 +928,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CakePhoto_Cake">
+          <End Role="Cake" Type="Self.Cake" Multiplicity="0..1" />
+          <End Role="CakePhoto" Type="Self.CakePhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cake">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CakePhoto">
+              <PropertyRef Name="CakeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Couple_WeddingStatus">
           <End Role="WeddingStatus" Type="Self.WeddingStatus" Multiplicity="0..1" />
           <End Role="Couple" Type="Self.Couple" Multiplicity="*" />
@@ -1138,6 +1161,7 @@
           <EntitySet Name="BouquetType" EntityType="Self.BouquetType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bride" EntityType="Self.Bride" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cake" EntityType="Self.Cake" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CakePhoto" EntityType="Self.CakePhoto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CakeType" EntityType="Self.CakeType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clothing" EntityType="Self.Clothing" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClothingPhoto" EntityType="Self.ClothingPhoto" Schema="dbo" store:Type="Tables" />
@@ -1319,6 +1343,10 @@
             <End Role="Bouquet" EntitySet="Bouquet" />
             <End Role="BouquetPhoto" EntitySet="BouquetPhoto" />
           </AssociationSet>
+          <AssociationSet Name="FK_CakePhoto_Cake" Association="Self.FK_CakePhoto_Cake">
+            <End Role="Cake" EntitySet="Cake" />
+            <End Role="CakePhoto" EntitySet="CakePhoto" />
+          </AssociationSet>
           <AssociationSet Name="FK_Couple_WeddingStatus" Association="Self.FK_Couple_WeddingStatus">
             <End Role="WeddingStatus" EntitySet="WeddingStatus" />
             <End Role="Couple" EntitySet="Couple" />
@@ -1399,8 +1427,9 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Price" Type="Int32" />
           <Property Name="AccessoryTypeId" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AccessoryPhoto" Relationship="Self.FK__Accessory__Acces__08B54D69" FromRole="Accessory" ToRole="AccessoryPhoto" />
           <NavigationProperty Name="AccessoryType" Relationship="Self.FK__Accessory__Acces__5165187F" FromRole="Accessory" ToRole="AccessoryType" />
           <NavigationProperty Name="CoupleFavorites" Relationship="Self.FK__CoupleFav__Acces__70DDC3D8" FromRole="Accessory" ToRole="CoupleFavorites" />
@@ -1476,10 +1505,20 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CakeTypeId" Type="Int32" />
-          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CakeType" Relationship="Self.FK__Cake__CakeTypeId__6A30C649" FromRole="Cake" ToRole="CakeType" />
           <NavigationProperty Name="CoupleFavorites" Relationship="Self.FK__CoupleFav__CakeI__778AC167" FromRole="Cake" ToRole="CoupleFavorites" />
+          <NavigationProperty Name="CakePhoto" Relationship="Self.FK_CakePhoto_Cake" FromRole="Cake" ToRole="CakePhoto" />
+        </EntityType>
+        <EntityType Name="CakePhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CakeId" Type="Int32" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Cake" Relationship="Self.FK_CakePhoto_Cake" FromRole="CakePhoto" ToRole="Cake" />
         </EntityType>
         <EntityType Name="CakeType">
           <Key>
@@ -1686,7 +1725,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TeamName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MusicianTypeId" Type="Int32" />
-          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CoupleFavorites" Relationship="Self.FK__CoupleFav__Music__75A278F5" FromRole="Musician" ToRole="CoupleFavorites" />
           <NavigationProperty Name="MusicianType" Relationship="Self.FK__Musician__Musici__60A75C0F" FromRole="Musician" ToRole="MusicianType" />
           <NavigationProperty Name="MusicianBookingDates" Relationship="Self.FK__MusicianB__Music__19DFD96B" FromRole="Musician" ToRole="MusicianBookingDates" />
@@ -1699,8 +1739,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MusicianId" Type="Int32" Nullable="false" />
           <Property Name="BookingDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="CoupleId" Type="Int32" />
           <Property Name="Status" Type="Boolean" />
+          <Property Name="CoupleId" Type="Int32" />
           <NavigationProperty Name="Couple" Relationship="Self.FK_MusicianBookingDates_Couple" FromRole="MusicianBookingDates" ToRole="Couple" />
           <NavigationProperty Name="Musician" Relationship="Self.FK__MusicianB__Music__19DFD96B" FromRole="MusicianBookingDates" ToRole="Musician" />
         </EntityType>
@@ -1902,8 +1942,9 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Price" Type="Int32" />
           <Property Name="TransferTypeId" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CoupleFavorites" Relationship="Self.FK__CoupleFav__Trans__76969D2E" FromRole="Transfer" ToRole="CoupleFavorites" />
           <NavigationProperty Name="TransferType" Relationship="Self.FK__Transfer__Transf__656C112C" FromRole="Transfer" ToRole="TransferType" />
           <NavigationProperty Name="TransferBookingDates" Relationship="Self.FK__TransferB__Trans__1F98B2C1" FromRole="Transfer" ToRole="TransferBookingDates" />
@@ -2075,6 +2116,18 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="CoupleFavorites">
+              <PropertyRef Name="CakeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CakePhoto_Cake">
+          <End Role="Cake" Type="Self.Cake" Multiplicity="0..1" />
+          <End Role="CakePhoto" Type="Self.CakePhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cake">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CakePhoto">
               <PropertyRef Name="CakeId" />
             </Dependent>
           </ReferentialConstraint>
@@ -2630,6 +2683,7 @@
           <EntitySet Name="BouquetType" EntityType="Self.BouquetType" />
           <EntitySet Name="Bride" EntityType="Self.Bride" />
           <EntitySet Name="Cake" EntityType="Self.Cake" />
+          <EntitySet Name="CakePhoto" EntityType="Self.CakePhoto" />
           <EntitySet Name="CakeType" EntityType="Self.CakeType" />
           <EntitySet Name="Clothing" EntityType="Self.Clothing" />
           <EntitySet Name="ClothingPhoto" EntityType="Self.ClothingPhoto" />
@@ -2706,6 +2760,10 @@
           <AssociationSet Name="FK__CoupleFav__CakeI__778AC167" Association="Self.FK__CoupleFav__CakeI__778AC167">
             <End Role="Cake" EntitySet="Cake" />
             <End Role="CoupleFavorites" EntitySet="CoupleFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CakePhoto_Cake" Association="Self.FK_CakePhoto_Cake">
+            <End Role="Cake" EntitySet="Cake" />
+            <End Role="CakePhoto" EntitySet="CakePhoto" />
           </AssociationSet>
           <AssociationSet Name="FK__Clothing__Clothi__4CA06362" Association="Self.FK__Clothing__Clothi__4CA06362">
             <End Role="ClothingType" EntitySet="ClothingType" />
@@ -2893,6 +2951,7 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="AccessoryTypeId" ColumnName="AccessoryTypeId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2965,6 +3024,15 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CakeTypeId" ColumnName="CakeTypeId" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CakePhoto">
+            <EntityTypeMapping TypeName="ZhiganshinaMilana_MarryMeModel.CakePhoto">
+              <MappingFragment StoreEntitySet="CakePhoto">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CakeId" ColumnName="CakeId" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -3145,6 +3213,7 @@
                 <ScalarProperty Name="TeamName" ColumnName="TeamName" />
                 <ScalarProperty Name="MusicianTypeId" ColumnName="MusicianTypeId" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3154,8 +3223,8 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="MusicianId" ColumnName="MusicianId" />
                 <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
-                <ScalarProperty Name="CoupleId" ColumnName="CoupleId" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CoupleId" ColumnName="CoupleId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3347,6 +3416,7 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="TransferTypeId" ColumnName="TransferTypeId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

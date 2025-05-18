@@ -1,12 +1,12 @@
-﻿<Page x:Class="ZhiganshinaMilana420_MarryMe.Pages.BouquetFolder.CardBouquetPage"
+﻿<Page x:Class="ZhiganshinaMilana420_MarryMe.Pages.CakeFolder.CardCakePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:ZhiganshinaMilana420_MarryMe.Pages.BouquetFolder"
+      xmlns:local="clr-namespace:ZhiganshinaMilana420_MarryMe.Pages.CakeFolder"
       mc:Ignorable="d" 
       d:DesignHeight="750" d:DesignWidth="1445"
-      Title="CardBouquetPage">
+      Title="CardCakePage">
 
     <Grid Background="#EEEFEA">
         <Grid Width="750" 
@@ -81,7 +81,7 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock HorizontalAlignment="Left"
                            Margin="50 70 0 0"
-                           Text="Стоимость букета"
+                           Text="Стоимость платья"
                            FontSize="20"/>
                 <TextBox x:Name="PriceTb"
                          HorizontalAlignment="Left"
