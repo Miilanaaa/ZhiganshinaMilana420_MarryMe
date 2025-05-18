@@ -62,34 +62,44 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.CakeFolder
         }
         private void ApplyFiltersAndSort()
         {
-            // Применяем фильтр по поисковой строке
+            // Фильтр по поисковой строке
             string searchText = SearchTb.Text?.ToLower() ?? string.Empty;
             var type = FilterCb.SelectedItem as CakeType;
 
-            // Применяем фильтр по цене
+            // Фильтр по цене (от и до)
             decimal minPrice, maxPrice;
             if (!decimal.TryParse(PriceFromTb.Text, out minPrice)) minPrice = 0;
             if (!decimal.TryParse(PriceToTb.Text, out maxPrice)) maxPrice = decimal.MaxValue;
 
-            // Start with all dresses
+            // Фильтр по весу (от)
+            decimal minWeight;
+            if (!decimal.TryParse(WeightTb.Text, out minWeight)) minWeight = 0;
+
+            // Начинаем со всех тортов
             filteredCake = allCake
-                .Where(r => r.Name.ToLower().Contains(searchText)) // Фильтр по названию
+                .Where(r => r.Name.ToLower().Contains(searchText)) // Поиск по названию
                 .Where(r => r.Price >= minPrice && r.Price <= maxPrice) // Фильтр по цене
                 .ToList();
 
-            // Apply type filter only if not "Все" (All) is selected
+            // Если указан минимальный вес (> 0), фильтруем
+            if (minWeight > 0)
+            {
+                filteredCake = filteredCake.Where(r => r.Weight >= minWeight).ToList();
+            }
+
+            // Фильтр по типу (если выбран не "Все")
             if (type != null && type.Name != "Все")
             {
                 filteredCake = filteredCake.Where(r => r.CakeTypeId == type.Id).ToList();
             }
 
-            // Применяем сортировку
+            // Сортировка
             switch (SortCb.SelectedIndex)
             {
-                case 1: // По возрастанию
+                case 1: // По возрастанию цены
                     filteredCake = filteredCake.OrderBy(r => r.Price).ToList();
                     break;
-                case 2: // По убыванию
+                case 2: // По убыванию цены
                     filteredCake = filteredCake.OrderByDescending(r => r.Price).ToList();
                     break;
             }

@@ -53,7 +53,8 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.CakeFolder
                 // Вывод данных ресторана
                 NameTb.Text = contextCake.Name;
                 DescriptionTb.Text = contextCake.Description;
-                PriceTb.Text = contextCake.Price.ToString();
+                PriceTb.Text =  $"{contextCake.Price} руб.".ToString();
+                WeightTb.Text = $"{contextCake.Weight} кг".ToString();
 
             }
             catch (Exception ex)

@@ -32,13 +32,24 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal"
                         Margin="0 15 0 0">
-                <TextBlock Text="Цена торта"
+                <TextBlock Text="Цена"
                            FontSize="25"/>
                 <TextBox x:Name="PriceTb"
                          FontSize="20"
                          TextChanged="PriceTb_TextChanged"
-                         Width="352"
+                         Width="160"
                          Margin="15 0 0 0"/>
+                <TextBlock Text="Вес"
+                           FontSize="25"
+                           Margin="17 0 0 0"/>
+                <TextBlock Text="(кг*)"
+                           FontSize="15"
+                           Margin="5 10 0 0"/>
+                <TextBox x:Name="WeightTb"
+                         FontSize="20"
+                         TextChanged="WeightTb_TextChanged"
+                         Width="160"
+                         Margin="10 0 0 0"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal"
                         Margin="0 15 0 0">

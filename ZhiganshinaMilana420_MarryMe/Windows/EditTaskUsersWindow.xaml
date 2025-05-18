@@ -12,6 +12,7 @@
         Title="EditTaskUsersWindow" 
         Height="450" 
         Width="630">
+    
     <Grid Cursor="">
         <TextBlock x:Name="NameEmployeeTb"
                    FontSize="18"

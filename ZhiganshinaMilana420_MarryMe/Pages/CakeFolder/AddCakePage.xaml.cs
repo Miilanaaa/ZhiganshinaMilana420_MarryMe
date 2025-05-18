@@ -53,6 +53,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.CakeFolder
             ClearErrorStyle(NameTb);
             ClearErrorStyle(PriceTb);
             ClearErrorStyle(TypeTb);
+            ClearErrorStyle(WeightTb);
             ClearErrorStyle(DescriptionTb);
         }
         private void NameTb_TextChanged(object sender, TextChangedEventArgs e)
@@ -70,6 +71,10 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.CakeFolder
         private void DescriptionTb_TextChanged(object sender, TextChangedEventArgs e)
         {
             ClearErrorStyle(DescriptionTb);
+        }
+        private void WeightTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ClearErrorStyle(WeightTb);
         }
         private void ClearErrorStyle(Control control)
         {
@@ -255,6 +260,11 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.CakeFolder
                 ApplyErrorStyle(DescriptionTb);
                 hasErrors = true;
             }
+            if (string.IsNullOrWhiteSpace(WeightTb.Text))
+            {
+                ApplyErrorStyle(WeightTb);
+                hasErrors = true;
+            }
 
             if (hasErrors)
             {
@@ -268,6 +278,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.CakeFolder
                     Name = NameTb.Text,
                     Price = Convert.ToInt32(PriceTb.Text),
                     CakeTypeId = (TypeTb.SelectedItem as CakeType)?.Id ?? 0,
+                    Weight = Convert.ToInt32(WeightTb.Text),
                     Description = DescriptionTb.Text
                 };
 

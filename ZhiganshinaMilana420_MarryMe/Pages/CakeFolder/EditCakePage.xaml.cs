@@ -55,6 +55,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.CakeFolder
             NameTb.Text = cake.Name;
             PriceTb.Text = cake.Price.ToString();
             DescriptionTb.Text = cake.Description;
+            WeightTb.Text = cake.Weight.ToString();
             if (cake.CakeTypeId != null)
             {
                 TypeTb.SelectedItem = cakeTypes.FirstOrDefault(t => t.Id == cake.CakeTypeId);
@@ -79,11 +80,16 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.CakeFolder
             ClearErrorStyle(NameTb);
             ClearErrorStyle(PriceTb);
             ClearErrorStyle(DescriptionTb);
+            ClearErrorStyle(WeightTb);
         }
 
         private void NameTb_TextChanged(object sender, TextChangedEventArgs e)
         {
             ClearErrorStyle(NameTb);
+        }
+        private void WeightTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ClearErrorStyle(WeightTb);
         }
         private void PriceTb_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -258,6 +264,11 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.CakeFolder
                 ApplyErrorStyle(TypeTb);
                 hasErrors = true;
             }
+            if (string.IsNullOrWhiteSpace(WeightTb.Text))
+            {
+                ApplyErrorStyle(WeightTb);
+                hasErrors = true;
+            }
             if (string.IsNullOrWhiteSpace(DescriptionTb.Text))
             {
                 ApplyErrorStyle(DescriptionTb);
@@ -274,6 +285,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.CakeFolder
                 cake1.Name = NameTb.Text;
                 cake1.Price = Convert.ToInt32(PriceTb.Text);
                 cake1.CakeTypeId = (TypeTb.SelectedItem as CakeType)?.Id ?? 0;
+                cake1.Weight = Convert.ToInt32(WeightTb.Text);
                 cake1.Description = DescriptionTb.Text;
 
                 DbConnection.MarryMe.SaveChanges();

@@ -27,6 +27,7 @@ namespace ZhiganshinaMilana420_MarryMe.DB
         public Nullable<int> Price { get; set; }
         public Nullable<int> TransferTypeId { get; set; }
         public string Description { get; set; }
+        public Nullable<int> NumberСars { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CoupleFavorites> CoupleFavorites { get; set; }

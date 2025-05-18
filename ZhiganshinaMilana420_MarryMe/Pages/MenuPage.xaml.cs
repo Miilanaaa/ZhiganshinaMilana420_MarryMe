@@ -145,7 +145,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
 
         private void ProectBtn_Click(object sender, RoutedEventArgs e)
         {
-            ContentFrame.Navigate(new ProectPage());
+            ContentFrame.Navigate(new ReportsPage());
         }
     }
 }

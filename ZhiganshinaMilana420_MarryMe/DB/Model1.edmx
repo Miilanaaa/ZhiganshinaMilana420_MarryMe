@@ -80,6 +80,7 @@
           <Property Name="CakeTypeId" Type="int" />
           <Property Name="Price" Type="int" />
           <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Weight" Type="int" />
         </EntityType>
         <EntityType Name="CakePhoto">
           <Key>
@@ -435,6 +436,7 @@
           <Property Name="Price" Type="int" />
           <Property Name="TransferTypeId" Type="int" />
           <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="NumberСars" Type="int" />
         </EntityType>
         <EntityType Name="TransferBookingDates">
           <Key>
@@ -1507,6 +1509,7 @@
           <Property Name="CakeTypeId" Type="Int32" />
           <Property Name="Price" Type="Int32" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Weight" Type="Int32" />
           <NavigationProperty Name="CakeType" Relationship="Self.FK__Cake__CakeTypeId__6A30C649" FromRole="Cake" ToRole="CakeType" />
           <NavigationProperty Name="CoupleFavorites" Relationship="Self.FK__CoupleFav__CakeI__778AC167" FromRole="Cake" ToRole="CoupleFavorites" />
           <NavigationProperty Name="CakePhoto" Relationship="Self.FK_CakePhoto_Cake" FromRole="Cake" ToRole="CakePhoto" />
@@ -1945,6 +1948,7 @@
           <Property Name="Price" Type="Int32" />
           <Property Name="TransferTypeId" Type="Int32" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NumberСars" Type="Int32" />
           <NavigationProperty Name="CoupleFavorites" Relationship="Self.FK__CoupleFav__Trans__76969D2E" FromRole="Transfer" ToRole="CoupleFavorites" />
           <NavigationProperty Name="TransferType" Relationship="Self.FK__Transfer__Transf__656C112C" FromRole="Transfer" ToRole="TransferType" />
           <NavigationProperty Name="TransferBookingDates" Relationship="Self.FK__TransferB__Trans__1F98B2C1" FromRole="Transfer" ToRole="TransferBookingDates" />
@@ -3025,6 +3029,7 @@
                 <ScalarProperty Name="CakeTypeId" ColumnName="CakeTypeId" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3417,6 +3422,7 @@
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="TransferTypeId" ColumnName="TransferTypeId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="NumberСars" ColumnName="NumberСars" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

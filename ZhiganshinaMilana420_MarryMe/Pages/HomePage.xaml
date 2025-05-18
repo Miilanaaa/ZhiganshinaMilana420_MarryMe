@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="750" d:DesignWidth="1445"
       Title="HomePage">
-    <Page.Resources></Page.Resources>
+    
     <Grid Background="#EEEFEA">
         <Button Name="AddClientBtt"
                 VerticalAlignment="Top"

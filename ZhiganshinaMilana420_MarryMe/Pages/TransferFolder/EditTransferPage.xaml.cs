@@ -77,12 +77,17 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.TransferFolder
             ClearErrorStyle(NameTb);
             ClearErrorStyle(PriceTb);
             ClearErrorStyle(TypeTb);
+            ClearErrorStyle(NumberСarsTb);
             ClearErrorStyle(DescriptionTb);
         }
 
         private void NameTb_TextChanged(object sender, TextChangedEventArgs e)
         {
             ClearErrorStyle(NameTb);
+        }
+        private void NumberСarsTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ClearErrorStyle(NumberСarsTb);
         }
 
         private void PriceTb_TextChanged(object sender, TextChangedEventArgs e)
@@ -263,6 +268,11 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.TransferFolder
                 ApplyErrorStyle(DescriptionTb);
                 hasErrors = true;
             }
+            if (string.IsNullOrWhiteSpace(NumberСarsTb.Text))
+            {
+                ApplyErrorStyle(NumberСarsTb);
+                hasErrors = true;
+            }
 
             if (hasErrors)
             {
@@ -275,6 +285,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.TransferFolder
                 transfer1.Name = NameTb.Text;
                 transfer1.TransferTypeId = (TypeTb.SelectedItem as TransferType)?.Id ?? 0;
                 transfer1.Price = Convert.ToInt32(PriceTb.Text);
+                transfer1.NumberСars = Convert.ToInt32(NumberСarsTb.Text);
                 transfer1.Description = DescriptionTb.Text;
 
                 DbConnection.MarryMe.SaveChanges();

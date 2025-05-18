@@ -52,13 +52,17 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.TransferFolder
             ClearErrorStyle(NameTb);
             ClearErrorStyle(PriceTb);
             ClearErrorStyle(TypeTb);
+            ClearErrorStyle(NumberСarsTb);
             ClearErrorStyle(DescriptionTb);
         }
         private void NameTb_TextChanged(object sender, TextChangedEventArgs e)
         {
             ClearErrorStyle(NameTb);
         }
-
+        private void NumberСarsTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ClearErrorStyle(NumberСarsTb);
+        }
         private void PriceTb_TextChanged(object sender, TextChangedEventArgs e)
         {
             ClearErrorStyle(PriceTb);
@@ -251,10 +255,16 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.TransferFolder
                 ApplyErrorStyle(TypeTb);
                 hasErrors = true;
             }
+
             // Проверка описания (если оно обязательно)
             if (string.IsNullOrWhiteSpace(DescriptionTb.Text))
             {
                 ApplyErrorStyle(DescriptionTb);
+                hasErrors = true;
+            }
+            if (string.IsNullOrWhiteSpace(NumberСarsTb.Text))
+            {
+                ApplyErrorStyle(NumberСarsTb);
                 hasErrors = true;
             }
 
@@ -270,6 +280,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.TransferFolder
                     Name = NameTb.Text,
                     TransferTypeId = (TypeTb.SelectedItem as TransferType)?.Id ?? 0,
                     Price = Convert.ToInt32(PriceTb.Text),
+                    NumberСars = Convert.ToInt32(NumberСarsTb.Text),
                     Description = DescriptionTb.Text
                 };
 

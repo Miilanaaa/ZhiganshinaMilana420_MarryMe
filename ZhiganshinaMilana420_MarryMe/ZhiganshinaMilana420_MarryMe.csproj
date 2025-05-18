@@ -538,6 +538,9 @@
     <Compile Include="Pages\PhotographerVideographerFolder\PhotographerVideographerPage.xaml.cs">
       <DependentUpon>PhotographerVideographerPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ReportsPage.xaml.cs">
+      <DependentUpon>ReportsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\RestaurantForder\CardRestaurantPage.xaml.cs">
       <DependentUpon>CardRestaurantPage.xaml</DependentUpon>
     </Compile>
@@ -836,6 +839,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ProectPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ReportsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

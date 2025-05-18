@@ -81,12 +81,25 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock HorizontalAlignment="Left"
                            Margin="50 70 0 0"
-                           Text="Стоимость платья"
+                           Text="Стоимость торта"
                            FontSize="20"/>
                 <TextBox x:Name="PriceTb"
                          HorizontalAlignment="Left"
                          Margin="10 70 0 0"
-                         Width="255"
+                         Width="150"
+                         Height="30"
+                         FontSize="20"
+                         IsReadOnly="True"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock HorizontalAlignment="Left"
+                           Margin="50 10 0 0"
+                           Text="Вес торта"
+                           FontSize="20"/>
+                <TextBox x:Name="WeightTb"
+                         HorizontalAlignment="Left"
+                         Margin="10 10 0 0"
+                         Width="215"
                          Height="30"
                          FontSize="20"
                          IsReadOnly="True"/>
