@@ -108,7 +108,6 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.StylistFolder
         {
             // Вычисляем общее количество страниц
             totalPages = (int)Math.Ceiling((double)filteredStylist.Count / itemsPerPage);
-
             // Очищаем панель пагинации
             PaginationPanel.Children.Clear();
             PaginationPanel.Children.Add(PrevPageBtn);
