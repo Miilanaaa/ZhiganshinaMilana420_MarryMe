@@ -239,10 +239,10 @@
                                                   VerticalAlignment="Center"
                                                   Margin="0 5 0 0"
                                                   Style="{StaticResource MaterialDesignActionToggleButton}"
-                                                  Checked="TaskUserChb_CheckedChanged"
-                                                  Unchecked="TaskUserChb_CheckedChanged"
-                                                  IsEnabled="{Binding IsTaskActive}"/>
-                                        <Button Name="DelareBt"
+                                                  Tag="{Binding}"  
+                                                  Click="TaskUserCheckBox_Click"
+                                            IsEnabled="{Binding IsTaskActive}"/>
+                                            <Button Name="DelareBt"
                                                 Content="🗑"
                                                 HorizontalAlignment="Left"
                                                 FontSize="15"

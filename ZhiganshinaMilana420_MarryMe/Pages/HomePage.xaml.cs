@@ -220,15 +220,15 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
             }
         }
 
-        private void TaskUserChb_CheckedChanged(object sender, RoutedEventArgs e)
+        private void TaskUserCheckBox_Click(object sender, RoutedEventArgs e)
         {
-            var checkBox = (CheckBox)sender;
-            var task = (TaskUsers)checkBox.DataContext;
+            if (!(sender is CheckBox checkBox)) return;
+            if (!(checkBox.Tag is TaskUsers task)) return;
 
             // Проверяем, что дата выполнения задачи еще не прошла
             if (task.DateEnd < DateTime.Today)
             {
-                // Возвращаем чекбокс в исходное состояние
+                // Отменяем изменение состояния
                 checkBox.IsChecked = !checkBox.IsChecked;
 
                 MessageBox.Show("Нельзя отмечать выполнение задач с прошедшей датой.",
@@ -237,8 +237,27 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
                               MessageBoxImage.Warning);
                 return;
             }
-        }
 
+            try
+            {
+                // Обновляем поле Done в базе данных
+                task.Done = checkBox.IsChecked ?? false;
+                DbConnection.MarryMe.SaveChanges();
+
+                // Опционально: обновляем список, если нужно
+                RefreshTaskList();
+            }
+            catch (Exception ex)
+            {
+                // В случае ошибки возвращаем состояние CheckBox
+                checkBox.IsChecked = !checkBox.IsChecked;
+
+                MessageBox.Show($"Ошибка при обновлении задачи: {ex.Message}",
+                              "Ошибка",
+                              MessageBoxButton.OK,
+                              MessageBoxImage.Error);
+            }
+        }
         private void AddEmployyeBt_Click(object sender, RoutedEventArgs e)
         {
             AddEmployeeWindow addEmployeeWindow = new AddEmployeeWindow();
