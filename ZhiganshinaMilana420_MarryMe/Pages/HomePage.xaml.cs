@@ -41,7 +41,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
             contextUsers = users;
 
             DateTime today = DateTime.Today;
-            CoupleLV.ItemsSource = DbConnection.MarryMe.Couple.ToList();
+            CoupleLV.ItemsSource = DbConnection.MarryMe.Couple.Where(c => c.WeddingStatusId == 1).ToList();
             statuses = DbConnection.MarryMe.WeddingStatus.ToList();
             gromms = DbConnection.MarryMe.Gromm.ToList();
 
@@ -59,6 +59,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
             if (users.RoleId == 2)
             {
                 AddClientBtt.Visibility = Visibility.Visible;
+
             }
             else
             {
@@ -164,10 +165,11 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
         public void Refresh()
         {
             couples = DbConnection.MarryMe.Couple
-                    .Include(c => c.Gromm)
-                    .Include(c => c.Bride)
-                    .Include(c => c.WeddingStatus)
-                    .ToList();
+                       .Include(c => c.Gromm)
+                       .Include(c => c.Bride)
+                       .Include(c => c.WeddingStatus)
+                       .Where(c => c.WeddingStatusId == 1) // Добавляем условие фильтрации
+                       .ToList();
             //couples = DbConnection.MarryMe.Couple?.ToList() ?? new List<Couple>();
             //gromms = DbConnection.MarryMe.Gromm?.ToList() ?? new List<Gromm>();
             //brides = DbConnection.MarryMe.Bride?.ToList() ?? new List<Bride>();

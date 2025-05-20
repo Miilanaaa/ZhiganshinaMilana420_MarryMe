@@ -25,6 +25,23 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
         public AddClientPage()
         {
             InitializeComponent();
+            DateDp.SelectedDateChanged += DateDp_SelectedDateChanged;
+        }
+        private void DateDp_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (DateDp.SelectedDate.HasValue)
+            {
+                DateTime minWeddingDate = DateTime.Today.AddMonths(1);
+                if (DateDp.SelectedDate.Value < minWeddingDate)
+                {
+                    ApplyErrorStyle(DateDp);
+                    DateDp.ToolTip = $"Дата свадьбы должна быть не ранее {minWeddingDate:dd.MM.yyyy}";
+                }
+                else
+                {
+                    ClearErrorStyle(DateDp);
+                }
+            }
         }
         private void ApplyErrorStyle(Control control)
         {
@@ -72,8 +89,26 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
                 }
                 else if (field is System.Windows.Controls.DatePicker datePicker && datePicker.SelectedDate == null)
                 {
-                    ApplyErrorStyle(field);
-                    isValid = false;
+                    if (datePicker.SelectedDate == null)
+                    {
+                        ApplyErrorStyle(field);
+                        isValid = false;
+                    }
+                    else if (datePicker == DateDp)
+                    {
+                        // Проверка что дата свадьбы не менее чем через месяц
+                        DateTime minWeddingDate = DateTime.Today.AddMonths(1);
+                        if (datePicker.SelectedDate.Value < minWeddingDate)
+                        {
+                            ApplyErrorStyle(field);
+                            field.ToolTip = $"Дата свадьбы должна быть не ранее {minWeddingDate:dd.MM.yyyy}";
+                            isValid = false;
+                        }
+                        else
+                        {
+                            ClearErrorStyle(field);
+                        }
+                    }
                 }
                 else
                 {

@@ -241,7 +241,7 @@
                                                   Style="{StaticResource MaterialDesignActionToggleButton}"
                                                   Tag="{Binding}"  
                                                   Click="TaskUserCheckBox_Click"
-                                            IsEnabled="{Binding IsTaskActive}"/>
+                                                  IsEnabled="{Binding IsTaskActive}"/>
                                             <Button Name="DelareBt"
                                                 Content="🗑"
                                                 HorizontalAlignment="Left"

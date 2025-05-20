@@ -45,8 +45,10 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
             public int Number { get; set; }
             public string Category { get; set; }
             public string Id { get; set; }
+            public int Price { get; set; }
             public string Date { get; set; }
             public Visibility CancelButtonVisibility { get; set; }
+            public Visibility AdminButtonsVisibility { get; set; }
         }
 
         public static Gromm Grooms { get; set; } = new Gromm();
@@ -71,14 +73,31 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
 
                 NameGroomTb.Text = groom != null ? $"{groom.Surname} {groom.Name} {groom.Patronymic}" : "Имя не указано";
                 NameBrideTb.Text = bride != null ? $"{bride.Surname} {bride.Name} {bride.Patronymic}" : "Имя не указано";
+                WeddingBudgetTb.Text = couple != null ? $"{couple.WeddingBudget} руб." : "Бюджет не указан";
+                NumberGuestsTb.Text = couple != null ? $"{couple.NumberGuests}" : "Количество не указано";
+                WeddingDateTb.Text = couple != null && couple.WeddingDate.HasValue ?
+                                     couple.WeddingDate.Value.ToString("dd.MM.yyyy") :
+                                      "Дата не указана";
 
                 LoadFavoriteItems();
             }
             catch (Exception ex)
             {                   
                 MessageBox.Show($"Ошибка загрузки данных: {ex.Message}");
-            }                   
 
+            }
+
+            if (UserInfo.User.RoleId == 2)
+            {
+                SeatingNavigateBt.Visibility = Visibility.Visible;
+                GenerateContractBt.Visibility = Visibility.Visible;
+
+            }
+            else
+            {
+                SeatingNavigateBt.Visibility = Visibility.Hidden;
+                GenerateContractBt.Visibility = Visibility.Hidden;
+            }
             this.DataContext = this;
         }
         private void SelectCategory_Click(object sender, RoutedEventArgs e)
@@ -134,9 +153,14 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
         {
             try
             {
+
+                bool isAdmin = UserInfo.User?.RoleId == 2; // Проверяем роль пользователя
+                var adminButtonsVisibility = isAdmin ? Visibility.Visible : Visibility.Collapsed;
+
                 CoupleFavorites = DbConnection.MarryMe.CoupleFavorites
                     .FirstOrDefault(c => c.CoupleId == contextCouple.Id) ?? new CoupleFavorites();
 
+                // Ресторан
                 var restaurant = DbConnection.MarryMe.Restaurant
                     .FirstOrDefault(r => r.Id == CoupleFavorites.RestaurantId);
                 var restaurantBooking = DbConnection.MarryMe.RestaurantBookingDates
@@ -144,36 +168,51 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
                                b.RestaurantId == CoupleFavorites.RestaurantId &&
                                b.Status == true);
                 string restaurantDate = "Не забронирован";
+                int restaurantPrice = 0;
+                int restaurantMenuPrice = 0;
+                int restaurantFinalPrice = 0;
                 if (restaurantBooking != null)
                 {
                     restaurantDate = restaurantBooking.BookingDate.ToString("dd.MM.yyyy");
+                    restaurantPrice = restaurant != null ? (int)restaurant.Price : 0;
+                    restaurantMenuPrice = restaurantBooking != null ? (int)restaurantBooking.MenuPrice : 0;
+                    restaurantFinalPrice = restaurantPrice + (restaurantMenuPrice * (contextCouple.NumberGuests ?? 0));
                 }
 
+                // Декорации
                 var decoration = DbConnection.MarryMe.Decoration
                     .FirstOrDefault(r => r.Id == CoupleFavorites.DecorationId);
                 string decorationBooking = "Не забронирован";
+                int decorationPrice = 0;
                 if (CoupleFavorites.DecorationId != null)
                 {
                     decorationBooking = "Выбрано";
+                    decorationPrice = decoration != null ? (int)decoration.Price : 0;
                 }
 
-
+                // Свадебное платье
                 var dress = DbConnection.MarryMe.Dress
                     .FirstOrDefault(d => d.Id == CoupleFavorites.DressBriedId);
                 string dressBooking = "Не забронирован";
+                int dressPrice = 0;
                 if (CoupleFavorites.DressBriedId != null)
                 {
                     dressBooking = "Выбрано";
+                    dressPrice = dress != null ? (int)dress.Price : 0;
                 }
 
+                // Смокинг
                 var clothingGromm = DbConnection.MarryMe.Clothing
                     .FirstOrDefault(c => c.Id == CoupleFavorites.ClothingGrommId);
                 string clothingBooking = "Не забронирован";
+                int clothingPrice = 0;
                 if (CoupleFavorites.ClothingGrommId != null)
                 {
                     clothingBooking = "Выбрано";
+                    clothingPrice = clothingGromm != null ? (int)clothingGromm.Price : 0;
                 }
 
+                // Ведущий
                 var host = DbConnection.MarryMe.Host
                     .FirstOrDefault(h => h.Id == CoupleFavorites.HostId);
                 var hostBooking = DbConnection.MarryMe.HostBookingDates
@@ -181,11 +220,14 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
                                b.HostId == CoupleFavorites.HostId &&
                                b.Status == true);
                 string hostDate = "Не забронирован";
+                int hostPrice = 0;
                 if (hostBooking != null)
                 {
                     hostDate = hostBooking.BookingDate.ToString("dd.MM.yyyy");
+                    hostPrice = host != null ? (int)host.Price : 0;
                 }
 
+                // Фото и видео
                 var PhotographerVideographer = DbConnection.MarryMe.PhotographerVideographer
                     .FirstOrDefault(p => p.Id == CoupleFavorites.PhotographerVideographerId);
                 var PhotographerVideographerBooking = DbConnection.MarryMe.PhotographerVideographerBookingDates
@@ -193,19 +235,25 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
                                b.PhotographerVideographerId == CoupleFavorites.PhotographerVideographerId &&
                                b.Status == true);
                 string PhotographerVideographerDate = "Не забронирован";
+                int photographerPrice = 0;
                 if (PhotographerVideographerBooking != null)
                 {
                     PhotographerVideographerDate = PhotographerVideographerBooking.BookingDate.ToString("dd.MM.yyyy");
+                    photographerPrice = PhotographerVideographer != null ? (int)PhotographerVideographer.Price : 0;
                 }
 
+                // Букет невесты
                 var Bouquet = DbConnection.MarryMe.Bouquet
                     .FirstOrDefault(b => b.Id == CoupleFavorites.BouquetId);
                 string BouquetBooking = "Не забронирован";
+                int bouquetPrice = 0;
                 if (CoupleFavorites.BouquetId != null)
                 {
                     BouquetBooking = "Выбрано";
+                    bouquetPrice = Bouquet != null ? (int)Bouquet.Price : 0;
                 }
 
+                // Стилист
                 var Stylist = DbConnection.MarryMe.Stylist
                     .FirstOrDefault(s => s.Id == CoupleFavorites.StylistId);
                 var StylistBooking = DbConnection.MarryMe.StylistBookingDates
@@ -213,11 +261,14 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
                                b.StylistId == CoupleFavorites.StylistId &&
                                b.Status == true);
                 string StylistDate = "Не забронирован";
+                int stylistPrice = 0;
                 if (StylistBooking != null)
                 {
                     StylistDate = StylistBooking.BookingDate.ToString("dd.MM.yyyy");
+                    stylistPrice = Stylist != null ? (int)Stylist.Price : 0;
                 }
 
+                // Музыкальная группа
                 var Musician = DbConnection.MarryMe.Musician
                     .FirstOrDefault(m => m.Id == CoupleFavorites.MusicianId);
                 var MusicianBooking = DbConnection.MarryMe.MusicianBookingDates
@@ -225,11 +276,14 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
                                b.MusicianId == CoupleFavorites.MusicianId &&
                                b.Status == true);
                 string MusicianDate = "Не забронирован";
+                int musicianPrice = 0;
                 if (MusicianBooking != null)
                 {
                     MusicianDate = MusicianBooking.BookingDate.ToString("dd.MM.yyyy");
+                    musicianPrice = Musician != null ? (int)Musician.Price : 0;
                 }
 
+                // Трансфер
                 var Transfer = DbConnection.MarryMe.Transfer
                     .FirstOrDefault(t => t.Id == CoupleFavorites.TransferId);
                 var TransferBooking = DbConnection.MarryMe.TransferBookingDates
@@ -237,139 +291,174 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
                                b.TransferId == CoupleFavorites.TransferId &&
                                b.Status == true);
                 string TransferDate = "Не забронирован";
+                int transferPrice = 0;
                 if (TransferBooking != null)
                 {
                     TransferDate = TransferBooking.BookingDate.ToString("dd.MM.yyyy");
+                    transferPrice = Transfer != null ? (int)Transfer.Price : 0;
                 }
 
+                // Торт
                 var Cake = DbConnection.MarryMe.Cake
                     .FirstOrDefault(c => c.Id == CoupleFavorites.CakeId);
                 string CakeBooking = "Не забронирован";
+                int cakePrice = 0;
                 if (CoupleFavorites.CakeId != null)
                 {
                     CakeBooking = "Выбрано";
+                    cakePrice = Cake != null ? (int)Cake.Price : 0;
                 }
 
+                // Ювелирные украшения
                 var Accessory = DbConnection.MarryMe.Accessory
                     .FirstOrDefault(c => c.Id == CoupleFavorites.AccessoryId);
                 string AccessoryBooking = "Не забронирован";
+                int accessoryPrice = 0;
                 if (CoupleFavorites.AccessoryId != null)
                 {
                     AccessoryBooking = "Выбрано";
+                    accessoryPrice = Accessory != null ? (int)Accessory.Price : 0;
                 }
 
                 var items = new List<CategoryItem>
                 {
-                new CategoryItem
-                {
-                    Number = 1,
-                    Category = "Ресторан",
-                    Id = restaurant != null ? restaurant.Name : "Не выбран",
-                    Date = restaurantDate,
-                    CancelButtonVisibility = (restaurant != null || restaurantBooking != null) ?
-                        Visibility.Visible : Visibility.Collapsed
-                },
-                new CategoryItem
-                {
-                    Number = 2,
-                    Category = "Декорации",
-                    Id = decoration != null ? decoration.Name : "Не выбран",
-                    Date = decorationBooking,
-                    CancelButtonVisibility = decoration != null ?
-                        Visibility.Visible : Visibility.Collapsed
-                },
-                new CategoryItem
-                {
-                    Number = 3,
-                    Category = "Свадебное платье",
-                    Id = dress != null ? dress.Name : "Не выбран",
-                    Date = dressBooking,
-                    CancelButtonVisibility = dress != null ?
-                        Visibility.Visible : Visibility.Collapsed
-                },
-                new CategoryItem
-                {
-                    Number = 4,
-                    Category = "Смокинг",
-                    Id = clothingGromm != null ? clothingGromm.Name : "Не выбран",
-                    Date = clothingBooking,
-                    CancelButtonVisibility = clothingGromm != null ?
-                        Visibility.Visible : Visibility.Collapsed
-                },
-                new CategoryItem
-                {
-                    Number = 5,
-                    Category = "Ведущий",
-                    Id = host != null ? host.Surname + " " + host.Name + " " + host.Patronymic : "Не выбран",
-                    Date = hostDate,
-                    CancelButtonVisibility = (host != null || hostBooking != null) ?
-                        Visibility.Visible : Visibility.Collapsed
-                },
-                new CategoryItem
-                {
-                    Number = 6,
-                    Category = "Фото и видео",
-                    Id = PhotographerVideographer != null ? PhotographerVideographer.TeamName : "Не выбран",
-                    Date = PhotographerVideographerDate,
-                    CancelButtonVisibility = (PhotographerVideographer != null || PhotographerVideographerBooking != null) ?
-                        Visibility.Visible : Visibility.Collapsed
-                },
-                new CategoryItem
-                {
-                    Number = 7,
-                    Category = "Букет невесты",
-                    Id = Bouquet != null ? Bouquet.Name : "Не выбран",
-                    Date = BouquetBooking,
-                    CancelButtonVisibility = Bouquet != null ?
-                        Visibility.Visible : Visibility.Collapsed
-                },
-                new CategoryItem
-                {
-                    Number = 8,
-                    Category = "Стилист",
-                    Id = Stylist != null ? Stylist.TeamName : "Не выбран",
-                    Date = StylistDate,
-                    CancelButtonVisibility = (Stylist != null || StylistBooking != null) ?
-                        Visibility.Visible : Visibility.Collapsed
-                },
-                new CategoryItem
-                {
-                    Number = 9,
-                    Category = "Музыкальная группа",
-                    Id = Musician != null ? Musician.TeamName : "Не выбран",
-                    Date = MusicianDate,
-                    CancelButtonVisibility = (Musician != null || MusicianBooking != null) ?
-                        Visibility.Visible : Visibility.Collapsed
-                },
-                new CategoryItem
-                {
-                    Number = 10,
-                    Category = "Трансфер",
-                    Id = Transfer != null ? Transfer.Name : "Не выбран",
-                    Date = TransferDate,
-                    CancelButtonVisibility = (Transfer != null || TransferBooking != null) ?
-                        Visibility.Visible : Visibility.Collapsed
-                },
-                new CategoryItem
-                {
-                    Number = 11,
-                    Category = "Торт",
-                    Id = Cake != null ? Cake.Name : "Не выбран",
-                    Date = CakeBooking,
-                    CancelButtonVisibility = Cake != null ?
-                        Visibility.Visible : Visibility.Collapsed
-                },
-                new CategoryItem
-                {
-                    Number = 12,
-                    Category = "Ювелирные украшения",
-                    Id = Accessory != null ? Accessory.Name : "Не выбран",
-                    Date = AccessoryBooking,
-                    CancelButtonVisibility = Accessory != null ?
-                        Visibility.Visible : Visibility.Collapsed
-                },
+                    new CategoryItem
+                    {
+                        Number = 1,
+                        Category = "Ресторан",
+                        Id = restaurant != null ? restaurant.Name : "Не выбран",
+                        Price = restaurantFinalPrice,
+                        Date = restaurantDate,
+                        CancelButtonVisibility = (restaurant != null || restaurantBooking != null) ?
+                            Visibility.Visible : Visibility.Collapsed,
+                        AdminButtonsVisibility = adminButtonsVisibility
+                    },
+                    new CategoryItem
+                    {
+                        Number = 2,
+                        Category = "Декорации",
+                        Id = decoration != null ? decoration.Name : "Не выбран",
+                        Price = decorationPrice,
+                        Date = decorationBooking,
+                        CancelButtonVisibility = decoration != null ?
+                            Visibility.Visible : Visibility.Collapsed,
+                        AdminButtonsVisibility = adminButtonsVisibility
+                    },
+                    new CategoryItem
+                    {
+                        Number = 3,
+                        Category = "Свадебное платье",
+                        Id = dress != null ? dress.Name : "Не выбран",
+                        Price = dressPrice,
+                        Date = dressBooking,
+                        CancelButtonVisibility = dress != null ?
+                            Visibility.Visible : Visibility.Collapsed,
+                        AdminButtonsVisibility = adminButtonsVisibility
+                    },
+                    new CategoryItem
+                    {
+                        Number = 4,
+                        Category = "Смокинг",
+                        Id = clothingGromm != null ? clothingGromm.Name : "Не выбран",
+                        Price = clothingPrice,
+                        Date = clothingBooking,
+                        CancelButtonVisibility = clothingGromm != null ?
+                            Visibility.Visible : Visibility.Collapsed,
+                        AdminButtonsVisibility = adminButtonsVisibility
+                    },
+                    new CategoryItem
+                    {
+                        Number = 5,
+                        Category = "Ведущий",
+                        Id = host != null ? host.Surname + " " + host.Name + " " + host.Patronymic : "Не выбран",
+                        Price = hostPrice,
+                        Date = hostDate,
+                        CancelButtonVisibility = (host != null || hostBooking != null) ?
+                            Visibility.Visible : Visibility.Collapsed,
+                        AdminButtonsVisibility = adminButtonsVisibility
+                    },
+                    new CategoryItem
+                    {
+                        Number = 6,
+                        Category = "Фото и видео",
+                        Id = PhotographerVideographer != null ? PhotographerVideographer.TeamName : "Не выбран",
+                        Price = photographerPrice,
+                        Date = PhotographerVideographerDate,
+                        CancelButtonVisibility = (PhotographerVideographer != null || PhotographerVideographerBooking != null) ?
+                            Visibility.Visible : Visibility.Collapsed,
+                        AdminButtonsVisibility = adminButtonsVisibility
+                    },
+                    new CategoryItem
+                    {
+                        Number = 7,
+                        Category = "Букет невесты",
+                        Id = Bouquet != null ? Bouquet.Name : "Не выбран",
+                        Price = bouquetPrice,
+                        Date = BouquetBooking,
+                        CancelButtonVisibility = Bouquet != null ?
+                            Visibility.Visible : Visibility.Collapsed,
+                        AdminButtonsVisibility = adminButtonsVisibility
+                    },
+                    new CategoryItem
+                    {
+                        Number = 8,
+                        Category = "Стилист",
+                        Id = Stylist != null ? Stylist.TeamName : "Не выбран",
+                        Price = stylistPrice,
+                        Date = StylistDate,
+                        CancelButtonVisibility = (Stylist != null || StylistBooking != null) ?
+                            Visibility.Visible : Visibility.Collapsed,
+                        AdminButtonsVisibility = adminButtonsVisibility
+                    },
+                    new CategoryItem
+                    {
+                        Number = 9,
+                        Category = "Музыкальная группа",
+                        Id = Musician != null ? Musician.TeamName : "Не выбран",
+                        Price = musicianPrice,
+                        Date = MusicianDate,
+                        CancelButtonVisibility = (Musician != null || MusicianBooking != null) ?
+                            Visibility.Visible : Visibility.Collapsed,
+                        AdminButtonsVisibility = adminButtonsVisibility
+                    },
+                    new CategoryItem
+                    {
+                        Number = 10,
+                        Category = "Трансфер",
+                        Id = Transfer != null ? Transfer.Name : "Не выбран",
+                        Price = transferPrice,
+                        Date = TransferDate,
+                        CancelButtonVisibility = (Transfer != null || TransferBooking != null) ?
+                            Visibility.Visible : Visibility.Collapsed,
+                        AdminButtonsVisibility = adminButtonsVisibility
+                    },
+                    new CategoryItem
+                    {
+                        Number = 11,
+                        Category = "Торт",
+                        Id = Cake != null ? Cake.Name : "Не выбран",
+                        Price = cakePrice,
+                        Date = CakeBooking,
+                        CancelButtonVisibility = Cake != null ?
+                            Visibility.Visible : Visibility.Collapsed,
+                        AdminButtonsVisibility = adminButtonsVisibility
+                    },
+                    new CategoryItem
+                    {
+                        Number = 12,
+                        Category = "Ювелирные украшения",
+                        Id = Accessory != null ? Accessory.Name : "Не выбран",
+                        Price = accessoryPrice,
+                        Date = AccessoryBooking,
+                        CancelButtonVisibility = Accessory != null ?
+                            Visibility.Visible : Visibility.Collapsed,
+                        AdminButtonsVisibility = adminButtonsVisibility
+                    },
                 };
+
                 FavoritClientLv.ItemsSource = items;
+                int totalPrice = items.Sum(item => item.Price);
+                FinalPriceTb.Text = totalPrice.ToString("N0") + " руб.";
             }
             catch (Exception ex)
             {
@@ -412,6 +501,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
                                     // Обновляем данные в ListView
                                     itemToUpdate.Id = "Не выбран";
                                     itemToUpdate.Date = "Не забронирован";
+                                    itemToUpdate.Price = 0;
                                     itemToUpdate.CancelButtonVisibility = Visibility.Collapsed;
                                 }
                                 break;
@@ -422,6 +512,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
                                     CoupleFavorites.DecorationId = null;
                                     itemToUpdate.Id = "Не выбран";
                                     itemToUpdate.Date = "Не забронирован";
+                                    itemToUpdate.Price = 0;
                                     itemToUpdate.CancelButtonVisibility = Visibility.Collapsed;
                                 }
                                 break;
@@ -432,6 +523,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
                                     CoupleFavorites.DressBriedId = null;
                                     itemToUpdate.Id = "Не выбран";
                                     itemToUpdate.Date = "Не забронирован";
+                                    itemToUpdate.Price = 0;
                                     itemToUpdate.CancelButtonVisibility = Visibility.Collapsed;
                                 }
                                 break;
@@ -442,6 +534,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
                                     CoupleFavorites.ClothingGrommId = null;
                                     itemToUpdate.Id = "Не выбран";
                                     itemToUpdate.Date = "Не забронирован";
+                                    itemToUpdate.Price = 0;
                                     itemToUpdate.CancelButtonVisibility = Visibility.Collapsed;
                                 }
                                 break;
@@ -458,6 +551,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
                                     CoupleFavorites.HostId = null;
                                     itemToUpdate.Id = "Не выбран";
                                     itemToUpdate.Date = "Не забронирован";
+                                    itemToUpdate.Price = 0;
                                     itemToUpdate.CancelButtonVisibility = Visibility.Collapsed;
                                 }
                                 break;
@@ -474,6 +568,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
                                     CoupleFavorites.PhotographerVideographerId = null;
                                     itemToUpdate.Id = "Не выбран";
                                     itemToUpdate.Date = "Не забронирован";
+                                    itemToUpdate.Price = 0;
                                     itemToUpdate.CancelButtonVisibility = Visibility.Collapsed;
                                 }
                                 break;
@@ -484,6 +579,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
                                     CoupleFavorites.BouquetId = null;
                                     itemToUpdate.Id = "Не выбран";
                                     itemToUpdate.Date = "Не забронирован";
+                                    itemToUpdate.Price = 0;
                                     itemToUpdate.CancelButtonVisibility = Visibility.Collapsed;
                                 }
                                 break;
@@ -500,6 +596,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
                                     CoupleFavorites.StylistId = null;
                                     itemToUpdate.Id = "Не выбран";
                                     itemToUpdate.Date = "Не забронирован";
+                                    itemToUpdate.Price = 0;
                                     itemToUpdate.CancelButtonVisibility = Visibility.Collapsed;
                                 }
                                 break;
@@ -516,6 +613,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
                                     CoupleFavorites.MusicianId = null;
                                     itemToUpdate.Id = "Не выбран";
                                     itemToUpdate.Date = "Не забронирован";
+                                    itemToUpdate.Price = 0;
                                     itemToUpdate.CancelButtonVisibility = Visibility.Collapsed;
                                 }
                                 break;
@@ -532,6 +630,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
                                     CoupleFavorites.TransferId = null;
                                     itemToUpdate.Id = "Не выбран";
                                     itemToUpdate.Date = "Не забронирован";
+                                    itemToUpdate.Price = 0;
                                     itemToUpdate.CancelButtonVisibility = Visibility.Collapsed;
                                 }
                                 break;
@@ -542,6 +641,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
                                     CoupleFavorites.CakeId = null;
                                     itemToUpdate.Id = "Не выбран";
                                     itemToUpdate.Date = "Не забронирован";
+                                    itemToUpdate.Price = 0;
                                     itemToUpdate.CancelButtonVisibility = Visibility.Collapsed;
                                 }
                                 break;
@@ -552,6 +652,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
                                     CoupleFavorites.AccessoryId = null;
                                     itemToUpdate.Id = "Не выбран";
                                     itemToUpdate.Date = "Не забронирован";
+                                    itemToUpdate.Price = 0;
                                     itemToUpdate.CancelButtonVisibility = Visibility.Collapsed;
                                 }
                                 break;
@@ -562,6 +663,8 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
 
                         // Обновляем отображение ListView
                         FavoritClientLv.Items.Refresh();
+                        int totalPrice = items.Sum(item => item.Price);
+                        FinalPriceTb.Text = totalPrice.ToString("N0") + " руб.";
 
                         MessageBox.Show("Выбор успешно отменен", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
