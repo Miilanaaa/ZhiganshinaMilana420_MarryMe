@@ -744,6 +744,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
                 var document = wordApp.Documents.Open(templatePath);
                 var groom = DbConnection.MarryMe.Gromm.FirstOrDefault(g => g.Id == contextCouple.GroomId);
                 var bried = DbConnection.MarryMe.Bride.FirstOrDefault(g => g.Id == contextCouple.BrideId);
+                var prise = FinalPriceTb.Text;
 
                 // Форматируем ФИО для подписи
                 string groomSignatureName = groom != null
@@ -787,6 +788,20 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
                 FillField(document, "фио_подписи_жениха", groomSignatureName);
                 FillField(document, "фио_подписи_невесты", briedSignatureName);
 
+                FillField(document, "фио_подписи_жениха", groomSignatureName);
+                FillField(document, "фио_подписи_невесты", briedSignatureName);
+
+                FillField(document, "итого_сумма", FinalPriceTb.Text);
+                FillField(document, "итоговая_сумма_договора", FinalPriceTb.Text);
+                if (decimal.TryParse(FinalPriceTb.Text, out decimal totalPrice))
+                {
+                    decimal advanceAmount = totalPrice * 0.5m; // Вычисляем 50% от суммы
+                    FillField(document, "аванс_договора", advanceAmount.ToString("N2")); // Форматируем с 2 знаками после запятой
+                }
+                else
+                {
+                    FillField(document, "аванс_договора", "0,00"); // Значение по умолчанию при ошибке
+                }
 
                 // Заполняем таблицу
                 if (document.Tables.Count > 0)
@@ -799,6 +814,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
                         {
                             var row = table.Rows[item.Number + 1];
                             row.Cells[3].Range.Text = item.Id ?? ""; // Название
+                            row.Cells[4].Range.Text = Convert.ToString(item.Price);
                             row.Cells[5].Range.Text = item.Date ?? ""; // Дата
                         }
                     }

@@ -35,6 +35,17 @@ namespace ZhiganshinaMilana420_MarryMe.Windows
             this.DataContext = this;
             InitializePasswordVisibilityControls();
         }
+        private bool IsAdult(DateTime birthDate)
+        {
+            var today = DateTime.Today;
+            var age = today.Year - birthDate.Year;
+
+            // Проверяем, был ли уже день рождения в этом году
+            if (birthDate.Date > today.AddYears(-age))
+                age--;
+
+            return age >= 18;
+        }
 
         private void InitializePasswordVisibilityControls()
         {
@@ -108,6 +119,19 @@ namespace ZhiganshinaMilana420_MarryMe.Windows
                 ClearErrorStyle(GenderMen);
                 ClearErrorStyle(GenderGirl);
             }
+            if (BirthDateDp.SelectedDate != null)
+            {
+                if (!IsAdult(BirthDateDp.SelectedDate.Value))
+                {
+                    ApplyErrorStyle(BirthDateDp);
+                    BirthDateDp.ToolTip = "Сотрудник должен быть совершеннолетним (18+ лет)";
+                    isValid = false;
+                }
+                else
+                {
+                    ClearErrorStyle(BirthDateDp);
+                }
+            }
 
             return isValid;
         }
@@ -156,29 +180,35 @@ namespace ZhiganshinaMilana420_MarryMe.Windows
 
             try
             {
-                Users newEmployee = new Users
+                var userinfo = DbConnection.MarryMe.Users.Where(i => i.Login == LoginTb.Text).FirstOrDefault();
+                if (userinfo == null)
                 {
-                    Surname = SurnameTb.Text,
-                    Name = NameTb.Text,
-                    Patronymic = PatronymicTb.Text,
-                    RoleId = (RoleCb.SelectedItem as Role)?.Id ?? 0,
-                    Email = EmailTb.Text,
-                    IdGender = GenderMen.IsChecked.GetValueOrDefault() ? 1 : 2,
-                    Salary = int.Parse(SalaryTb.Text),
-                    BirthDate = BirthDateDp.SelectedDate.Value,
-                    Dismissed = false,
-                    Login = LoginTb.Text,
-                    Password = isPasswordVisible ? visiblePasswordTextBox.Text : PasswordTb.Password
-                };
+                    Users newEmployee = new Users();
+                    newEmployee.Surname = SurnameTb.Text;
+                    newEmployee.Name = NameTb.Text;
+                    newEmployee.Patronymic = PatronymicTb.Text;
+                    newEmployee.RoleId = (RoleCb.SelectedItem as Role)?.Id ?? 0;
+                    newEmployee.Email = EmailTb.Text;
+                    newEmployee.IdGender = GenderMen.IsChecked.GetValueOrDefault() ? 1 : 2;
+                    newEmployee.Salary = int.Parse(SalaryTb.Text);
+                    newEmployee.BirthDate = BirthDateDp.SelectedDate.Value;
+                    newEmployee.Dismissed = false;
+                    newEmployee.Login = LoginTb.Text;
+                    newEmployee.Password = isPasswordVisible ? visiblePasswordTextBox.Text : PasswordTb.Password;
 
-                DbConnection.MarryMe.Users.Add(newEmployee);
-                DbConnection.MarryMe.SaveChanges();
+                    DbConnection.MarryMe.Users.Add(newEmployee);
+                    DbConnection.MarryMe.SaveChanges();
 
-                GenerateEmploymentOrder(newEmployee);
+                    GenerateEmploymentOrder(newEmployee);
 
-                //MessageBox.Show("Сотрудник успешно добавлен!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-                EmployeeAdded?.Invoke();
-                this.Close();
+                    //MessageBox.Show("Сотрудник успешно добавлен!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                    EmployeeAdded?.Invoke();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Пользователь под таким логином существует, введите другой логин!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             catch (Exception ex)
             {

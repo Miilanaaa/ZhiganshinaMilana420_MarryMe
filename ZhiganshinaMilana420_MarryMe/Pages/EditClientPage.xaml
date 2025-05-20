@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ZhiganshinaMilana420_MarryMe.Pages"
       mc:Ignorable="d" 
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
       d:DesignHeight="750" d:DesignWidth="1445"
       Title="EditClientPage">
     <Grid Background="#EEEFEA">
@@ -280,7 +281,8 @@
                 <DatePicker x:Name="DateDp"
                             Margin="50 10 0 0"
                             Width="250"
-                            Height="35"/>
+                            Height="35"
+                            DisplayDateStart="{x:Static sys:DateTime.Today}"/>
                 <TextBlock Text="Бюджет свадьбы"
                            FontSize="20"
                            HorizontalAlignment="Left"

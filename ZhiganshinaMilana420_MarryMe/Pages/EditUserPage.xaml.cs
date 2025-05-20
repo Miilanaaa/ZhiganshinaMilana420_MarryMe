@@ -264,30 +264,38 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
 
             try
             {
-                // Обновление основных данных
-                contextUser.Surname = SurnameTb.Text;
-                contextUser.Name = NameTb.Text;
-                contextUser.Patronymic = PatronymicTb.Text;
-                contextUser.Login = LoginTb.Text;
-                contextUser.Password = isPasswordVisible ? visiblePasswordTextBox.Text : PasswordTb.Password;
-                contextUser.Email = EmailTb.Text;
-
-                // Обновление дат и финансов
-                contextUser.BirthDate = BirthDateDp.SelectedDate.Value;
-
-                // Обновление роли и пола
-                
-                contextUser.IdGender = GenderMen.IsChecked.GetValueOrDefault() ? 1 : 2;
-
-                // Обновление фото
-                if (photoBytes != null)
+                var userinfo = DbConnection.MarryMe.Users.Where(i => i.Login == LoginTb.Text).FirstOrDefault();
+                if(userinfo == null)
                 {
-                    contextUser.Photo = photoBytes;
-                }
+                    // Обновление основных данных
+                    contextUser.Surname = SurnameTb.Text;
+                    contextUser.Name = NameTb.Text;
+                    contextUser.Patronymic = PatronymicTb.Text;
+                    contextUser.Login = LoginTb.Text;
+                    contextUser.Password = isPasswordVisible ? visiblePasswordTextBox.Text : PasswordTb.Password;
+                    contextUser.Email = EmailTb.Text;
 
-                DbConnection.MarryMe.SaveChanges();
-                MessageBox.Show("Данные успешно сохранены!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-                NavigationService.Navigate(new MenuPage(UserInfo.User));
+                    // Обновление дат и финансов
+                    contextUser.BirthDate = BirthDateDp.SelectedDate.Value;
+
+                    // Обновление роли и пола
+
+                    contextUser.IdGender = GenderMen.IsChecked.GetValueOrDefault() ? 1 : 2;
+
+                    // Обновление фото
+                    if (photoBytes != null)
+                    {
+                        contextUser.Photo = photoBytes;
+                    }
+
+                    DbConnection.MarryMe.SaveChanges();
+                    MessageBox.Show("Данные успешно сохранены!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                    NavigationService.Navigate(new MenuPage(UserInfo.User));
+                }
+                else
+                {
+                    MessageBox.Show("Пользователь под таким логином существует, введите другой логин!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             catch (Exception ex)
             {

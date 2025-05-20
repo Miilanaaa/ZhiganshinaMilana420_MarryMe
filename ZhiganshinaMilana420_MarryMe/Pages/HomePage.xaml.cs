@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -21,15 +22,59 @@ using ZhiganshinaMilana420_MarryMe.DB;
 using ZhiganshinaMilana420_MarryMe.Windows;
 using Path = System.IO.Path;
 
+
+
 namespace ZhiganshinaMilana420_MarryMe.Pages
 {
+
     /// <summary>
     /// Логика взаимодействия для HomePage.xaml
     /// </summary>
+    /// 
+    public class TaskDateDecorator : Decorator
+    {
+        private static readonly HashSet<DateTime> _datesWithTasks = new HashSet<DateTime>();
+
+        public static void UpdateDatesWithTasks(IEnumerable<DateTime> dates)
+        {
+            _datesWithTasks.Clear();
+            foreach (var date in dates)
+            {
+                _datesWithTasks.Add(date.Date);
+            }
+        }
+
+        protected override void OnRender(DrawingContext drawingContext)
+        {
+            base.OnRender(drawingContext);
+
+            if (Parent is CalendarDayButton button && button.DataContext is DateTime date)
+            {
+                var hasTasks = _datesWithTasks.Contains(date.Date);
+                button.SetValue(HasTasksProperty, hasTasks);
+            }
+        }
+
+        public static readonly DependencyProperty HasTasksProperty =
+            DependencyProperty.RegisterAttached(
+                "HasTasks",
+                typeof(bool),
+                typeof(CalendarDayButton),
+                new PropertyMetadata(false));
+
+        public static bool GetHasTasks(CalendarDayButton button)
+        {
+            return (bool)button.GetValue(HasTasksProperty);
+        }
+
+        public static void SetHasTasks(CalendarDayButton button, bool value)
+        {
+            button.SetValue(HasTasksProperty, value);
+        }
+    }
     public partial class HomePage : Page
     {
         public static List<Users> admin { get; set; }
-        public static List<WeddingStatus> statuses { get;set; }
         public static List<Couple> couples { get; set; }
         public static List<Gromm> gromms { get; set; }
         public static List<Bride> brides { get; set; }
@@ -42,7 +87,6 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
 
             DateTime today = DateTime.Today;
             CoupleLV.ItemsSource = DbConnection.MarryMe.Couple.Where(c => c.WeddingStatusId == 1).ToList();
-            statuses = DbConnection.MarryMe.WeddingStatus.ToList();
             gromms = DbConnection.MarryMe.Gromm.ToList();
 
             taskUsers = DbConnection.MarryMe.TaskUsers
@@ -51,8 +95,6 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
             DateTaskDp.Text = today.ToString("dd.MM.yyyy");
 
             brides = new List<Bride>(DbConnection.MarryMe.Bride.ToList());
-            statuses.Insert(0, new WeddingStatus() { Name = "Нет" });
-            FilterCb.SelectedIndex = 0;
 
             this.DataContext = this;
 
@@ -65,7 +107,9 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
             {
                 AddClientBtt.Visibility = Visibility.Hidden;
             }
+            Loaded += (s, e) => UpdateEmptyTaskImageVisibility();
         }
+        
 
         private void DateTaskDp_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -75,8 +119,11 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
             }
             DateTime selectedDate = DateTaskDp.SelectedDate ?? DateTime.MinValue;
 
-            var filteredItems = DbConnection.MarryMe.TaskUsers.Where(i => i.DateEnd == selectedDate && i.UserId == contextUsers.Id).ToList();
+            var filteredItems = DbConnection.MarryMe.TaskUsers
+                .Where(i => i.DateEnd == selectedDate && i.UserId == contextUsers.Id).ToList();
             TaskUserLV.ItemsSource = filteredItems;
+
+            UpdateEmptyTaskImageVisibility();
         }
         private void SearchTb_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -176,14 +223,9 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
 
             string searchText = SearchTb?.Text?.Trim().ToLower() ?? "";
 
-            var selectedStatus = FilterCb.SelectedItem as WeddingStatus;
-
             var filteredCouples = couples.AsEnumerable();
 
-            if (selectedStatus != null && selectedStatus.Id != 0)
-            {
-                filteredCouples = filteredCouples.Where(c => c.WeddingStatus != null && c.WeddingStatus.Id == selectedStatus.Id);
-            }
+            
             if (!string.IsNullOrEmpty(searchText))
             {
                 var searchTerms = searchText.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
@@ -206,11 +248,6 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
             {
                 CoupleLV_Loaded(null, null);
             }
-        }
-
-        private void FilterCbClik(object sender, SelectionChangedEventArgs e)
-        {
-            Refresh();
         }
 
         private void CoupleLV_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -271,7 +308,8 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
             AddTaskUserWindow addTaskUserWindow = new AddTaskUserWindow(contextUsers);
             addTaskUserWindow.Closed += (s, args) =>
             {
-                RefreshTaskList(); // Обновляем список при закрытии окна
+                RefreshTaskList();
+                UpdateEmptyTaskImageVisibility();
             };
             addTaskUserWindow.ShowDialog();
         }
@@ -291,6 +329,22 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
                 taskUsers = new List<TaskUsers>(DbConnection.MarryMe.TaskUsers
                     .Where(i => i.DateEnd == today && i.UserId == contextUsers.Id).ToList());
                 TaskUserLV.ItemsSource = taskUsers;
+            }
+
+            // Обновляем видимость изображения
+            UpdateEmptyTaskImageVisibility();
+        }
+        private void UpdateEmptyTaskImageVisibility()
+        {
+            if (TaskUserLV.ItemsSource == null || !TaskUserLV.ItemsSource.Cast<object>().Any())
+            {
+                EmptyTaskImage.Visibility = Visibility.Visible;
+                TaskUserLV.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                EmptyTaskImage.Visibility = Visibility.Collapsed;
+                TaskUserLV.Visibility = Visibility.Visible;
             }
         }
 
@@ -334,6 +388,8 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
                             "Информация",
                             MessageBoxButton.OK,
                             MessageBoxImage.Information);
+                        RefreshTaskList();
+                        UpdateEmptyTaskImageVisibility();
                     }
                 }
                 catch (Exception ex)

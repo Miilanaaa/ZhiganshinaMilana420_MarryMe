@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        Title="AddEmployeeWindow" Height="500" Width="900">
+        Title="AddEmployeeWindow" 
+        Height="500" 
+        Width="900">
     <Grid>
         <StackPanel Orientation="Vertical"
                     HorizontalAlignment="Center"

@@ -358,6 +358,7 @@
     <Compile Include="DB\Partikal\Stylist.cs" />
     <Compile Include="DB\Partikal\TaskUsers.cs" />
     <Compile Include="DB\Partikal\Transfer.cs" />
+    <Compile Include="DB\Partikal\Users.cs" />
     <Compile Include="DB\PhotoDress.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -636,6 +637,9 @@
     </Compile>
     <Compile Include="Windows\DismissalWindow.xaml.cs">
       <DependentUpon>DismissalWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\EditGuestWindow.xaml.cs">
+      <DependentUpon>EditGuestWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\EditShapeWindow.xaml.cs">
       <DependentUpon>EditShapeWindow.xaml</DependentUpon>
@@ -971,6 +975,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\EditGuestWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\EditShapeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1080,6 +1088,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="Images\TaskFon.png" />
     <Resource Include="Images\bride_1.png" />
     <Resource Include="Images\bride_2.png" />
     <Resource Include="Images\heart_1.png" />

@@ -15,24 +15,20 @@ using System.Windows.Shapes;
 namespace ZhiganshinaMilana420_MarryMe.Windows
 {
     /// <summary>
-    /// Логика взаимодействия для EditShapeWindow.xaml
+    /// Логика взаимодействия для EditGuestWindow.xaml
     /// </summary>
-    public partial class EditShapeWindow : Window
+    public partial class EditGuestWindow : Window
     {
-        public string ShapeName { get; private set; }
-        public double ShapeWidth { get; private set; }
-        public double ShapeHeight { get; private set; }
+        public string GuestName { get; private set; }
+        public double GuestWidth { get; private set; }
+        public double GuestHeight { get; private set; }
 
-        public EditShapeWindow(string currentName, double currentWidth, double currentHeight)
+        public EditGuestWindow(string currentName, double currentWidth, double currentHeight)
         {
             InitializeComponent();
             NameTextBox.Text = currentName;
             WidthTextBox.Text = currentWidth.ToString();
             HeightTextBox.Text = currentHeight.ToString();
-
-            // Добавьте подсказки
-            WidthTextBox.ToolTip = "Ширина стола";
-            HeightTextBox.ToolTip = "Высота стола";
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
@@ -40,10 +36,9 @@ namespace ZhiganshinaMilana420_MarryMe.Windows
             if (double.TryParse(WidthTextBox.Text, out double width) &&
                 double.TryParse(HeightTextBox.Text, out double height))
             {
-                // Сохраняем весь текст, включая цифру
-                ShapeName = NameTextBox.Text;
-                ShapeWidth = width;
-                ShapeHeight = height;
+                GuestName = NameTextBox.Text;
+                GuestWidth = width;
+                GuestHeight = height;
                 DialogResult = true;
             }
             else

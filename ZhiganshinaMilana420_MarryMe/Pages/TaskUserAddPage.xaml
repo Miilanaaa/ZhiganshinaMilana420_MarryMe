@@ -128,13 +128,15 @@
                                             Height="40"
                                             FontSize="17"
                                             Margin="0 0 0 0"
-                                            Click="TaskUserBt_Click"/>
+                                            Click="TaskUserBt_Click"
+                                            IsEnabled="{Binding IsUsersDismissed}"/>
                                     <Button Content="уволить"
                                             Width="130"
                                             Height="40"
                                             FontSize="17"
                                             Margin="0 30 0 0"
-                                            Click="Delate_Click"/>
+                                            Click="Delate_Click"
+                                            IsEnabled="{Binding IsUsersDismissed}"/>
                                 </StackPanel>
                             </StackPanel>
                         </Border>

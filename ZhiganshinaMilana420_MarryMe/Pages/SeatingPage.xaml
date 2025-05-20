@@ -7,45 +7,74 @@
       mc:Ignorable="d" 
       d:DesignHeight="815" d:DesignWidth="1570"
       Title="SeatingPage">
+    <Page.Resources>
+        <Style x:Key="ElementContainerStyle" TargetType="Grid">
+            <Setter Property="Width" Value="Auto"/>
+            <Setter Property="Height" Value="Auto"/>
+        </Style>
 
-    <Grid Background="Wheat">
-        <!-- Определение строк Grid -->
+        <!-- Стиль для текста гостей и столов (внизу) -->
+        <Style x:Key="BottomTextStyle" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="Margin" Value="0,5,0,0"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Width" Value="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Grid}}"/>
+        </Style>
+
+        <!-- Стиль для текста прямоугольников (в центре фигуры) -->
+        <Style x:Key="CenterTextStyle" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Width" Value="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Grid}}"/>
+        </Style>
+    </Page.Resources>
+    <Grid>
         <Grid.RowDefinitions>
-            <!-- Первая строка для панели инструментов (автоматическая высота) -->
             <RowDefinition Height="Auto"/>
-            <!-- Вторая строка для холста (занимает все оставшееся пространство) -->
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Панель инструментов с кнопками (расположена в первой строке) -->
-        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5">
-            <!-- Кнопка добавления прямоугольника -->
-            <Button Content="Добавить прямоугольник" Margin="5" Padding="10,5" Click="AddRectangle_Click"/>
-            <!-- Кнопка добавления эллипса -->
-            <!--<Button Content="Добавить эллипс" Margin="5" Padding="10,5" />-->
-            <Button Content="Добавить гостя" Margin="5" Padding="10,5" Click="AddEllipse_Click"/>
-            <Button Content="Добавить стол" Margin="5" Padding="10,5" Click="AddTable_Click"/>
-            <!-- Кнопка очистки холста -->
-            <Button Content="Очистить" Margin="5" Padding="10,5" Click="ClearCanvas_Click"/>
-            <Button Content="Отмена" Margin="900 0 0 0" Padding="10,5" Click="ExitNavigate_Click"/>
+        <StackPanel Grid.Row="0" 
+                    Orientation="Horizontal" 
+                    Margin="5">
+            <Button Content="Добавить прямоугольник" 
+                    Margin="5" 
+                    Padding="10,5" 
+                    Click="AddRectangle_Click"/>
+            <Button Content="Добавить гостя" 
+                    Margin="5" 
+                    Padding="10,5" 
+                    Click="AddEllipse_Click"/>
+            <Button Content="Добавить стол" 
+                    Margin="5" 
+                    Padding="10,5" 
+                    Click="AddTable_Click"/>
+            <Button Content="Очистить" 
+                    Margin="5" 
+                    Padding="10,5" 
+                    Click="ClearCanvas_Click"/>
+            <Button Content="Печать" 
+                    Margin="5" 
+                    Padding="10,5" 
+                    Click="PrintButton_Click"/>
+            <Button Content="Назад" 
+                    Margin="5" 
+                    Padding="10,5" 
+                    Click="ExitBtt_Clik"/>
         </StackPanel>
-
-        <!-- Область для рисования (расположена во второй строке) -->
-        <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="1" Margin="5">
-            <!-- Холст для размещения фигур -->
-            <Canvas x:Name="DrawingCanvas" Background="White" 
+        <Border Grid.Row="1" 
+                BorderBrush="Gray" 
+                BorderThickness="1" 
+                Margin="5">
+            <Canvas x:Name="DrawingCanvas" 
+                    Background="White" 
                     MouseMove="DrawingCanvas_MouseMove"
                     MouseLeftButtonUp="DrawingCanvas_MouseLeftButtonUp"
-                    MouseLeave="DrawingCanvas_MouseLeave">
-                <!-- 
-                Свойства Canvas:
-                x:Name - имя для обращения в коде
-                Background - цвет фона
-                MouseMove - обработчик движения мыши
-                MouseLeftButtonUp - обработчик отпускания кнопки мыши
-                MouseLeave - обработчик выхода мыши за пределы холста
-                -->
-            </Canvas>
+                    MouseLeave="DrawingCanvas_MouseLeave"/>
         </Border>
     </Grid>
 </Page>

@@ -39,6 +39,7 @@ namespace ZhiganshinaMilana420_MarryMe.Windows
                 double.TryParse(HeightTextBox.Text, out double height) &&
                 int.TryParse(SeatsTextBox.Text, out int seats))
             {
+                // Сохраняем весь текст, включая цифру
                 ShapeName = NameTextBox.Text;
                 ShapeWidth = width;
                 ShapeHeight = height;
