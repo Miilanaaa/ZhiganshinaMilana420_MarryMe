@@ -75,7 +75,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
             addEmployeeWindow.Closed += (s, args) =>
             {
                 // Обновляем данные после закрытия окна
-                users = new List<Users>(DbConnection.MarryMe.Users.Where(i => i.Id != UserInfo.User.Id)).ToList();
+                users = new List<Users>(DbConnection.MarryMe.Users.Where(i => i.Id != UserInfo.User.Id && i.Dismissed == false)).ToList();
                 UsersLV.ItemsSource = users;
             };
             addEmployeeWindow.ShowDialog();
