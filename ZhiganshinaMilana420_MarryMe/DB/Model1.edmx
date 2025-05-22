@@ -358,7 +358,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -480,6 +480,8 @@
           <Property Name="BirthDate" Type="date" />
           <Property Name="IdGender" Type="int" />
           <Property Name="Dismissed" Type="bit" />
+          <Property Name="DeviceDate" Type="date" />
+          <Property Name="DateDismissal" Type="date" />
         </EntityType>
         <EntityType Name="WeddingStatus">
           <Key>
@@ -1859,7 +1861,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Restaurant" Relationship="Self.FK__Restauran__Resta__45F365D3" FromRole="RestaurantType" ToRole="Restaurant" />
         </EntityType>
         <EntityType Name="Role">
@@ -2000,6 +2002,8 @@
           <Property Name="BirthDate" Type="DateTime" Precision="0" />
           <Property Name="IdGender" Type="Int32" />
           <Property Name="Dismissed" Type="Boolean" />
+          <Property Name="DeviceDate" Type="DateTime" Precision="0" />
+          <Property Name="DateDismissal" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Gender" Relationship="Self.FK_Users_Gender" FromRole="Users" ToRole="Gender" />
           <NavigationProperty Name="Role" Relationship="Self.FK__Users__RoleId__398D8EEE" FromRole="Users" ToRole="Role" />
           <NavigationProperty Name="TaskUsers" Relationship="Self.FK_TaskUsers_Users" FromRole="Users" ToRole="TaskUsers" />
@@ -3470,6 +3474,8 @@
                 <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
                 <ScalarProperty Name="IdGender" ColumnName="IdGender" />
                 <ScalarProperty Name="Dismissed" ColumnName="Dismissed" />
+                <ScalarProperty Name="DeviceDate" ColumnName="DeviceDate" />
+                <ScalarProperty Name="DateDismissal" ColumnName="DateDismissal" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

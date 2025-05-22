@@ -33,6 +33,8 @@ namespace ZhiganshinaMilana420_MarryMe.DB
         public Nullable<System.DateTime> BirthDate { get; set; }
         public Nullable<int> IdGender { get; set; }
         public Nullable<bool> Dismissed { get; set; }
+        public Nullable<System.DateTime> DeviceDate { get; set; }
+        public Nullable<System.DateTime> DateDismissal { get; set; }
     
         public virtual Gender Gender { get; set; }
         public virtual Role Role { get; set; }

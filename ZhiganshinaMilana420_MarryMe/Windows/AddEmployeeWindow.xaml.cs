@@ -245,13 +245,24 @@ namespace ZhiganshinaMilana420_MarryMe.Windows
 
                 // Заполняем поля в документе
                 FillField(document, "номер_договора", $"EMP-{employee.Id}-{DateTime.Now:yyyyMMdd}");
+                
                 FillField(document, "день", DateTime.Now.Day.ToString());
                 FillField(document, "месяц", GetMonthNameGenitive(DateTime.Now.Month));
                 FillField(document, "год", DateTime.Now.Year.ToString());
+                FillField(document, "день", DateTime.Now.Day.ToString());
+                FillField(document, "месяц", GetMonthNameGenitive(DateTime.Now.Month));
+                FillField(document, "год", DateTime.Now.Year.ToString());
+
+                FillField(document, "id_сотрудника", employee.Id.ToString());
+
                 FillField(document, "фио_сотрудника_полностью", $"{employee.Surname} {employee.Name} {employee.Patronymic}");
                 FillField(document, "должность_сотрудника", (RoleCb.SelectedItem as Role)?.Name ?? "");
                 FillField(document, "оклад_сотрудника", employee.Salary.ToString());
-                FillField(document, "фио_работника", $"{employee.Surname} {employee.Name[0]}.{employee.Patronymic[0]}.");
+
+                FillField(document, "день", DateTime.Now.Day.ToString());
+                FillField(document, "месяц", GetMonthNameGenitive(DateTime.Now.Month));
+                FillField(document, "год", DateTime.Now.Year.ToString());
+                FillField(document, "номер_договора", $"EMP-{employee.Id}-{DateTime.Now:yyyyMMdd}");
 
                 // Сохраняем документ
                 string fileName = $"Приказ о приеме {employee.Surname} {employee.Name[0]}.{employee.Patronymic[0]}. от {DateTime.Now:dd.MM.yyyy}.docx";

@@ -32,7 +32,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
             InitializeComponent();
             users = new List<Users>(DbConnection.MarryMe.Users.Where(i => i.Id != UserInfo.User.Id)).ToList();
             UsersLV.ItemsSource = users;
-            ShowFreeCheckBox.IsChecked = true;
+            ShowFreeCheckBox.IsChecked = false;
             ShowTakenCheckBox.IsChecked = true;
             this.DataContext = this;
         }
@@ -95,10 +95,12 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
                         GenerateDismissalOrder(employee, dismissalWindow.DismissalReason, dismissalWindow.DismissalArticle);
 
                         employee.Dismissed = true;
+                        employee.Login = null;
+                        employee.Password = null;
                         DbConnection.MarryMe.SaveChanges();
 
                         // Обновляем список сотрудников
-                        users = new List<Users>(DbConnection.MarryMe.Users.Where(i => i.Id != UserInfo.User.Id)).ToList();
+                        users = new List<Users>(DbConnection.MarryMe.Users.Where(i => i.Id != UserInfo.User.Id && i.Dismissed == false)).ToList();
                         UsersLV.ItemsSource = users;
 
                         MessageBox.Show("Сотрудник уволен. Приказ об увольнении создан.",
@@ -141,9 +143,28 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
 
                 // Заполняем поля в документе
                 FillField(document, "номер_приказа", $"DISM-{employee.Id}-{DateTime.Now:yyyyMMdd}");
+
                 FillField(document, "день", DateTime.Now.Day.ToString());
                 FillField(document, "месяц", GetMonthNameGenitive(DateTime.Now.Month));
                 FillField(document, "год", DateTime.Now.Year.ToString());
+                
+                if (employee.DeviceDate.HasValue)
+                {
+                    FillField(document, "дата_работы", employee.DeviceDate.Value.Day.ToString());
+                    FillField(document, "месяц_работы", GetMonthNameGenitive(employee.DeviceDate.Value.Month));
+                    FillField(document, "год_работы", employee.DeviceDate.Value.Year.ToString());
+                }
+                else
+                {
+                    // Использовать текущую дату, если DeviceDate не задан
+                    FillField(document, "дата_работы", DateTime.Now.Day.ToString());
+                    FillField(document, "месяц_работы", GetMonthNameGenitive(DateTime.Now.Month));
+                    FillField(document, "год_работы", DateTime.Now.Year.ToString());
+                }
+                FillField(document, "день", DateTime.Now.Day.ToString());
+                FillField(document, "месяц", GetMonthNameGenitive(DateTime.Now.Month));
+                FillField(document, "год", DateTime.Now.Year.ToString());
+
                 FillField(document, "фио_сотрудника", $"{employee.Surname} {employee.Name} {employee.Patronymic}");
                 FillField(document, "id_сотрудника", employee.Id.ToString());
                 FillField(document, "должность сотрудника", employee.Role?.Name ?? "");
