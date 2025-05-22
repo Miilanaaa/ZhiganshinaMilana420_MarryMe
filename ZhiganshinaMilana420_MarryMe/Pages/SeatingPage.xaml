@@ -61,7 +61,7 @@
                     Margin="5" 
                     Padding="10,5" 
                     Click="PrintButton_Click"/>
-            <Button Content="Назад" 
+            <Button Content="Выйти и не сохранить" 
                     Margin="5" 
                     Padding="10,5" 
                     Click="ExitBtt_Clik"/>
