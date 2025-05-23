@@ -15,7 +15,7 @@ namespace ZhiganshinaMilana420_MarryMe.Classes
     public class RestaurantsApiService
     {
         private readonly HttpClient _client;
-        private const string BaseUrl = "http://localhost:44335/api/restaurants";
+        private const string BaseUrl = "http://localhost:44357/api/restaurants";
 
 
 
