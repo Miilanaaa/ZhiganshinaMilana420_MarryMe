@@ -65,26 +65,49 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.RestaurantForder
             // Получаем выбранную дату
             DateTime? selectedDate = DateBookingDp.SelectedDate;
 
+            // Применяем фильтр по вместимости
+            var capacityFilter = CapacityFilterCb.SelectedItem as ComboBoxItem;
+            int minCapacity = 0;
+            int maxCapacity = int.MaxValue;
+
+            if (capacityFilter?.Tag != null && capacityFilter.Tag.ToString() != "Все вместимости")
+            {
+                var capacityRange = capacityFilter.Tag.ToString().Split('-');
+                minCapacity = int.Parse(capacityRange[0]);
+                maxCapacity = int.Parse(capacityRange[1]);
+            }
+
             filteredRestaurants = allRestaurants
                 .Where(r => r.Name.ToLower().Contains(searchText)) // Фильтр по названию
                 .Where(r => r.Price >= minPrice && r.Price <= maxPrice) // Фильтр по цене
+                .Where(r => r.Сapacity >= minCapacity && r.Сapacity <= maxCapacity) // Фильтр по вместимости
                 .Where(r => selectedDate == null || !IsRestaurantBooked(r.Id, selectedDate.Value)) // Фильтр по дате
                 .ToList();
 
             // Применяем сортировку
             switch (SortCb.SelectedIndex)
             {
-                case 1: // По возрастанию
+                case 1: // По возрастанию цены
                     filteredRestaurants = filteredRestaurants.OrderBy(r => r.Price).ToList();
                     break;
-                case 2: // По убыванию
+                case 2: // По убыванию цены
                     filteredRestaurants = filteredRestaurants.OrderByDescending(r => r.Price).ToList();
+                    break;
+                case 3: // По возрастанию вместимости
+                    filteredRestaurants = filteredRestaurants.OrderBy(r => r.Сapacity).ToList();
+                    break;
+                case 4: // По убыванию вместимости
+                    filteredRestaurants = filteredRestaurants.OrderByDescending(r => r.Сapacity).ToList();
                     break;
             }
 
             // Обновляем пагинацию
             currentPage = 1;
             InitializePagination();
+        }
+        private void CapacityFilterCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ApplyFiltersAndSort();
         }
         private bool IsRestaurantBooked(int restaurantId, DateTime date)
         {

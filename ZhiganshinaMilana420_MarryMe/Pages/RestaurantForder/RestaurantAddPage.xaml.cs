@@ -60,10 +60,15 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.RestaurantForder
             ClearErrorStyle(PriceTb);
             ClearErrorStyle(TypeTb);
             ClearErrorStyle(DescriptionTb);
+            ClearErrorStyle(CapacityTb);
         }
         private void NameTb_TextChanged(object sender, TextChangedEventArgs e)
         {
             ClearErrorStyle(NameTb);
+        }
+        private void CapacityTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ClearErrorStyle(CapacityTb);
         }
 
         private void AddressTb_TextChanged(object sender, TextChangedEventArgs e)
@@ -261,6 +266,11 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.RestaurantForder
                 ApplyErrorStyle(AddressTb);
                 hasErrors = true;
             }
+            if (string.IsNullOrWhiteSpace(CapacityTb.Text))
+            {
+                ApplyErrorStyle(CapacityTb);
+                hasErrors = true;
+            }
 
             // Проверка цены
             if (string.IsNullOrWhiteSpace(PriceTb.Text) || !int.TryParse(PriceTb.Text, out _))
@@ -297,7 +307,8 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.RestaurantForder
                     RestaurantTypeId = (TypeTb.SelectedItem as RestaurantType)?.Id ?? 0,
                     Price = Convert.ToInt32(PriceTb.Text),
                     Address = AddressTb.Text,
-                    Description = DescriptionTb.Text
+                    Description = DescriptionTb.Text,
+                    Сapacity = Convert.ToInt32(CapacityTb.Text)
                 };
 
                 DbConnection.MarryMe.Restaurant.Add(restaurant);
@@ -330,15 +341,42 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.RestaurantForder
                 hasErrors = true;
             }
 
+            // Проверка адреса
+            if (string.IsNullOrWhiteSpace(AddressTb.Text))
+            {
+                ApplyErrorStyle(AddressTb);
+                hasErrors = true;
+            }
+            if (string.IsNullOrWhiteSpace(CapacityTb.Text))
+            {
+                ApplyErrorStyle(CapacityTb);
+                hasErrors = true;
+            }
+
+            // Проверка цены
+            if (string.IsNullOrWhiteSpace(PriceTb.Text) || !int.TryParse(PriceTb.Text, out _))
+            {
+                ApplyErrorStyle(PriceTb);
+                hasErrors = true;
+            }
+
+            // Проверка типа ресторана
             if (TypeTb.SelectedItem == null)
             {
                 ApplyErrorStyle(TypeTb);
                 hasErrors = true;
             }
 
+            // Проверка описания (если оно обязательно)
+            if (string.IsNullOrWhiteSpace(DescriptionTb.Text))
+            {
+                ApplyErrorStyle(DescriptionTb);
+                hasErrors = true;
+            }
+
             if (hasErrors)
             {
-                MessageBox.Show("Заполните обязательные поля (Название и Тип ресторана) перед созданием меню",
+                MessageBox.Show("Заполните обязательные поля перед созданием меню",
                               "Ошибка",
                               MessageBoxButton.OK,
                               MessageBoxImage.Error);
@@ -391,7 +429,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.RestaurantForder
 
                 // Показываем информацию о документе
                 MenuDocumentBorder.Visibility = Visibility.Visible;
-                MenuDocumentTb.Text = $"Меню: {Path.GetFileName(savePath)}";
+                MenuDocumentTb.Text = $"Меню";
 
                 MessageBox.Show("Файл меню успешно создан и сохранен", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -428,7 +466,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.RestaurantForder
             if (restaurant1 != null && !string.IsNullOrEmpty(restaurant1.DocumentMenu))
             {
                 MenuDocumentBorder.Visibility = Visibility.Visible;
-                MenuDocumentTb.Text = $"Меню: {Path.GetFileName(restaurant1.DocumentMenu)}";
+                MenuDocumentTb.Text = $"Меню";
             }
             else
             {

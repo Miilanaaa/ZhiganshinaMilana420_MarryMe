@@ -24,37 +24,137 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.RestaurantForder
     /// </summary>
     public partial class RestaurantPage : Page
     {
+        private List<Restaurant> allRestaurants;
+        private List<Restaurant> filteredRestaurants;
+        private List<Restaurant> displayedRestaurants;
+
+        private int currentPage = 1;
+        private int itemsPerPage = 6; // Since you have 2 columns, 6 items will make 3 rows
+        private int totalPages;
         public static List<RestaurantType> typees {  get; set; }
         public static List<RestaurantPhoto> restaurantPhotos = new List<RestaurantPhoto>();
         public static List<Restaurant> restaurants {  get; set; }
         public RestaurantPage()
         {
             InitializeComponent();
-            restaurants = new List<Restaurant>(DbConnection.MarryMe.Restaurant.ToList());
-            RestaurantLV.ItemsSource = restaurants;
+            allRestaurants = new List<Restaurant>(DbConnection.MarryMe.Restaurant.ToList());
             restaurantPhotos = new List<RestaurantPhoto>(DbConnection.MarryMe.RestaurantPhoto.ToList());
-            
-            typees =new List<RestaurantType>(DbConnection.MarryMe.RestaurantType.ToList());
+
+            typees = new List<RestaurantType>(DbConnection.MarryMe.RestaurantType.ToList());
             typees.Insert(0, new RestaurantType() { Name = "Все" });
             FilterCb.SelectedIndex = 0;
             this.DataContext = this;
+
+            ApplyFiltersAndSort(); // Initialize with all restaurants
         }
 
         public void Refresh()
         {
-            var filterRestaurant = DbConnection.MarryMe.Restaurant.ToList();
+            ApplyFiltersAndSort();
+        }
+
+        private void ApplyFiltersAndSort()
+        {
             var category = FilterCb.SelectedItem as RestaurantType;
 
-            if(category != null && category.Id != 0)
+            // Apply filters
+            filteredRestaurants = allRestaurants
+                .Where(r => category == null || category.Id == 0 || r.RestaurantTypeId == category.Id)
+                .Where(r => SearchTb.Text.Length == 0 || r.Name.ToLower().StartsWith(SearchTb.Text.Trim().ToLower()))
+                .ToList();
+
+            // Update pagination
+            currentPage = 1;
+            InitializePagination();
+        }
+
+        private void InitializePagination()
+        {
+            // Calculate total pages
+            totalPages = (int)Math.Ceiling((double)filteredRestaurants.Count / itemsPerPage);
+
+            // Clear pagination panel
+            PaginationPanel.Children.Clear();
+            PaginationPanel.Children.Add(PrevPageBtn);
+
+            // Create page buttons
+            for (int i = 1; i <= totalPages; i++)
             {
-                filterRestaurant = filterRestaurant.Where(c => c.RestaurantTypeId == category.Id).ToList();
+                var pageBtn = new Button
+                {
+                    Content = i.ToString(),
+                    Width = 40,
+                    Height = 40,
+                    FontSize = 15,
+                    Margin = new Thickness(5, 0, 5, 0),
+                    Tag = i
+                };
+                pageBtn.Click += PageBtn_Click;
+
+                if (i == currentPage)
+                {
+                    pageBtn.Background = Brushes.LightGray;
+                }
+
+                PaginationPanel.Children.Add(pageBtn);
             }
 
-            if (SearchTb.Text.Length > 0)
+            PaginationPanel.Children.Add(NextPageBtn);
+
+            LoadPageData();
+        }
+
+        private void LoadPageData()
+        {
+            displayedRestaurants = filteredRestaurants
+                .Skip((currentPage - 1) * itemsPerPage)
+                .Take(itemsPerPage)
+                .ToList();
+
+            RestaurantLV.ItemsSource = displayedRestaurants;
+
+            UpdatePaginationButtons();
+        }
+
+        private void UpdatePaginationButtons()
+        {
+            foreach (var child in PaginationPanel.Children)
             {
-                filterRestaurant = filterRestaurant.Where(r => r.Name.ToLower().StartsWith(SearchTb.Text.Trim().ToLower())).ToList();
+                if (child is Button btn && btn.Tag is int pageNumber)
+                {
+                    btn.Background = pageNumber == currentPage ? Brushes.LightGray : Brushes.Transparent;
+                }
             }
-            RestaurantLV.ItemsSource = filterRestaurant;
+
+            PrevPageBtn.IsEnabled = currentPage > 1;
+            NextPageBtn.IsEnabled = currentPage < totalPages;
+        }
+
+        private void PageBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn && btn.Tag is int pageNumber)
+            {
+                currentPage = pageNumber;
+                LoadPageData();
+            }
+        }
+
+        private void PrevPageBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentPage > 1)
+            {
+                currentPage--;
+                LoadPageData();
+            }
+        }
+
+        private void NextPageBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentPage < totalPages)
+            {
+                currentPage++;
+                LoadPageData();
+            }
         }
 
         private void ExitBtn_Click(object sender, RoutedEventArgs e)

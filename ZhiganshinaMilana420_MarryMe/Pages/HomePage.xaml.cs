@@ -86,22 +86,25 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
             contextUsers = users;
 
             DateTime today = DateTime.Today;
-            CoupleLV.ItemsSource = DbConnection.MarryMe.Couple.Where(c => c.WeddingStatusId == 1).ToList();
-            gromms = DbConnection.MarryMe.Gromm.ToList();
 
+            // Загружаем с сортировкой по дате свадьбы (от ближайшей)
+            CoupleLV.ItemsSource = DbConnection.MarryMe.Couple
+                .Where(c => c.WeddingStatusId == 1) // Только активные свадьбы
+                .OrderBy(c => c.WeddingDate) // Сортировка по возрастанию даты
+                .ToList();
+
+            gromms = DbConnection.MarryMe.Gromm.ToList();
             taskUsers = DbConnection.MarryMe.TaskUsers
                 .Where(i => i.UserId == users.Id && i.DateEnd == today).ToList();
             TaskUserLV.ItemsSource = taskUsers;
             DateTaskDp.Text = today.ToString("dd.MM.yyyy");
 
             brides = new List<Bride>(DbConnection.MarryMe.Bride.ToList());
-
             this.DataContext = this;
 
             if (users.RoleId == 2)
             {
                 AddClientBtt.Visibility = Visibility.Visible;
-
             }
             else
             {
@@ -109,7 +112,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
             }
             Loaded += (s, e) => UpdateEmptyTaskImageVisibility();
         }
-        
+
 
         private void DateTaskDp_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -211,21 +214,19 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
         }
         public void Refresh()
         {
+            // Загружаем пары с сортировкой по дате свадьбы (от ближайшей)
             couples = DbConnection.MarryMe.Couple
                        .Include(c => c.Gromm)
                        .Include(c => c.Bride)
                        .Include(c => c.WeddingStatus)
-                       .Where(c => c.WeddingStatusId == 1) // Добавляем условие фильтрации
+                       .Where(c => c.WeddingStatusId == 1)
+                       .OrderBy(c => c.WeddingDate)
                        .ToList();
-            //couples = DbConnection.MarryMe.Couple?.ToList() ?? new List<Couple>();
-            //gromms = DbConnection.MarryMe.Gromm?.ToList() ?? new List<Gromm>();
-            //brides = DbConnection.MarryMe.Bride?.ToList() ?? new List<Bride>();
 
             string searchText = SearchTb?.Text?.Trim().ToLower() ?? "";
 
             var filteredCouples = couples.AsEnumerable();
 
-            
             if (!string.IsNullOrEmpty(searchText))
             {
                 var searchTerms = searchText.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
@@ -239,11 +240,10 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
                         (c.Gromm.Name != null && c.Gromm.Name.ToLower().Contains(term)) ||
                         (c.Bride.Surname != null && c.Bride.Surname.ToLower().Contains(term)) ||
                         (c.Bride.Name != null && c.Bride.Name.ToLower().Contains(term))));
-                
             }
+
             CoupleLV.ItemsSource = filteredCouples.ToList();
 
-            // Обновляем видимость кнопок
             if (CoupleLV.IsLoaded)
             {
                 CoupleLV_Loaded(null, null);

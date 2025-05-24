@@ -85,18 +85,33 @@
                     TextWrapping="Wrap"
                     FontSize="20"
                     IsReadOnly="True"/>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock HorizontalAlignment="Left"
-                           Margin="50 70 0 0"
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock HorizontalAlignment="Left"
+                           Margin="50 10 0 0"
+                           Text="Вместительность"
+                           FontSize="20"/>
+                    <TextBox x:Name="CapacityTb"
+                             HorizontalAlignment="Left"
+                             Margin="10 10 0 0"
+                             Width="155"
+                             Height="30"
+                             FontSize="20"
+                             IsReadOnly="True"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock HorizontalAlignment="Left"
+                           Margin="50 10 0 0"
                            Text="Стоимость брони ресторана"
                            FontSize="20"/>
-                <TextBox x:Name="PriceTb"
+                    <TextBox x:Name="PriceTb"
                          HorizontalAlignment="Left"
-                         Margin="10 70 0 0"
+                         Margin="10 10 0 0"
                          Width="155"
                          Height="30"
                          FontSize="20"
                          IsReadOnly="True"/>
+                </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock HorizontalAlignment="Left"

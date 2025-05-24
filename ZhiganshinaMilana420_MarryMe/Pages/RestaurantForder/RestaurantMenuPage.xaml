@@ -9,7 +9,7 @@
       Title="RestaurantMenuPage">
     <Grid Background="#EEEFEA">
         <TextBox x:Name="SearchTb"
-                 Width="250"
+                 Width="180"
                  Height="40"
                  HorizontalAlignment="Left"
                  VerticalAlignment="Top"
@@ -17,16 +17,37 @@
                  TextChanged="SearchTb_TextChanged"/>
         <DatePicker x:Name="DateBookingDp"
                     FontSize="20"
-                    Width="250"
+                    Width="180"
                     Height="40"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-                    Margin="320 20 0 0"
+                    Margin="240 20 0 0"
                     SelectedDateChanged="DateBookingDp_SelectedDateChanged"/>
+        <ComboBox x:Name="CapacityFilterCb"
+                  Width="180"
+                  Height="40"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top"
+                  Margin="430 20 0 0"
+                  SelectionChanged="CapacityFilterCb_SelectionChanged">
+            <ComboBoxItem Content="Все вместимости"/>
+            <ComboBoxItem Content="до 15 чел." Tag="0-15"/>
+            <ComboBoxItem Content="15 - 19 чел." Tag="15-19"/>
+            <ComboBoxItem Content="20 - 29 чел." Tag="20-29"/>
+            <ComboBoxItem Content="30 - 39 чел." Tag="30-39"/>
+            <ComboBoxItem Content="40 - 49 чел." Tag="40-49"/>
+            <ComboBoxItem Content="50 - 59 чел." Tag="50-59"/>
+            <ComboBoxItem Content="60 - 79 чел." Tag="60-79"/>
+            <ComboBoxItem Content="80 - 99 чел." Tag="80-99"/>
+            <ComboBoxItem Content="100 - 149 чел." Tag="100-149"/>
+            <ComboBoxItem Content="150 - 199 чел." Tag="150-199"/>
+            <ComboBoxItem Content="200 - 299 чел." Tag="200-299"/>
+            <ComboBoxItem Content="от 300 чел." Tag="300-9999"/>
+        </ComboBox>
         <StackPanel Orientation="Horizontal" 
                     HorizontalAlignment="Left" 
                     VerticalAlignment="Top"
-                    Margin="600 20 0 0">
+                    Margin="630 20 0 0">
             <TextBlock Text="Цена от:" 
                        VerticalAlignment="Center"
                        Margin="0 0 10 0"/>

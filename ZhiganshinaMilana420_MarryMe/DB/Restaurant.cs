@@ -29,6 +29,7 @@ namespace ZhiganshinaMilana420_MarryMe.DB
         public string Address { get; set; }
         public string Description { get; set; }
         public string DocumentMenu { get; set; }
+        public Nullable<int> Сapacity { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CoupleFavorites> CoupleFavorites { get; set; }

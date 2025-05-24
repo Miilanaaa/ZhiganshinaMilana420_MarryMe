@@ -66,7 +66,9 @@
                                 <Image Source="{Binding DisplayPhotoImage}"
                                        Width="150"
                                        Height="150"
-                                       HorizontalAlignment="Left"
+                                       Stretch="UniformToFill"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
                                        Margin="20 5"/>
                                 <StackPanel Orientation="Vertical"
                                             Width="400"
@@ -114,5 +116,28 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <StackPanel x:Name="PaginationPanel"
+            Orientation="Horizontal" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Bottom"
+            Margin="0 0 0 10">
+            <Button x:Name="PrevPageBtn" 
+            Content="◄" 
+            Width="50" 
+            Height="40" 
+            FontSize="15"
+            Margin="5 0"
+            Click="PrevPageBtn_Click"/>
+
+            <!-- Кнопки страниц будут добавляться динамически -->
+
+            <Button x:Name="NextPageBtn" 
+            Content="►" 
+            Width="50" 
+            Height="40" 
+            FontSize="15"
+            Margin="5 0"
+            Click="NextPageBtn_Click"/>
+        </StackPanel>
     </Grid>
 </Page>

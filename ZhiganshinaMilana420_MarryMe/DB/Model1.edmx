@@ -333,6 +333,7 @@
           <Property Name="Address" Type="nvarchar" MaxLength="200" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="DocumentMenu" Type="nvarchar(max)" />
+          <Property Name="Сapacity" Type="int" />
         </EntityType>
         <EntityType Name="RestaurantBookingDates">
           <Key>
@@ -1829,6 +1830,7 @@
           <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DocumentMenu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Сapacity" Type="Int32" />
           <NavigationProperty Name="CoupleFavorites" Relationship="Self.FK__CoupleFav__Resta__6E01572D" FromRole="Restaurant" ToRole="CoupleFavorites" />
           <NavigationProperty Name="RestaurantType" Relationship="Self.FK__Restauran__Resta__45F365D3" FromRole="Restaurant" ToRole="RestaurantType" />
           <NavigationProperty Name="RestaurantBookingDates" Relationship="Self.FK__Restauran__Resta__7A672E12" FromRole="Restaurant" ToRole="RestaurantBookingDates" />
@@ -3312,6 +3314,7 @@
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="DocumentMenu" ColumnName="DocumentMenu" />
+                <ScalarProperty Name="Сapacity" ColumnName="Сapacity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

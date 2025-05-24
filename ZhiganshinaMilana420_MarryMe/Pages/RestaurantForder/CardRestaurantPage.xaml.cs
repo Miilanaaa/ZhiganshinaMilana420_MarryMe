@@ -69,6 +69,7 @@ namespace ZhiganshinaMilana420_MarryMe.Pages.RestaurantForder
                 NameTb.Text = contextRestaurant.Name;
                 DescriptionTb.Text = contextRestaurant.Description;
                 AddressTb.Text = contextRestaurant.Address;
+                CapacityTb.Text = contextRestaurant.Сapacity.ToString();
                 PriceTb.Text = contextRestaurant.Price.ToString();
 
                 // Show menu button if menu exists

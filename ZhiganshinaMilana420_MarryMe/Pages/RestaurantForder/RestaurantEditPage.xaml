@@ -52,11 +52,12 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal"
                         Margin="0 15 0 0">
-                <TextBlock Text="Тип ресторана"
-                           FontSize="25"/>
+                <TextBlock Text="Тип"
+                           FontSize="20"
+                           Margin="0 10 0 0"/>
                 <ComboBox x:Name="TypeTb"
                           FontSize="20"
-                          Width="315"
+                          Width="150"
                           SelectionChanged="TypeTb_SelectionChanged"
                           Margin="15 0 0 0"
                           ItemsSource="{Binding restaurantTypes}">
@@ -66,6 +67,14 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
+                <TextBlock Text="Вместительность"
+                           FontSize="20"
+                           Margin="10 10 10 0"/>
+                <TextBox x:Name="CapacityTb"
+                         FontSize="20"
+                         TextChanged="CapacityTb_TextChanged"
+                         Width="119"
+                         Margin="5 0 0 0"/>
             </StackPanel>
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="Описание"
@@ -75,6 +84,13 @@
                          FontSize="20"
                          Width="500"
                          Height="160"
+                         TextWrapping="Wrap"
+                         AcceptsReturn="True"
+                         VerticalContentAlignment="Top"
+                         HorizontalContentAlignment="Left"
+                         VerticalScrollBarVisibility="Auto"
+                         SpellCheck.IsEnabled="True"
+                         Language="ru-RU"
                          TextChanged="DescriptionTb_TextChanged"
                          HorizontalAlignment="Left"
                          Margin="0 10 0 0"/>
