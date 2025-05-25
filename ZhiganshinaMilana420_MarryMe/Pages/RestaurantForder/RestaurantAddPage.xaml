@@ -201,7 +201,7 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
                 Margin="50"
-                Content="Отмена" 
+                Content="Назад" 
                 Click="ExitBt_Click"/>
     </Grid>
 </Page>

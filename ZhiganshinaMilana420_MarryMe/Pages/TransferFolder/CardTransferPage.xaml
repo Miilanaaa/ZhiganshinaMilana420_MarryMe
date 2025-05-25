@@ -22,7 +22,7 @@
                     HorizontalAlignment="Left"
                     Margin="400 0 0 0"
                     VerticalAlignment="Bottom"
-                    FontSize="30" Cursor=""/>
+                    FontSize="30"/>
         <Button Content="❮" 
                 FontSize="20" 
                 Width="50" 

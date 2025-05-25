@@ -5,28 +5,44 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ZhiganshinaMilana420_MarryMe.Windows"
         mc:Ignorable="d"
-        Title="EditShapeWindow" Height="450" Width="800">
-    <Grid Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        WindowStartupLocation="CenterScreen" 
+        Title="EditShapeWindow" Height="280" Width="400" Cursor="">
+    <Grid>
+        <StackPanel Orientation="Vertical"
+                    Margin="10">
+            <TextBlock Text="Название:"
+                       FontSize="15"/>
+            <TextBox x:Name="NameTextBox"
+                     FontSize="15"
+                     Height="25"
+                     Margin="0 10 0 0"/>
 
-        <TextBlock Text="Название:" Grid.Row="0"/>
-        <TextBox x:Name="NameTextBox" Grid.Row="1" Margin="0,5"/>
+            <TextBlock Text="Ширина:"
+                       FontSize="15"/>
+            <TextBox x:Name="WidthTextBox"
+                     FontSize="15"
+                     Height="25"
+                     Margin="0 10 0 0"/>
 
-        <TextBlock Text="Ширина:" Grid.Row="2" Margin="0,10,0,0"/>
-        <TextBox x:Name="WidthTextBox" Grid.Row="2" Margin="0,28,0,24"/>
-
-        <TextBlock Text="Длина:" Grid.Row="2" Margin="0,57,0,283" Grid.RowSpan="3"/>
-        <TextBox x:Name="HeightTextBox" Grid.Row="4" Margin="0,4,0,264"/>
-
-        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-            <Button Content="Сохранить" Width="80" Margin="0,0,10,0" Click="SaveButton_Click"/>
-            <Button Content="Отмена" Width="80" Click="CancelButton_Click"/>
+            <TextBlock Text="Длина:"
+                       FontSize="15"/>
+            <TextBox x:Name="HeightTextBox"
+                     Height="25"
+                     FontSize="15"
+                     Margin="0 10 0 0"/>
+        </StackPanel>
+        
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom">
+            <Button Content="Сохранить"
+                    Click="SaveButton_Click"
+                    Width="150"
+                    Margin="10"/>
+            <Button Content="Отмена" 
+                    Click="CancelButton_Click"
+                    Width="150"
+                    Margin="10"/>
         </StackPanel>
     </Grid>
 </Window>
