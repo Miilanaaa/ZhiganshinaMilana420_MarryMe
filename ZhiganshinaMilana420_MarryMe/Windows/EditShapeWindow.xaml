@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ZhiganshinaMilana420_MarryMe.Windows"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen" 
-        Title="EditShapeWindow" Height="280" Width="400" Cursor="">
+        Title="EditShapeWindow" Height="350" Width="400" Cursor="">
     <Grid>
         <StackPanel Orientation="Vertical"
                     Margin="10">

@@ -33,6 +33,8 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
     /// 
     public class TaskDateDecorator : Decorator
     {
+
+
         private static readonly HashSet<DateTime> _datesWithTasks = new HashSet<DateTime>();
 
         public static void UpdateDatesWithTasks(IEnumerable<DateTime> dates)
@@ -80,6 +82,11 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
         public static List<Bride> brides { get; set; }
         public static List<TaskUsers> taskUsers { get; set; }
         Users contextUsers;
+
+        private int currentCouplePage = 1;
+        private const int couplesPerPage = 4; // Количество пар на странице
+        private int totalCouplePages;
+        private List<Couple> allCouples = new List<Couple>();
         public HomePage(Users users)
         {
             InitializeComponent();
@@ -87,11 +94,14 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
 
             DateTime today = DateTime.Today;
 
-            // Загружаем с сортировкой по дате свадьбы (от ближайшей)
-            CoupleLV.ItemsSource = DbConnection.MarryMe.Couple
-                .Where(c => c.WeddingStatusId == 1) // Только активные свадьбы
-                .OrderBy(c => c.WeddingDate) // Сортировка по возрастанию даты
+            // Загружаем все пары
+            allCouples = DbConnection.MarryMe.Couple
+                .Where(c => c.WeddingStatusId == 1)
+                .OrderBy(c => c.WeddingDate)
                 .ToList();
+
+            // Инициализируем пагинацию
+            InitializeCouplePagination();
 
             gromms = DbConnection.MarryMe.Gromm.ToList();
             taskUsers = DbConnection.MarryMe.TaskUsers
@@ -214,24 +224,21 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
         }
         public void Refresh()
         {
-            // Загружаем пары с сортировкой по дате свадьбы (от ближайшей)
-            couples = DbConnection.MarryMe.Couple
-                       .Include(c => c.Gromm)
-                       .Include(c => c.Bride)
-                       .Include(c => c.WeddingStatus)
-                       .Where(c => c.WeddingStatusId == 1)
-                       .OrderBy(c => c.WeddingDate)
-                       .ToList();
+            // Загружаем все пары с фильтрацией и сортировкой
+            allCouples = DbConnection.MarryMe.Couple
+                .Include(c => c.Gromm)
+                .Include(c => c.Bride)
+                .Include(c => c.WeddingStatus)
+                .Where(c => c.WeddingStatusId == 1)
+                .OrderBy(c => c.WeddingDate)
+                .ToList();
 
             string searchText = SearchTb?.Text?.Trim().ToLower() ?? "";
-
-            var filteredCouples = couples.AsEnumerable();
 
             if (!string.IsNullOrEmpty(searchText))
             {
                 var searchTerms = searchText.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-                filteredCouples = filteredCouples.Where(c =>
+                allCouples = allCouples.Where(c =>
                     c != null &&
                     c.Gromm != null &&
                     c.Bride != null &&
@@ -239,16 +246,111 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
                         (c.Gromm.Surname != null && c.Gromm.Surname.ToLower().Contains(term)) ||
                         (c.Gromm.Name != null && c.Gromm.Name.ToLower().Contains(term)) ||
                         (c.Bride.Surname != null && c.Bride.Surname.ToLower().Contains(term)) ||
-                        (c.Bride.Name != null && c.Bride.Name.ToLower().Contains(term))));
+                        (c.Bride.Name != null && c.Bride.Name.ToLower().Contains(term))))
+                    .ToList();
             }
 
-            CoupleLV.ItemsSource = filteredCouples.ToList();
-
-            if (CoupleLV.IsLoaded)
-            {
-                CoupleLV_Loaded(null, null);
-            }
+            // Обновляем пагинацию
+            InitializeCouplePagination();
         }
+
+        private void InitializeCouplePagination()
+{
+    // Вычисляем общее количество страниц
+    totalCouplePages = (int)Math.Ceiling((double)allCouples.Count / couplesPerPage);
+    
+    // Очищаем панель пагинации
+    CouplePaginationPanel.Children.Clear();
+    CouplePaginationPanel.Children.Add(CouplePrevPageBtn);
+
+    // Создаем кнопки для каждой страницы
+    for (int i = 1; i <= totalCouplePages; i++)
+    {
+        var pageBtn = new Button
+        {
+            Content = i.ToString(),
+            Width = 30,
+            Height = 30,
+            FontSize = 12,
+            Margin = new Thickness(2, 0, 2, 0),
+            Tag = i
+        };
+        pageBtn.Click += CouplePageBtn_Click;
+
+        if (i == currentCouplePage)
+        {
+            pageBtn.Background = Brushes.LightGray;
+        }
+
+        CouplePaginationPanel.Children.Add(pageBtn);
+    }
+
+    CouplePaginationPanel.Children.Add(CoupleNextPageBtn);
+
+    // Загружаем данные для текущей страницы
+    LoadCouplePageData();
+}
+
+private void LoadCouplePageData()
+{
+    // Получаем пары для текущей страницы
+    var displayedCouples = allCouples
+        .Skip((currentCouplePage - 1) * couplesPerPage)
+        .Take(couplesPerPage)
+        .ToList();
+
+    CoupleLV.ItemsSource = displayedCouples;
+
+    // Обновляем состояние кнопок
+    UpdateCouplePaginationButtons();
+
+    // Обновляем видимость кнопок договоров
+    if (CoupleLV.IsLoaded)
+    {
+        CoupleLV_Loaded(null, null);
+    }
+}
+
+private void UpdateCouplePaginationButtons()
+{
+    foreach (var child in CouplePaginationPanel.Children)
+    {
+        if (child is Button btn && btn.Tag is int pageNumber)
+        {
+            btn.Background = pageNumber == currentCouplePage ? Brushes.LightGray : Brushes.Transparent;
+        }
+    }
+
+    CouplePrevPageBtn.IsEnabled = currentCouplePage > 1;
+    CoupleNextPageBtn.IsEnabled = currentCouplePage < totalCouplePages;
+}
+
+private void CouplePageBtn_Click(object sender, RoutedEventArgs e)
+{
+    if (sender is Button btn && btn.Tag is int pageNumber)
+    {
+        currentCouplePage = pageNumber;
+        LoadCouplePageData();
+    }
+}
+
+private void CouplePrevPageBtn_Click(object sender, RoutedEventArgs e)
+{
+    if (currentCouplePage > 1)
+    {
+        currentCouplePage--;
+        LoadCouplePageData();
+    }
+}
+
+private void CoupleNextPageBtn_Click(object sender, RoutedEventArgs e)
+{
+    if (currentCouplePage < totalCouplePages)
+    {
+        currentCouplePage++;
+        LoadCouplePageData();
+    }
+}
 
         private void CoupleLV_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

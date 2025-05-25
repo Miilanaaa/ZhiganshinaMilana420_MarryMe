@@ -8,7 +8,7 @@
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
       d:DesignHeight="750" d:DesignWidth="1445"
       Title="AddClientPage" Cursor="">
-
+    
     <Grid Background="#EEEFEA">
         <Border Width="620"
                 Height="450"

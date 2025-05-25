@@ -429,5 +429,302 @@ namespace ZhiganshinaMilana420_MarryMe.Pages
         {
             NavigationService.GoBack();
         }
+
+        [Serializable]
+        public class CanvasElement
+        {
+            public string Type { get; set; }
+            public double Left { get; set; }
+            public double Top { get; set; }
+            public double Width { get; set; }
+            public double Height { get; set; }
+            public string Text { get; set; }
+            public int SeatsCount { get; set; }
+            public string Color { get; set; }
+        }
+
+        [Serializable]
+        public class CanvasData
+        {
+            public List<CanvasElement> Elements { get; set; } = new List<CanvasElement>();
+        }
+
+
+        private void SaveAsButton_Click(object sender, RoutedEventArgs e)
+        {
+            var saveFileDialog = new SaveFileDialog
+            {
+                Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*",
+                DefaultExt = ".json"
+            };
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                try
+                {
+                    var canvasData = new CanvasData();
+
+                    foreach (UIElement element in DrawingCanvas.Children)
+                    {
+                        if (element is Grid grid)
+                        {
+                            var canvasElement = new CanvasElement
+                            {
+                                Left = Canvas.GetLeft(grid),
+                                Top = Canvas.GetTop(grid)
+                            };
+
+                            // Check if it's a table
+                            var tableInfo = _tables.FirstOrDefault(t => t.TableContainer == grid);
+                            if (tableInfo != null)
+                            {
+                                canvasElement.Type = "Table";
+                                canvasElement.Width = tableInfo.TableShape.Width;
+                                canvasElement.Height = tableInfo.TableShape.Height;
+                                canvasElement.Text = tableInfo.TableText.Text;
+                                canvasElement.SeatsCount = tableInfo.SeatsCount;
+                                canvasElement.Color = (tableInfo.TableShape.Fill as SolidColorBrush)?.Color.ToString();
+                            }
+                            else
+                            {
+                                // Check for rectangle
+                                var contentGrid = grid.Children.OfType<Grid>().FirstOrDefault();
+                                if (contentGrid != null)
+                                {
+                                    var rectangle = contentGrid.Children.OfType<Rectangle>().FirstOrDefault();
+                                    if (rectangle != null)
+                                    {
+                                        canvasElement.Type = "Rectangle";
+                                        canvasElement.Width = rectangle.Width;
+                                        canvasElement.Height = rectangle.Height;
+                                        canvasElement.Color = (rectangle.Fill as SolidColorBrush)?.Color.ToString();
+                                        canvasElement.Text = contentGrid.Children.OfType<TextBlock>().FirstOrDefault()?.Text;
+                                    }
+                                }
+
+                                // Check for guest if not rectangle
+                                if (canvasElement.Type == null)
+                                {
+                                    var ellipse = grid.Children.OfType<Ellipse>().FirstOrDefault(i => i.Tag as string != "seat");
+                                    if (ellipse != null)
+                                    {
+                                        canvasElement.Type = "Guest";
+                                        canvasElement.Width = ellipse.Width;
+                                        canvasElement.Height = ellipse.Height;
+                                        canvasElement.Color = (ellipse.Fill as SolidColorBrush)?.Color.ToString();
+                                        canvasElement.Text = grid.Children.OfType<TextBlock>().FirstOrDefault()?.Text;
+                                    }
+                                }
+                            }
+
+                            if (canvasElement.Type != null)
+                            {
+                                canvasData.Elements.Add(canvasElement);
+                            }
+                        }
+                    }
+
+                    string json = JsonConvert.SerializeObject(canvasData, Formatting.Indented);
+                    File.WriteAllText(saveFileDialog.FileName, json);
+                    MessageBox.Show("Файл успешно сохранен!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при сохранении файла: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void OpenFileButton_Click(object sender, RoutedEventArgs e)
+        {
+            var openFileDialog = new OpenFileDialog
+            {
+                Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*"
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                try
+                {
+                    string json = File.ReadAllText(openFileDialog.FileName);
+                    var canvasData = JsonConvert.DeserializeObject<CanvasData>(json);
+
+                    if (canvasData != null)
+                    {
+                        ClearCanvas_Click(null, null); // Очищаем холст перед загрузкой
+
+                        foreach (var element in canvasData.Elements)
+                        {
+                            try
+                            {
+                                switch (element.Type)
+                                {
+                                    case "Rectangle":
+                                        AddRectangleFromData(element);
+                                        break;
+                                    case "Guest":
+                                        AddGuestFromData(element);
+                                        break;
+                                    case "Table":
+                                        AddTableFromData(element);
+                                        break;
+                                    default:
+                                        MessageBox.Show($"Неизвестный тип элемента: {element.Type}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                        break;
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show($"Ошибка при загрузке элемента {element.Type}: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            }
+                        }
+                        MessageBox.Show("Файл успешно загружен!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при открытии файла: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void AddRectangleFromData(CanvasElement element)
+        {
+            try
+            {
+                var rectangle = new Rectangle
+                {
+                    Width = element.Width,
+                    Height = element.Height,
+                    Fill = !string.IsNullOrEmpty(element.Color)
+                           ? new SolidColorBrush((Color)ColorConverter.ConvertFromString(element.Color))
+                           : RectangleColor,
+                    Stroke = Brushes.Black,
+                    StrokeThickness = 1
+                };
+
+                // Создаем Grid для объединения прямоугольника и текста
+                var contentGrid = new Grid();
+                contentGrid.Children.Add(rectangle);
+
+                var textBlock = new TextBlock
+                {
+                    Text = element.Text ?? $"Прямоугольник {DrawingCanvas.Children.Count + 1}",
+                    Style = (Style)FindResource("CenterTextStyle")
+                };
+                contentGrid.Children.Add(textBlock);
+
+                // Основной контейнер
+                var grid = new Grid
+                {
+                    Style = (Style)FindResource("ElementContainerStyle")
+                };
+                grid.Children.Add(contentGrid);
+                grid.Children.Add(CreateDeleteButton(grid));
+                grid.Children.Add(CreateShapeEditButton(rectangle, textBlock));
+
+                SetupDrag(grid);
+                Panel.SetZIndex(grid, 1);
+
+                Canvas.SetLeft(grid, element.Left);
+                Canvas.SetTop(grid, element.Top);
+                DrawingCanvas.Children.Add(grid);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при создании прямоугольника: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void AddGuestFromData(CanvasElement element)
+        {
+            var ellipse = new Ellipse
+            {
+                Width = element.Width,
+                Height = element.Height,
+                Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(element.Color)),
+                Stroke = Brushes.Black,
+                StrokeThickness = 1,
+                Cursor = Cursors.Hand,
+                VerticalAlignment = VerticalAlignment.Top
+            };
+
+            var textBlock = new TextBlock
+            {
+                Text = element.Text,
+                Style = (Style)FindResource("BottomTextStyle")
+            };
+
+            var grid = new Grid();
+            grid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
+            grid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
+
+            Grid.SetRow(ellipse, 0);
+            Grid.SetRow(textBlock, 1);
+
+            grid.Children.Add(ellipse);
+            grid.Children.Add(textBlock);
+            grid.Children.Add(CreateDeleteButton(grid));
+            grid.Children.Add(CreateShapeEditButton(ellipse, textBlock));
+
+            SetupDrag(grid);
+            Panel.SetZIndex(grid, 1);
+
+            Canvas.SetLeft(grid, element.Left);
+            Canvas.SetTop(grid, element.Top);
+            DrawingCanvas.Children.Add(grid);
+        }
+
+        private void AddTableFromData(CanvasElement element)
+        {
+            var table = new Ellipse
+            {
+                Width = element.Width,
+                Height = element.Height,
+                Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(element.Color)),
+                Stroke = Brushes.Black,
+                StrokeThickness = 2,
+                VerticalAlignment = VerticalAlignment.Top
+            };
+
+            var textBlock = new TextBlock
+            {
+                Text = element.Text,
+                Style = (Style)FindResource("CenterTextStyle"),
+                FontWeight = FontWeights.Bold
+            };
+
+            var grid = new Grid
+            {
+                Style = (Style)FindResource("ElementContainerStyle")
+            };
+            grid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
+            grid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
+
+            Grid.SetRow(table, 0);
+            Grid.SetRow(textBlock, 1);
+
+            var tableInfo = new TableInfo
+            {
+                TableContainer = grid,
+                TableShape = table,
+                TableText = textBlock,
+                SeatsCount = element.SeatsCount
+            };
+            _tables.Add(tableInfo);
+
+            grid.Children.Add(table);
+            AddSeatsAroundTable(grid, tableInfo, tableInfo.SeatsCount);
+            grid.Children.Add(textBlock);
+            grid.Children.Add(CreateDeleteButton(grid));
+            grid.Children.Add(CreateTableEditButton(tableInfo));
+
+            SetupDrag(grid);
+            Panel.SetZIndex(grid, 0);
+
+            Canvas.SetLeft(grid, element.Left);
+            Canvas.SetTop(grid, element.Top);
+            DrawingCanvas.Children.Add(grid);
+        }
     }
 }

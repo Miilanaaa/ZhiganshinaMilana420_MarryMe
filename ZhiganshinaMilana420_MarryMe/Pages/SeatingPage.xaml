@@ -57,14 +57,22 @@
                     Margin="5" 
                     Padding="10,5" 
                     Click="ClearCanvas_Click"/>
-            <Button Content="Печать" 
+            <Button Content="Сохранить как" 
                     Margin="5" 
                     Padding="10,5" 
-                    Click="PrintButton_Click"/>
+                    Click="SaveAsButton_Click"/>
+            <Button Content="Открыть файл" 
+                    Margin="5" 
+                    Padding="10,5" 
+                    Click="OpenFileButton_Click"/>
             <Button Content="Выйти и не сохранить" 
                     Margin="5" 
                     Padding="10,5" 
                     Click="ExitBtt_Clik"/>
+            <Button Content="Печать" 
+                    Margin="5"
+                    Padding="10,5" 
+                    Click="PrintButton_Click"/>
         </StackPanel>
         <Border Grid.Row="1" 
                 BorderBrush="Gray" 
