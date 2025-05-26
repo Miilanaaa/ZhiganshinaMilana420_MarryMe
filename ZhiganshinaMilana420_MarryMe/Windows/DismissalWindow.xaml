@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         Title="DismissalWindow" Height="350" 
         Width="500"
-        WindowStartupLocation="CenterOwner"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        MouseDown="Window_MouseDown"
         ResizeMode="NoResize">
     <Grid Margin="10">
         <StackPanel>

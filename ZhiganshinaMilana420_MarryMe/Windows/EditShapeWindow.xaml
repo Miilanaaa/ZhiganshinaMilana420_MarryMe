@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ZhiganshinaMilana420_MarryMe.Windows"
         mc:Ignorable="d"
-        WindowStartupLocation="CenterScreen" 
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        MouseDown="Window_MouseDown"
         Title="EditShapeWindow" Height="350" Width="400" Cursor="">
     <Grid>
         <StackPanel Orientation="Vertical"
